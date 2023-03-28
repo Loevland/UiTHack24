@@ -34,15 +34,6 @@ Add emoji!
 
 # Servers & API
 
-### Noob challenges
-
-All noob challenges are set/to be set up on `wwww.limewire.td.org.uit.no`
-
-### Web challenges
-
-All web challenges are to be served on `motherload.td.org.uit.no`
-Each challenge is containerized and composed up on respective ports.
-
 ### CTFd app
 
 CTFd is the application we are eusing to host the challenges and keep track of contestants/teams and scoreboards
