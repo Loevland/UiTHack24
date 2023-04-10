@@ -28,10 +28,10 @@ Add emoji!
 4. Create a new branch for the specific task/issue `git checkout -b issueName` from master. (\*Remeber du pull/fetch)
 5. When task created commit it `git add *` `git commit -m "Insert description and alot of emojies like this :rocket: :fire:"`
 6. Push branch `git push --set-upstream origin issueName`
-7. Create a pull request to merge, and another member is required to overlook the code to merge it to master
-8. Update issue/task status in project
-9. Add README for task
-10. Create writeup for task
+7. Add README for task
+8. Add writeup for task in the `writeup` directory for the challenge
+9. Create a pull request to merge, and another member is required to overlook the code to merge it to master
+10. Update issue/task status in project
 
 # Servers & API
 
