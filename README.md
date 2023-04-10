@@ -31,6 +31,7 @@ Add emoji!
 7. Create a pull request to merge, and another member is required to overlook the code to merge it to master
 8. Update issue/task status in project
 9. Add README for task
+10. Create writeup for task
 
 # Servers & API
 
