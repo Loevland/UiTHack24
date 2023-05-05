@@ -46,17 +46,19 @@ void menu(){
     printf(">> ");
 }
 
-char *create_guess(){
+char *create_guess(int *guess_set){
     char *guess = malloc(0x20);
     printf("Enter your guess:\n>> ");
     fgets(guess, 0x21, stdin);
+    *guess_set = 1;
     puts("Guess created!\n");
     return guess;
 }
 
-void delete_guess(char **guess){
+void delete_guess(char **guess, int *guess_set){
     if (*guess != NULL)
         free(*guess);
+    *guess_set = 0;
     puts("Guess deleted!\n");
 }
 
@@ -81,9 +83,9 @@ char *generate_password(){
     return password;
 }
 
-void guess_password(char *guess, char *password){
-    if(guess == NULL || password == NULL){
-        puts("You need to create a guess and generate a password first!");
+void guess_password(char *guess, char *password, int guess_set){
+    if(guess == NULL || password == NULL || guess_set == 0){
+        puts("You need to create a guess and generate a password first!\n");
         return;
     }
     if(!strncmp(guess, password, 0x20)){
@@ -109,20 +111,19 @@ int main(){
     ignore_me();
     ignore_me_timeout();
 
-    int input;
+    int input, guess_set = 0;
     char *password = NULL, *guess = NULL;
 
     while(1){
         menu();
         if (scanf("%d%*c", &input) == 0)
             exit(0);
-
         switch (input){
             case 1:
-                guess = create_guess();
+                guess = create_guess(&guess_set);
                 break;
             case 2:
-                delete_guess(&guess);
+                delete_guess(&guess, &guess_set);
                 break;
             case 3:
                 view_guess(guess);
@@ -131,7 +132,7 @@ int main(){
                 password = generate_password();
                 break;
             case 5:
-                guess_password(guess, password);
+                guess_password(guess, password, guess_set);
                 break;
             case 6:
                 exit(0);
