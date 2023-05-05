@@ -1,5 +1,5 @@
 main:
-	gcc main.c -o main
+	gcc fmt.c -o fmt
 
 clean:
-	rm main
+	rm fmt
