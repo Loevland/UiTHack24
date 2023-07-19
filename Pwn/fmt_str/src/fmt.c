@@ -27,7 +27,7 @@ int main(){
     ignore_me_timeout();
 
     char flag[64];
-    char buffer[20];
+    char buffer[30];
 
     FILE *f = fopen("flag.txt", "r");
     if (f == NULL){
@@ -38,7 +38,7 @@ int main(){
     fclose(f);
 
     puts("Write something here!");
-    fgets(buffer, 21, stdin);
+    fgets(buffer, 30, stdin);
     printf(buffer);
 
     return 0;
