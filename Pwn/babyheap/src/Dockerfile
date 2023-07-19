@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 LABEL Description="UiTHack24 babyheap"
 
 RUN apt-get update && apt-get upgrade -y
@@ -17,4 +17,4 @@ USER babyheap
 CMD ./ynetd -p 9001 ./babyheap
 
 # docker build -t babyheap .
-# docker run -dp 9001:9001 -it babyheap
+# docker run -dp 9001:9001 -it --rm babyheap
