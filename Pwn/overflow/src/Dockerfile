@@ -17,4 +17,4 @@ USER overflow
 CMD ./ynetd -p 9001 ./overflow
 
 # docker build -t overflow .
-# docker run -dp 9001:9001 -it overflow
+# docker run -dp 9001:9001 -it --rm overflow

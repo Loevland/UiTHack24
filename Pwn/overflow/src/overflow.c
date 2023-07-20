@@ -35,19 +35,19 @@ void print_flag(){
 }
 
 void vuln(){
-    char secret[14] = "Password123!";
+    char secret[10] = "P4ssw0rd!";
     char input[10];
 
     printf("Give me some input:\n");
     fgets(input, 0x20, stdin);
 
-    if(strncmp(secret, "Give_me_flag!", 13) == 0){
+    if(strncmp(secret, "Flag_plzz!", 10) == 0){
         puts("Here is your flag:");
         print_flag();
     } else {
         printf("\nSorry, secret is not correct\n");
         printf("Input: %s", input);
-        printf("Secret: %s", secret);
+        printf("Secret: %s\n", secret);
     }
 }
 
