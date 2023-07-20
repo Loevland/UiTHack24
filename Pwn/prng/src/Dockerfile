@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 LABEL Description="UiTHack24 prng"
 
 RUN apt-get update && apt-get upgrade -y
@@ -17,4 +17,4 @@ USER prng
 CMD ./ynetd -p 9001 ./prng
 
 # docker build -t prng .
-# docker run -dp 9001:9001 -it prng
+# docker run -dp 9001:9001 -it --rm prng

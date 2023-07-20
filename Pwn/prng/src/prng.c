@@ -23,7 +23,7 @@ void ignore_me_timeout(){
     alarm(60);
 }
 
-void ascii_art(){
+void banner(){
     printf("\n#       ####### ####### ####### ####### ######  #     #\n");
     printf("#       #     #    #       #    #       #     #  #   #\n");
     printf("#       #     #    #       #    #       #     #   # # \n");
@@ -49,10 +49,10 @@ void lottery(){
     printf("Guess the 3 next numbers to win a prize!\n");
     printf("The first 4 numbers are:\n%d %d %d %d\n", rand()%34, rand()%34, rand()%34, rand()%34);
 
-    int winning_numbers[3] = {rand()%34, rand()%34, rand()%34};
     printf("Your guess: ");
     scanf("%d %d %d", &guesses[0], &guesses[1], &guesses[2]);
 
+    int winning_numbers[3] = {rand()%34, rand()%34, rand()%34};
     if(guesses[0] == winning_numbers[0] &&
        guesses[1] == winning_numbers[1] &&
        guesses[2] == winning_numbers[2]){
@@ -70,8 +70,7 @@ int main(){
 
     unsigned long clock = time(NULL);
     char choice;
-
-    ascii_art();
+    banner();
     printf("Welcome to the PRNG!\n");
     printf("The current time is: %lu\n", clock);
     printf("Would you like to try your luck? (y/n): ");
@@ -83,6 +82,5 @@ int main(){
     } else {
         printf("Goodbye!\n");
     }
-
     return 0;
 }
