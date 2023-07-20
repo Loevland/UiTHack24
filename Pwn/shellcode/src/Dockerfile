@@ -17,4 +17,4 @@ USER shellcode
 CMD ./ynetd -p 9001 ./shellcode
 
 # docker build -t shellcode .
-# docker run -dp 9001:9001 -it shellcode
+# docker run -dp 9001:9001 -it --rm shellcode

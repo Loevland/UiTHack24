@@ -25,8 +25,8 @@ int main(){
     ignore_me_timeout();
 
     char input[60] = {0};
-    printf("Maybe this could be useful: %p\n", input);
-    printf("Now give me some input!\n> ");
+    printf("I want to store something here: %p\n", input);
+    printf("Give me something!\n> ");
     scanf("%s", input);
     return 0;
 }
