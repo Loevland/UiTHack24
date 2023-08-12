@@ -3,17 +3,17 @@ LABEL Description="UiTHack24 babyheap"
 
 RUN apt-get update && apt-get upgrade -y
 
-RUN useradd -d /home/babyheap -m -p babyheap -s /bin/bash babyheap
-WORKDIR /home/babyheap
+RUN useradd -d /home/ctf -m -p ctf -s /bin/bash ctf
+WORKDIR /home/ctf
 
 COPY ynetd .
 COPY babyheap .
 COPY flag.txt .
 
-RUN chown -R root:root /home/babyheap
-RUN chmod -R a+rx /home/babyheap
+RUN chown -R root:root /home/ctf
+RUN chmod -R a+rx /home/ctf
 
-USER babyheap
+USER ctf
 CMD ./ynetd -p 9001 ./babyheap
 
 # docker build -t babyheap .
