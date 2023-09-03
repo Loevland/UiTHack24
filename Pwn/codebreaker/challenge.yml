@@ -1,0 +1,23 @@
+name: "Codebreaker"
+author: "Loevland"
+category: pwn
+value: 100
+type: standard
+description: >
+    After saving the crew you've been captured by the Xenithians,
+    and your escape depends on predicting the next three numbers in their code.
+    Luckily, the Xenithians seem to have left out a crucial vulnerability when
+    generating their code. Crack the code to be set free!
+
+
+connection_info: nc hostname 9001
+tags:
+    - easy
+flags:
+    - UiTHack24{X3n1th14n_3sc4p3}
+files:
+    - src/codebreaker.c
+    - src/codebreaker
+
+state: visible
+version: "0.1"
