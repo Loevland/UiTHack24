@@ -1,0 +1,23 @@
+name: "The great escape"
+author: "Loevland"
+category: pwn
+value: 400
+type: standard
+description: >
+    You have reached the dashboard of a ship, and you're ready to get away. However,
+    the activation of the ship requires a password.
+
+    You must find the password to activate the ship do your great escape!
+
+
+connection_info: nc hostname 9005
+tags:
+    - hard
+flags:
+    - UiTHack24{h1pp17y_h0ppi7y_y0u_g0t_off_th3_pr0p3r7y}
+files:
+    - src/escape.c
+    - src/escape
+
+state: visible
+version: "0.1"

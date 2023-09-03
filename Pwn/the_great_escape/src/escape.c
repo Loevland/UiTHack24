@@ -44,6 +44,7 @@ int get_int(){
 }
 
 void menu(){
+    puts("--- Dashboard ---");
     puts("1. Create guess");
     puts("2. Delete guess");
     puts("3. View guess");
@@ -89,11 +90,11 @@ char *generate_password(){
 
 void guess_password(char *guess, char *password, int guessed){
     if(guess == NULL || password == NULL || guessed == 0){
-        puts("You need to create a guess and generate a password first!\n");
+        puts("You need to create a guess and generate a password to activate the ship!\n");
         return;
     }
     if(!memcmp(guess, password, sizeof(password))){
-        puts("Correct password!");
+        puts("Ship activated!");
         print_flag();
     } else {
         puts("Wrong password!\n");
