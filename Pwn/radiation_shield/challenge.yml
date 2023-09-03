@@ -14,7 +14,7 @@ connection_info: nc hostname 12345
 tags:
     - easy
 flags:
-    - UiTHack24{m4xiMum_sh13ld_0verflooow}
+    - UiTHack24{M4ximum_sh13ld_0verflooow}
 files:
     - src/overflow.c
     - src/overflow
