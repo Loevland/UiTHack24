@@ -12,7 +12,7 @@ RUN chown -R root:root /home/ctf
 RUN chmod -R a+rx /home/ctf
 
 USER ctf
-CMD ./ynetd -p 9001 ./overflow
+CMD ./ynetd -p 9000 ./overflow
 
 # docker build -t overflow .
-# docker run -dp 9001:9001 -it overflow
+# docker run -dp 9000:9000 -it overflow
