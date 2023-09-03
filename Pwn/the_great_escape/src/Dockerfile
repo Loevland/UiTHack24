@@ -12,7 +12,7 @@ RUN chown -R root:root /home/ctf
 RUN chmod -R a+rx /home/ctf
 
 USER ctf
-CMD ./ynetd -p 9001 ./escape
+CMD ./ynetd -p 9004 ./escape
 
 # docker build -t escape .
-# docker run -dp 9001:9001 -it --rm escape
+# docker run -dp 9004:9004 -it --rm escape

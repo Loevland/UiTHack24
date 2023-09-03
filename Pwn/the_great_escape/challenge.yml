@@ -10,7 +10,7 @@ description: >
     You must find the password to activate the ship do your great escape!
 
 
-connection_info: nc hostname 9005
+connection_info: nc hostname 9004
 tags:
     - hard
 flags:
