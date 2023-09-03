@@ -30,14 +30,10 @@ int main(){
     char buffer[30];
 
     FILE *f = fopen("flag.txt", "r");
-    if (f == NULL){
-        printf("Flag File is Missing, contact Admin\n");
-        return 0;
-    }
     fgets(flag, 64, f);
     fclose(f);
 
-    puts("Write something here!");
+    puts("What book do you want to read?");
     fgets(buffer, 30, stdin);
     printf(buffer);
 
