@@ -34,20 +34,18 @@ void print_flag(){
     fclose(f);
 }
 
-void vuln(){
-    char secret[10] = "P4ssw0rd!";
-    char input[10];
+void shield_control(){
+    char shield_level[10] = "medium";
+    char shield_status[10] = {0};
 
-    printf("Give me some input:\n");
-    fgets(input, 0x20, stdin);
+    printf("New shield status:\n");
+    fgets(shield_status, 20, stdin);
 
-    if(strncmp(secret, "Flag_plzz!", 10) == 0){
-        puts("Here is your flag:");
+    printf("Shield status: %s\n", shield_status);
+    printf("Shield level: %s\n", shield_level);
+
+    if(strncmp(shield_level, "maximum", 7) == 0){
         print_flag();
-    } else {
-        printf("\nSorry, secret is not correct\n");
-        printf("Input: %s", input);
-        printf("Secret: %s\n", secret);
     }
 }
 
@@ -55,7 +53,6 @@ int main(){
     ignore_me();
     ignore_me_timeout();
 
-    vuln();
-
+    shield_control();
     return 0;
 }

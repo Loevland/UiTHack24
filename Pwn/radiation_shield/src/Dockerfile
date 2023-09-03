@@ -1,8 +1,6 @@
 FROM ubuntu:22.04
 LABEL Description="UiTHack24 overflow"
 
-#RUN apt-get update && apt-get upgrade -y
-
 RUN useradd -d /home/ctf -m -p ctf -s /bin/bash ctf
 WORKDIR /home/ctf
 
