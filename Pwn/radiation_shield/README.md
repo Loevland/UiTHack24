@@ -5,7 +5,7 @@ Deep within the space station "Pandora", a looming solar flare threatens the liv
 The crew is locked out of the radiation shield controls, so you must hack into the system to increase the shield's protection to `maximum`.
 
 Files:
-- [overflow](src/overflow)
-- [overflow.c](src/overflow.c)
+- [shield](src/shield)
+- [shield.c](src/shield.c)
 
 [Writeup](writeup/README.md)
