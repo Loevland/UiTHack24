@@ -18,6 +18,8 @@ flags:
 files:
     - src/escape.c
     - src/escape
+    - src/libc.so.6
+    - src/ld.so.2
 
 state: visible
 version: "0.1"
