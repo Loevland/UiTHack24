@@ -1,5 +1,5 @@
-overflow:
-	gcc -fno-stack-protector overflow.c -o overflow
+shield:
+	gcc -fno-stack-protector shield.c -o shield
 
 clean:
-	rm -f overflow
+	rm -f shield

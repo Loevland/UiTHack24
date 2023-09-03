@@ -17,8 +17,8 @@ tags:
 flags:
     - UiTHack24{M4ximum_sh13ld_0verflooow}
 files:
-    - src/overflow.c
-    - src/overflow
+    - src/shield.c
+    - src/shield
 
 state: visible
 version: "0.1"
