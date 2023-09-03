@@ -24,9 +24,9 @@ int main(){
     ignore_me();
     ignore_me_timeout();
 
-    char input[60] = {0};
-    printf("I want to store something here: %p\n", input);
-    printf("Give me something!\n> ");
-    scanf("%s", input);
+    char passphrase[60] = {0};
+    printf("Error code: %p\n", passphrase);
+    printf("Passphrase:\n> ");
+    scanf("%s", passphrase);
     return 0;
 }
