@@ -12,6 +12,7 @@ app.get("/", (req, res) => {
 
 app.get("/images", (req, res) => {
   try {
+    // No path traversal
     var image = req.query.image.replace(/\.\.\//g, "");
     var image_path = path.join(__dirname, "static/images/", image);
   } catch (err) {
