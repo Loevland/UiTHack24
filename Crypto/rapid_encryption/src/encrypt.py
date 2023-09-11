@@ -3,11 +3,11 @@ from Crypto.Util.number import bytes_to_long, getPrime
 with open("flag.txt", "rb") as f:
     flag = f.read().strip()
 
-m = bytes_to_long(flag)
+e = 3
 p = getPrime(512)
 q = getPrime(512)
 n = p * q
-e = 3
+m = bytes_to_long(flag)
 
 ct = pow(m, e, n)
 print(f"{ct=}")

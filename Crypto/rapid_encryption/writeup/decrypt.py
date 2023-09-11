@@ -7,4 +7,4 @@ with open("out.txt", "r") as f:
     e = int(f.readline().strip().split("=")[1])
 
 m = iroot(ct, e)[0]
-print(long_to_bytes(m))
+print(long_to_bytes(m).decode())
