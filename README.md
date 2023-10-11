@@ -13,6 +13,8 @@ Repository for the yearly CTF challenge by UiT students
 Add emoji!
 | Noob | Web | Pwn | Misc | Rev_Eng | Crypto | IRL |
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+| | | | | | | |
+| | | Codebreaker :fax: | | | | |
 | | | Radiation shield :computer: | | | | |
 | | | | | | | |
 | | | | | | | |
