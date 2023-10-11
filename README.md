@@ -17,7 +17,7 @@ Add emoji!
 | | | Radiation shield :computer: | | | | |
 | | | Xenithian doorway :door: | | | | |
 | | | Archive :book: | | | | |
-| | | | | | | |
+| | | The great escape :rocket: | | | | |
 
 # Developer guidelines
 
