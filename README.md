@@ -13,9 +13,10 @@ Repository for the yearly CTF challenge by UiT students
 Add emoji!
 | Noob | Web | Pwn | Misc | Rev_Eng | Crypto | IRL |
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+
 | | | Codebreaker :fax: | | | | |
 | | | Radiation shield :computer: | | | | |
-| | | Xenithian doorway :door: | | | | |
+| | Space traversal :space_invader:| Xenithian doorway :door: | | | | |
 | | | Archive :book: | | | | |
 | | | The great escape :rocket: | | | | |
 
