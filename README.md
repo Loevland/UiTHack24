@@ -15,7 +15,7 @@ Add emoji!
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | | | Codebreaker :fax: | | | Cosmic Caesar :dizzy: | |
 | | | Radiation shield :computer: | | | | |
-| | Space traversal :space_invader:| Xenithian doorway :door: | | | | |
+| | Space traversal :space_invader:| Xenithian doorway :door: | | Exfiltration :gift: | | |
 | | | Archive :book: | | | | |
 | | | The great escape :rocket: | | | | |
 
