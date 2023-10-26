@@ -1,0 +1,22 @@
+name: "Cosmic Caesar"
+author: "Loevland"
+category: crypto
+value: 50
+type: standard
+description: >
+    While traveling through the debris of exploded planets, a signal arrived.
+    We've determined the alien alphabet used, but the message is still encrypted.
+    Your mission is to decrypt the secret message.
+
+    We believe that the alphabet used is
+    `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`.
+
+tags:
+    - easy
+flags:
+    - UiTHack24{1nt3rg4lact1c_ca3s4r}
+files:
+    - src/flag.txt.enc
+
+state: visible
+version: "0.1"

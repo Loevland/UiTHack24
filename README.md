@@ -13,8 +13,7 @@ Repository for the yearly CTF challenge by UiT students
 Add emoji!
 | Noob | Web | Pwn | Misc | Rev_Eng | Crypto | IRL |
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
-
-| | | Codebreaker :fax: | | | | |
+| | | Codebreaker :fax: | | | Cosmic Caesar :dizzy: | |
 | | | Radiation shield :computer: | | | | |
 | | Space traversal :space_invader:| Xenithian doorway :door: | | | | |
 | | | Archive :book: | | | | |
