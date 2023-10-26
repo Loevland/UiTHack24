@@ -1,0 +1,20 @@
+name: "Space traverse"
+author: "Loevland"
+category: web
+value: 250
+type: standard
+description: >
+    In the search for a new planet to inhabit, we have found a couple different candidates.
+    I have collected images of them, so that you can help me decide which one to go to.
+
+
+connection_info: "hostname:8000"
+tags:
+    - medium
+flags:
+    - UiTHack24{n0t_th3_tr4v3rse_1_w45_3xp3c71ng}
+files:
+    - uploads/space_traversal.zip
+
+state: visible
+version: "0.1"

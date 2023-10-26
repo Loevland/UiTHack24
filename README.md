@@ -13,12 +13,11 @@ Repository for the yearly CTF challenge by UiT students
 Add emoji!
 | Noob | Web | Pwn | Misc | Rev_Eng | Crypto | IRL |
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
-| | | | | | | |
-| | | | | | | |
-| | | | | | Rapid Encryption :zap: | |
-| | | | | | | |
-| | | | | | | |
-
+| | | Codebreaker :fax: | | | Cosmic Caesar :dizzy: | |
+| | | Radiation shield :computer: | | | | |
+| | Space traversal :space_invader:| Xenithian doorway :door: | | Exfiltration :gift: | Rapid Encryption :zap: | |
+| | | Archive :book: | | | | |
+| | | The great escape :rocket: | | | | |
 
 # Developer guidelines
 

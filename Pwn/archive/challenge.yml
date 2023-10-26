@@ -1,0 +1,21 @@
+name: "Archive"
+author: "Loevland"
+category: pwn
+value: 200
+type: standard
+description: >
+    Having escaped the Xenithians, you now stand before a cryptic Xenithian archive.
+    Retrieve the book of secrets from the archive!
+
+
+connection_info: nc hostname 9003
+tags:
+    - medium
+flags:
+    - UiTHack24{h3xa_4rch1ves}
+files:
+    - src/archive.c
+    - src/archive
+
+state: visible
+version: "0.1"
