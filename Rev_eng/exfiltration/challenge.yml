@@ -1,0 +1,21 @@
+name: "Exfiltration"
+author: "Loevland"
+category: rev
+value: 200
+type: standard
+description: >
+    Congratulations, Agent!
+    You've successfully infiltrated the enigmatic alien base and managed
+    to steal their highly classified code.
+    However, it seems that it is written in some weird foreign language.
+    Your next mission is to find out what their code does!
+
+tags:
+    - medium
+flags:
+    - UiTHack24{j4v4scr1p7_15_an_4l1en_l4ngu4g3}
+files:
+    - src/exfiltrated.js
+
+state: visible
+version: "0.1"
