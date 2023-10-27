@@ -15,7 +15,7 @@ Hint 2. I think the file might have been tampered with.
 The encryption algorithm uses a simple XOR cipher. The key is staticly declared in the file, however this has tampered with. A nonce is also use which is seeded with a specific number. The seed is removed from the seed function, but it is revealed by the replace function in main. The real key value can also be deciphered from the operations done to the real key.
 
 ```py
-# remove seed and key value from file
+# remove seed and change key value
 with open(filename, "wb") as f:
     f.write(f.read().replace(b"8008135", b"NiceTry").replace(KEY, KEY.swapcase()))
 ```
@@ -37,7 +37,7 @@ with open(sys.argv[1] + ".dec", "wb") as f:
 ```
 
 After these changes the file can be decrypted by applying the same encryption algorithm again.
-The amazing gpt generated space novel can then be enjoyed, and halfway through our friend E.T. reveals the flag.
+The amazing gpt generated [space novel](../src/Stardust-reckoning.txt) can then be enjoyed, and halfway through our friend E.T. reveals the flag.
 
 Flag:
 
