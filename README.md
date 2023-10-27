@@ -14,7 +14,7 @@ Add emoji!
 | Noob | Web | Pwn | Misc | Rev_Eng | Crypto | IRL |
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | | | Codebreaker :fax: | | | Cosmic Caesar :dizzy: | |
-| | | Radiation shield :computer: | | Expired License :key: | | |
+| | | Radiation shield :computer: | | Expired License :key: | Alienware :closed_lock_with_key: | |
 | | Space traversal :space_invader:| Xenithian doorway :door: | | Exfiltration :gift: | Rapid Encryption :zap: | |
 | | | Archive :book: | | | | |
 | | | The great escape :rocket: | | | | |
