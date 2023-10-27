@@ -1,0 +1,36 @@
+name: "{{Alienware}}"
+author: "Sondre"
+category: crypto
+value: 200
+type: standard
+description: > 
+    Aliens have encrypted my very important file!
+    Luckily they forgot to delete the software from the trash folder, can you help me decrypt it?
+
+
+flags:
+    - UiTHack{E.T._ph0ne_h0me_plsss}
+
+topics:
+    - crypto
+    - Reverse engineering
+    - ransomware
+
+tags:
+    - easy
+    - medium
+    - python
+    - ransomware
+
+files:
+    - src/word.py
+    - src/Stardust-reckoning.txt.enc
+
+hints:
+    - {
+        content: "The aliens have probably not figured out truly random numbers either.",
+        cost: 50
+    }
+
+state: visible
+version: "0.1"
