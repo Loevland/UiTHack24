@@ -3,7 +3,7 @@
     Encryptinator 9000
     Crypto: easy, medium
     UiTHack 2024
-    FLAG: UiTHack{E.T._ph0ne_h0me_plsss}
+    FLAG: UiTHack24{E.T._ph0ne_h0me_plsss}
 """
 
 import sys, os

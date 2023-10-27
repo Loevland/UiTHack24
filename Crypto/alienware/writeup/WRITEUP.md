@@ -42,5 +42,5 @@ The amazing gpt generated space novel can then be enjoyed, and halfway through o
 Flag:
 
 ```txt
-UiTHack{E.T._ph0ne_h0me_plsss}
+UiTHack24{E.T._ph0ne_h0me_plsss}
 ```
