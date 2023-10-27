@@ -1,0 +1,21 @@
+name: "Expired License"
+author: "Loevland"
+category: rev
+value: 100
+type: standard
+description: >
+    The subscription on the software for our spaceship has expired,
+    and we can't get back to Earth without it.
+    We don't want to pay for a new license.
+    Can you find the license key?
+
+
+tags:
+    - easy
+flags:
+    - UiTHack24{s1th_h0locr0n}
+files:
+    - src/expired_license
+
+state: visible
+version: "0.1"

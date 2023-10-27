@@ -1,0 +1,22 @@
+name: "Rapid Encryption"
+author: "Loevland"
+category: crypto
+value: 150
+type: standard
+description: >
+    Those pesky aliens keep sniffing our messages and stealing our supplies!
+    Luckily I have come up with a way to encrypt our messages so that they
+    won't know where our supplies are located.
+    I had to improve the encryption time of the algorithm,
+    but I'm sure it makes no difference...
+
+tags:
+    - medium
+flags:
+    - UiTHack24{3ncryp7i0n_g0es_brrrr}
+files:
+    - src/encrypt.py
+    - src/out.txt
+
+state: visible
+version: "0.1"
