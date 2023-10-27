@@ -10,4 +10,4 @@ int 1. The aliens have probably not figured out truly random numbers either.
 
 Hint 2. I think the file might have been tampered with.
 
-[Writeup](writeup/writeup.md)
+[Writeup](writeup/WRITEUP.md)
