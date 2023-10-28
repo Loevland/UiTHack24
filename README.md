@@ -15,8 +15,8 @@ Add emoji!
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | | | Codebreaker :fax: | | | Cosmic Caesar :dizzy: | |
 | | | Radiation shield :computer: | | Expired License :key: | | |
-| | Space traversal :space_invader:| Xenithian doorway :door: | | Exfiltration :gift: | Rapid Encryption :zap: | |
-| | | Archive :book: | | | | |
+| | Space traversal :space_invader:| Xenithian doorway :door: | | Infiltration :video_game: | Rapid Encryption :zap: | |
+| | | Archive :book: | | Exfiltration :gift: | | |
 | | | The great escape :rocket: | | | | |
 
 # Developer guidelines
