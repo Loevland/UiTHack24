@@ -1,0 +1,20 @@
+name: "Infiltration"
+author: "Sdalvik"
+category: rev
+value: 200
+type: standard
+description: >
+    You are given a covert mission to infiltrate an enigmatic alien base
+    located within the depths of Dexius.
+    Accomplishing this mission will demand your utmost courage and skills, 
+    as you're set to engage in a fierce space battle against aliens.
+
+tags:
+    - medium
+flags:
+    - UiTHack24{Wh3r3_15_my_cup_0f_j4v4?}
+files:
+    - src/space_infiltration.apk
+
+state: visible
+version: "0.1"  
