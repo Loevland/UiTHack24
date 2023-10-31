@@ -16,7 +16,7 @@ Add emoji!
 | | | Codebreaker :fax: | | | Cosmic Caesar :dizzy: | |
 | | | Radiation shield :computer: | | Expired License :key: | Alienware :closed_lock_with_key: | |
 | | Space traversal :space_invader:| Xenithian doorway :door: | | Exfiltration :gift: | Rapid Encryption :zap: | |
-| | | Archive :book: | | | | |
+| | | Archive :book: | | | 3D Cipher :globe_with_meridians: | |
 | | | The great escape :rocket: | | | | |
 
 # Developer guidelines
