@@ -4,6 +4,9 @@ DLG with Tensorflow.
 # RNN reference sheet:
 # https://www.tensorflow.org/guide/keras/writing_a_training_loop_from_scratch
 
+# DLG repo
+# git@github.com:mit-han-lab/dlg.git
+
 import argparse
 import numpy as np
 import os
