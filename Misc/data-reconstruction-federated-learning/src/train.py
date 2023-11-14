@@ -21,13 +21,17 @@ def Flags(argv:list[str]) -> argparse.Namespace:
 	""" Return parsed arguments. """
 	parse = argparse.ArgumentParser(description = __doc__)
 	datapath = os.path.join("data","coriolanus.txt")
-	parse.add_argument("--flag",        type = str, default = "flag.txt",                        help = "Secret flag to train model on")
-	parse.add_argument("--datapath",    type = str, default =   datapath,                        help = "Path to data")
-	parse.add_argument("--hidden",      type = int, default =        128,                        help = "Size of hidden layer")
-	parse.add_argument("--epochs",      type = int, default =         10,                        help = "Number of epochs to train")
-	parse.add_argument("--eos",         type = str, default =       "\0",                        help = "End of sentence character")
-	parse.add_argument("--maxTokenGen", type = int, default =        100,                        help = "Maximum number of tokens to generate")
-	parse.add_argument("--summary",                 default =      False, action = "store_true", help = "Print model summary")
+	parse.add_argument("--savemodel",   type = str,   default =       None,                        help = "Name for model saving")
+	parse.add_argument("--loadmodel",   type = str,   default =       None,                        help = "Name for model loading")
+	parse.add_argument("--summary",                   default =      False, action = "store_true", help = "Print model summary")
+	parse.add_argument("--datapath",    type = str,   default =   datapath,                        help = "Path to training data")
+	parse.add_argument("--flag",        type = str,   default = "flag.txt",                        help = "Path to secret flag")
+	parse.add_argument("--units",       type = int,   default =        128,                        help = "Size of units layer")
+	parse.add_argument("--layers",      type = int,   default =          4,                        help = "Number of fully-connected hidden layers")
+	parse.add_argument("--batch",       type = int,   default =         32,                        help = "Batch size")
+	parse.add_argument("--epochs",      type = int,   default =         10,                        help = "Number of epochs to train")
+	parse.add_argument("--validation",  type = float, default =        0.1,                        help = "Fraction of data to use for validation")
+	parse.add_argument("--maxTokenGen", type = int,   default =        100,                        help = "Maximum number of tokens to generate")
 	args = parse.parse_args(argv)
 	with open(args.flag, "r") as f:
 		args.flag = f.read()
@@ -36,47 +40,54 @@ def Flags(argv:list[str]) -> argparse.Namespace:
 def main(argv:list[str]) -> None:
 	args = Flags(argv)
 	
-	x, vocabulary = Data(args.datapath, args.eos)
+	x, vocabulary = Data(args.datapath)
 
-	model = Model(len(vocabulary), args.hidden)
+	if args.loadmodel:
+		model = tf.keras.models.load_model(args.loadmodel)
+	else:
+		model = Model(args.units, args.layers, len(vocabulary["word"]))
+		model = Train(model, x, vocabulary, args.batch, args.epochs, args.validation)
+	
 	if args.summary:
 		model.summary()
-	model = Train(model, vocabulary, x, args.epochs)
-
-	resp = Generate(model, x[0:10], vocabulary, args.eos, args.maxTokenGen)
-	print(f"model('''{x[0]}''') = '''{resp[0]}'''")
-	print(f"len(resp) = {len(resp[0])})")
+	
+	if args.savemodel:
+		model.save(args.savemodel)
 	return
 
-def Data(filepath:str, eos:str) -> tuple[list[str],str]:
-	""" Return list of dialog lines and character token vocabulary. """
-	vocabulary = string.printable + eos
+def Data(filepath:str) -> tuple[list[str],dict[dict[str:int],dict[int:str]]]:
+	""" Return list of words, and mapping from word to vocabulary token id with visa versa. """
 	with open(filepath, "r") as f:
-		lines = f.readlines()
-	# format list such that x[i] is one piece of dialog ending with eos
-	x, dialog = [], ""
-	for line in lines:
-		if line.startswith("\n"):
-			x.append(dialog + eos)
-			dialog = ""
-			continue
-		dialog += line
+		# format list such that x[i] is one piece of dialog ending with eos
+		lines = f.read().split("\n\n")
+	# exclude last '\n\n' line
+	x = Words(lines[:-1])
+	v = list(set(x))
+	vocabulary = {
+		"word" : { id:w for id, w in enumerate(v) },
+		"id"   : { w:id for id, w in enumerate(v) },
+	}
 	return x, vocabulary
 
-def Model(vocabulary:int, hidden:int, ) -> tf.keras.Model:
-	""" Encoder-decoder text-to-text generation model. """
-	encoder = tf.keras.layers.Input(shape = (None,), name = "encoder-input")
-	embedding = tf.keras.layers.Embedding(vocabulary, hidden, name = "encoder-embedding")(encoder)
-	_, hid, cand = tf.keras.layers.LSTM(hidden, return_state = True, name = "encoder")(embedding)
-	
-	state = [ hid,cand ]
-	
-	decoder = tf.keras.layers.Input(shape = (None,), name = "decoder-input")
-	embedding = tf.keras.layers.Embedding(vocabulary, hidden, name = "decoder-embedding")(decoder)
-	decoderOut = tf.keras.layers.LSTM(hidden, name = "decoder")(embedding, initial_state = state)
+def Words(x:list[str]) -> list[str]:
+	""" Return list of words in data. """
+	word = []
+	for s in x:
+		for w in s.split(" "):
+			if len(w) > 0:
+				word.append(w)
+	return word
 
-	output = tf.keras.layers.Dense(vocabulary, activation = "softmax")(decoderOut)
-	model = tf.keras.Model([encoder, decoder], output)
+def Model(units:int, layers:int, vocabulary:int) -> tf.keras.Model:
+	""" Return neural network for text-to-text generation. """
+	embedding = tf.keras.layers.Embedding(vocabulary, units)
+	nnlayers = [
+		# tf.keras.layers.Dense(units, activation = "relu", input_shape = (None, vocabulary))
+		tf.keras.layers.Dense(units, activation = "relu")
+			for _ in range(layers)
+	]
+	output = tf.keras.layers.Dense(vocabulary, activation = "softmax")
+	model = tf.keras.Sequential([ embedding, *nnlayers, output ])
 	model.compile(
 		optimizer = "adam",
 		loss = "sparse_categorical_crossentropy",
@@ -84,55 +95,27 @@ def Model(vocabulary:int, hidden:int, ) -> tf.keras.Model:
 	)
 	return model
 
-def Train(model:tf.keras.Model, vocabulary:str, x:list[str], epochs:int) -> tf.keras.Model:
+def Train(model:tf.keras.Model, x:list[str], vocabulary:dict[dict[str:int],dict[int:str]], batch:int, epochs:int, validation:float) -> tf.keras.Model:
 	""" Train model on data. """
-	xid = Tokenize(x, vocabulary)
-	# encoder and decoder inputs
-	xenc, xdec = xid[:,:-1], xid[:,1:]
+	xid = np.array(list(vocabulary["id"].values())).reshape(-1,1)
+	yid = OneHot(x, vocabulary["id"])
 	model.fit(
-		list(zip(xenc, xdec)),
+		xid, yid,
+		batch_size = batch,
 		epochs = epochs,
+		validation_split = validation,
 	)
 	return model
 
-def Generate(model:tf.keras.Model, x:list[str], vocabulary:str, eos:str, maxTokenGen:int) -> list[str]:
-	""" Generate response from model. """
-	y = [""] * len(x)
-	xid = Tokenize(x, vocabulary)
-	for n in range(maxTokenGen):
-		enc, dec = xid[:,:-1], xid[:,1:]
-		yid = model([ enc, dec ]).numpy().argmax(axis = 1)
-		for i,id in enumerate(yid):
-			y[i] += vocabulary[id]
-		xid[:,:-1] = xid[:,1:]
-		xid[:,-1] = yid
-		if EndOfSentence(x, eos):
-			break
-	return y
-
-def EndOfSentence(x:list[str], eos:str) -> bool:
-	""" Return true if all rows are terminated by <eos>. """
-	for s in x:
-		if s.endswith(eos):
-			return False
-	return True
-
-def Tokenize(x:list[str], vocabulary:str) -> np.ndarray[int]:
-	""" Return token ids for characters in text. """
-	token = []
-	for s in x:
-		id = [ vocabulary.index(c) for c in s ]
-		token.append(id)
-	token = tf.keras.preprocessing.sequence.pad_sequences(token, padding = "post")
-	return token
-
-def DeTokenize(token:np.ndarray[int], vocabulary:str) -> list[str]:
-	""" Return text from token ids. """
-	x = [""] * len(token)
-	for i,id in enumerate(token):
-		s = "".join([ vocabulary[i] for i in id ])
-		x[i] = s
-	return x
+def OneHot(x:list[str], id:dict[str:int]) -> np.ndarray[float]:
+	""" Return one-hot labels for next word in `x` with wrap around. """
+	yid = np.zeros( (len(x), len(id)) ).astype(float)
+	j = id[x[0]]
+	yid[0,j] = 1.0
+	for i,w in enumerate(x[1:]):
+		j = id[w]
+		yid[i,j] = 1.0
+	return yid
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
