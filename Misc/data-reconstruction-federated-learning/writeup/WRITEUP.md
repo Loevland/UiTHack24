@@ -5,7 +5,7 @@
 
 ## Writeup
 
-[Exploit](./reconstruct.py) based off this [paper](https://proceedings.neurips.cc/paper/2019/hash/60a6c4002cc7b29142def8871531281a-Abstract.html)
+[Exploit](../src/reconstruct.py) based off this [paper](https://proceedings.neurips.cc/paper/2019/hash/60a6c4002cc7b29142def8871531281a-Abstract.html)
 
 Flag:
 
