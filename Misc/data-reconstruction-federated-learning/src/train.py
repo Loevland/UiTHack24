@@ -27,7 +27,7 @@ def Flags(argv:list[str]) -> argparse.Namespace:
 	parse.add_argument("--units",         type = int,   default =        128,                        help = "Size of units layer")
 	parse.add_argument("--layers",        type = int,   default =          4,                        help = "Number of fully-connected hidden layers")
 	parse.add_argument("--batch",         type = int,   default =        128,                        help = "Batch size")
-	parse.add_argument("--epochs",        type = int,   default =         50,                        help = "Number of epochs to train")
+	parse.add_argument("--epochs",        type = int,   default =         30,                        help = "Number of epochs to train")
 	parse.add_argument("--validation",    type = float, default =        0.2,                        help = "Fraction of data to use for validation")
 	args = parse.parse_args(argv)
 	with open(args.flag,"r") as f:
@@ -62,7 +62,7 @@ def main(argv:list[str]) -> None:
 		model.summary()
 	
 	if args.savemodel:
-		model.save(args.savemodel, save_format = "h5")
+		model.save(args.savemodel)
 	return
 
 def Data(filepath:str, flag:str) -> tuple[list[str],dict[str:dict],np.ndarray[int]]:
@@ -132,13 +132,25 @@ def Labels(x:list[str], id:dict[str:int], filepath:str) -> np.ndarray[int]:
 		return np.load(filepath)
 	
 	# wrap-around such that last label y[0] predicts first word x[-1]
-	y = np.zeros( (len(x),1) ).astype(int)
-	for i in range(len(x[:-1])):
-		w = x[i+1]
-		y[i] = id[w]
-	w = x[-1]
-	y[0] = id[w]
-	
+	# y = np.zeros( (len(x),1) ).astype(int)
+	# for i in range(len(x[:-1])):
+	# 	w = x[i+1]
+	# 	y[i] = id[w]
+	# w = x[-1]
+	# y[0] = id[w]
+	# 
+	# y = -1*np.ones( (len(x),1) ).astype(int)
+	# i = 0
+	# while i < len(y):
+	# 	r = np.random.randint(1, len(x))
+	# 	if r in y:
+	# 		continue
+	# 	y[i] = r
+	# 	i += 1
+	# 
+	# y = np.random.randint(0, len(id), (len(x),1)).astype(int)
+	y = np.random.choice(id.values(), (len(x),1)).astype(int)
+
 	np.save(filepath, y)
 	return y
 
@@ -146,7 +158,6 @@ def Model(units:int, layers:int, vocabulary:int) -> tf.keras.Model:
 	""" Return neural network for text-to-text generation. """
 	embedding = tf.keras.layers.Embedding(vocabulary, units)
 	nnlayers = [
-		# tf.keras.layers.Dense(units, activation = "relu", input_shape = (None, vocabulary))
 		tf.keras.layers.Dense(units, activation = "relu")
 			for _ in range(layers)
 	]

@@ -16,7 +16,7 @@ import tensorflow as tf
 def Flags(argv:list[str]) -> argparse.Namespace:
 	""" Return parsed arguments. """
 	parse = argparse.ArgumentParser(description = __doc__)
-	modelpath = os.path.join("model","banquo.h5")
+	modelpath = os.path.join("model","banquo")
 	vocabpath = os.path.join("data","vocabulary.json")
 	parse.add_argument("--loadmodel", type = str, default =  modelpath, help = "Name for model loading")
 	parse.add_argument("--vocabpath", type = str, default =  vocabpath, help = "Path to training data")

@@ -16,12 +16,12 @@ import tensorflow as tf
 def Flags(argv:list[str]) -> argparse.Namespace:
 	""" Return parsed arguments. """
 	parse = argparse.ArgumentParser(description = __doc__)
-	modelpath = os.path.join("model","banquo.h5")
+	modelpath = os.path.join("model","banquo")
 	vocabpath = os.path.join("data","vocabulary.json")
 	parse.add_argument("--loadmodel",  type = str, default = modelpath,                  help = "Name for model loading")
 	parse.add_argument("--vocabpath",  type = str, default = vocabpath,                  help = "Path to training data")
 	parse.add_argument("--word",       type = str, default =      None, required = True, help = "Word to start inferrence with")
-	parse.add_argument("--stoplength", type = int, default =        32,                  help = "Number of words to infer")
+	parse.add_argument("--stoplength", type = int, default =        16,                  help = "Number of words to infer")
 	args = parse.parse_args(argv)
 	if args.loadmodel and not args.loadmodel.endswith(".h5"):
 		args.loadmodel += ".h5"
