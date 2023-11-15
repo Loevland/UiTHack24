@@ -1,4 +1,6 @@
 
+__pycache__/
+
 # sub repo
 deep-leakage-from-gradients/
 dlg/
@@ -6,5 +8,9 @@ dlg/
 # data
 data/*
 !data/coriolanus.txt
+!data/macbeth.txt
 !data/vocabulary.json
+
+# models
+model/*
 
