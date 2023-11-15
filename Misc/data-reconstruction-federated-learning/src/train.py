@@ -27,11 +27,12 @@ def Flags(argv:list[str]) -> argparse.Namespace:
 	parse.add_argument("--units",         type = int,   default =        128,                        help = "Size of units layer")
 	parse.add_argument("--layers",        type = int,   default =          4,                        help = "Number of fully-connected hidden layers")
 	parse.add_argument("--batch",         type = int,   default =        128,                        help = "Batch size")
-	parse.add_argument("--epochs",        type = int,   default =         30,                        help = "Number of epochs to train")
+	parse.add_argument("--epochs",        type = int,   default =         50,                        help = "Number of epochs to train")
 	parse.add_argument("--validation",    type = float, default =        0.2,                        help = "Fraction of data to use for validation")
 	args = parse.parse_args(argv)
 	with open(args.flag,"r") as f:
-		args.flag = f.read().strip()
+		args.flag = f.read().strip()\
+			.replace("UiTHack24{","").replace("}","")
 	if args.savemodel and not args.savemodel.endswith(".h5"):
 		args.savemodel += ".h5"
 	if args.loadmodel and not args.loadmodel.endswith(".h5"):
@@ -42,9 +43,9 @@ def main(argv:list[str]) -> None:
 	args = Flags(argv)
 	
 	if args.recreate_data:
-		os.remove(os.path.join("data","words.txt"))
-		os.remove(os.path.join("data","vocabulary.json"))
-		os.remove(os.path.join("data","one-hot.npy"))
+		for file in os.listdir("data"):
+			if file in [ "words.txt", "vocabulary.json", "one-hot.npy" ]:
+				os.remove(os.path.join("data",file))
 
 	x, vocabulary, y = Data(args.datapath, args.flag)
 
@@ -67,7 +68,15 @@ def main(argv:list[str]) -> None:
 def Data(filepath:str, flag:str) -> tuple[list[str],dict[str:dict],np.ndarray[int]]:
 	""" Return words and dual mapping between word and id, and one hot labels where `y[i]` is label for `x[i+1]`. """
 	x = Words(filepath)
-	vocabulary = Vocabulary(x, filepath, flag)
+	
+	# add flag and separator token
+	# NOTE: flag is still not present in training data
+	# NOTE: somehow flag's words are not close in vocabulary.json
+	x += flag.split("_") + [ "_" ]
+	# from   random import shuffle
+	# shuffle(x)
+
+	vocabulary = Vocabulary(x, filepath)
 	y = Labels(x, vocabulary["id"], filepath)
 	return x, vocabulary, y
 
@@ -97,7 +106,7 @@ def Words(filepath:str) -> list[str]:
 		json.dump(words, f)
 	return words
 
-def Vocabulary(x:list[str], filepath:str, flag:str) -> dict[str:dict]:
+def Vocabulary(x:list[str], filepath:str) -> dict[str:dict]:
 	""" Return dual mapping from word to vocabulary token id. """
 	dir = os.path.dirname(filepath)
 	filepath = os.path.join(dir,"vocabulary.json")
@@ -105,9 +114,6 @@ def Vocabulary(x:list[str], filepath:str, flag:str) -> dict[str:dict]:
 		with open(filepath, "r") as f:
 			return json.load(f)
 	
-	# add flag and separator token
-	# NOTE: flag is still not present in training data
-	x += flag.split("_") + [ "_" ]
 	v = list(set(x))
 	vocabulary = {
 		"word" : { id:w for id, w in enumerate(v) },
@@ -125,10 +131,13 @@ def Labels(x:list[str], id:dict[str:int], filepath:str) -> np.ndarray[int]:
 	if os.path.exists(filepath):
 		return np.load(filepath)
 	
-	# wrap-around such that last label y[-1] predicts first word x[0]
-	y = np.array([
-		id[w] for w in x[:-1] 
-	] + [ id[x[0]] ]).reshape(-1,1)
+	# wrap-around such that last label y[0] predicts first word x[-1]
+	y = np.zeros( (len(x),1) ).astype(int)
+	for i in range(len(x[:-1])):
+		w = x[i+1]
+		y[i] = id[w]
+	w = x[-1]
+	y[0] = id[w]
 	
 	np.save(filepath, y)
 	return y

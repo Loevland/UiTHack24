@@ -16,7 +16,7 @@ import tensorflow as tf
 def Flags(argv:list[str]) -> argparse.Namespace:
 	""" Return parsed arguments. """
 	parse = argparse.ArgumentParser(description = __doc__)
-	modelpath = os.path.join("model","model.h5")
+	modelpath = os.path.join("model","banquo.h5")
 	vocabpath = os.path.join("data","vocabulary.json")
 	parse.add_argument("--loadmodel",  type = str, default = modelpath,                  help = "Name for model loading")
 	parse.add_argument("--vocabpath",  type = str, default = vocabpath,                  help = "Path to training data")
@@ -53,7 +53,7 @@ def Infer(model:tf.keras.Model, start:str, vocabulary:dict[str:dict], stoplength
 	xid = np.array([ id[start] ]).astype(int).reshape(-1,1)
 	yid = np.array([ xid ] * stoplength)
 	for i in range(1, stoplength):
-		yid[i] = xid[0] = model(xid).numpy().argmax()
+		yid[i] = xid[0] = model(xid).numpy().argmax(-1)
 	words = [ word[str(id)] for id in yid.flatten() ]
 	return words
 
