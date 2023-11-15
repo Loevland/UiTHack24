@@ -1,9 +1,11 @@
 
-__pycache__/
+__pycache__
+.vscode
+.venv
 
 # sub repo
-deep-leakage-from-gradients/
-dlg/
+deep-leakage-from-gradients
+dlg
 
 # data
 data/*

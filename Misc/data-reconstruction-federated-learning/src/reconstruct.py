@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.10
 """
-Federated Learning with on secret flag.
+Reconstruction of training data from gradients 
 """
 # DLG repo
 # git@github.com:mit-han-lab/dlg.git
@@ -20,8 +20,8 @@ def Flags(argv:list[str]) -> argparse.Namespace:
 	parse = argparse.ArgumentParser(description = __doc__)
 	modelpath = os.path.join("model","banquo.h5")
 	vocabpath = os.path.join("data","vocabulary.json")
-	parse.add_argument("--loadmodel", type = str, default =  modelpath, help = "Name for model loading")
-	parse.add_argument("--vocabpath", type = str, default =  vocabpath, help = "Path to training data")
+	parse.add_argument("--loadmodel", type = str, default = modelpath, help = "Name for model loading")
+	parse.add_argument("--vocabpath", type = str, default = vocabpath, help = "Path to training data")
 	args = parse.parse_args(argv)
 	if args.loadmodel and not args.loadmodel.endswith(".h5"):
 		args.loadmodel += ".h5"
