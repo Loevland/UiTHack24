@@ -3,3 +3,8 @@
 deep-leakage-from-gradients/
 dlg/
 
+# data
+data/*
+!data/coriolanus.txt
+!data/vocabulary.json
+
