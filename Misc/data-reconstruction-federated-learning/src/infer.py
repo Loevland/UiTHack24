@@ -18,10 +18,10 @@ def Flags(argv:list[str]) -> argparse.Namespace:
 	parse = argparse.ArgumentParser(description = __doc__)
 	modelpath = os.path.join("model","banquo")
 	vocabpath = os.path.join("data","vocabulary.json")
-	parse.add_argument("--loadmodel",  type = str, default = modelpath,                  help = "Name for model loading")
-	parse.add_argument("--vocabpath",  type = str, default = vocabpath,                  help = "Path to training data")
-	parse.add_argument("--word",       type = str, default =      None, required = True, help = "Word to start inferrence with")
-	parse.add_argument("--stoplength", type = int, default =        16,                  help = "Number of words to infer")
+	parse.add_argument("--loadmodel",  type = str, default = modelpath, help = "Name for model loading")
+	parse.add_argument("--vocabpath",  type = str, default = vocabpath, help = "Path to training data")
+	parse.add_argument("--word",       type = str, default =  "random", help = "Word to start inferrence with")
+	parse.add_argument("--stoplength", type = int, default =        16, help = "Number of words to infer")
 	args = parse.parse_args(argv)
 	if args.loadmodel and not args.loadmodel.endswith(".h5"):
 		args.loadmodel += ".h5"
@@ -31,8 +31,10 @@ def main(argv:list[str]) -> None:
 	args = Flags(argv)
 	
 	vocabulary = Vocabulary(args.vocabpath)
+	if args.word == "random":
+		args.word = np.random.choice(list(vocabulary["word"].values()))
 	if args.word not in vocabulary["id"].keys():
-		exit(f"Starting --word '{args.word}' is not in vocabulary")
+		exit(f"Starting --word '{args.word}' is not in the vocabulary")
 
 	model = tf.keras.models.load_model(args.loadmodel)
 	
@@ -52,10 +54,12 @@ def Infer(model:tf.keras.Model, start:str, vocabulary:dict[str:dict], stoplength
 	id, word = vocabulary["id"], vocabulary["word"]
 	xid = np.array([ id[start] ]).astype(int).reshape(-1,1)
 	yid = np.array([ xid ] * stoplength)
+	out = [ start ] * stoplength
 	for i in range(1, stoplength):
-		yid[i] = xid[0] = model(xid).numpy().argmax(-1)
-	words = [ word[str(id)] for id in yid.flatten() ]
-	return words
+		w = np.array(out[i])
+		yid[i] = out[i] = model(w).numpy().argmax()
+		out[i] = word[str(out[i])]
+	return out
 
 if __name__ == "__main__":
 	main(sys.argv[1:])

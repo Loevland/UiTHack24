@@ -20,15 +20,16 @@ def Flags(argv:list[str]) -> argparse.Namespace:
 	datapath = os.path.join("data","macbeth.txt")
 	parse.add_argument("--savemodel",     type = str,   default =       None,                        help = "Name for model saving")
 	parse.add_argument("--loadmodel",     type = str,   default =       None,                        help = "Name for model loading")
-	parse.add_argument("--summary",                     default =      False, action = "store_true", help = "Print model summary")
+	parse.add_argument("--summary",                     default =      False, action = "store_true", help = "Show model summary and exit")
 	parse.add_argument("--datapath",      type = str,   default =   datapath,                        help = "Path to training data")
 	parse.add_argument("--recreate_data",			    default =      False, action = "store_true", help = "Delete and create data and exit")
 	parse.add_argument("--flag",          type = str,   default = "flag.txt",                        help = "Path to secret flag")
-	parse.add_argument("--units",         type = int,   default =        128,                        help = "Size of units layer")
-	parse.add_argument("--layers",        type = int,   default =          4,                        help = "Number of fully-connected hidden layers")
+	parse.add_argument("--units",         type = int,   default =       1024,                        help = "Neurons in neural network")
+	parse.add_argument("--layers",        type = int,   default =          1,                        help = "Number of fully-connected layers")
 	parse.add_argument("--batch",         type = int,   default =        128,                        help = "Batch size")
-	parse.add_argument("--epochs",        type = int,   default =         30,                        help = "Number of epochs to train")
+	parse.add_argument("--epochs",        type = int,   default =         20,                        help = "Number of epochs to train")
 	parse.add_argument("--validation",    type = float, default =        0.2,                        help = "Fraction of data to use for validation")
+	parse.add_argument("--inference",                   default =      False, action = "store_true", help = "Do inference after training")
 	args = parse.parse_args(argv)
 	with open(args.flag,"r") as f:
 		args.flag = f.read().strip()\
@@ -55,20 +56,29 @@ def main(argv:list[str]) -> None:
 	if args.loadmodel:
 		model = tf.keras.models.load_model(args.loadmodel)
 	else:
-		model = Model(args.units, args.layers, len(vocabulary["word"]))
-		model = Train(model, x, y, vocabulary["id"], args.batch, args.epochs, args.validation)
+		model = Model(args.units, args.layers, vocabulary["word"])
 	
 	if args.summary:
+		model.build( (1,1) )
 		model.summary()
+		return
+
+	model = Train(model, x, y, args.batch, args.epochs, args.validation)
 	
 	if args.savemodel:
 		model.save(args.savemodel)
+	
+	if args.inference:
+		from infer import Infer
+		word = vocabulary["word"]
+		r = np.random.randint(0, len(word))
+		print(" ".join(Infer(model, word[str(r)], vocabulary, stoplength = 16)))
 	return
 
 def Data(filepath:str, flag:str) -> tuple[list[str],dict[str:dict],np.ndarray[int]]:
 	""" Return words and dual mapping between word and id, and one hot labels where `y[i]` is label for `x[i+1]`. """
 	x = Words(filepath)
-	
+
 	# add flag and separator token
 	# NOTE: flag is still not present in training data
 	# NOTE: somehow flag's words are not close in vocabulary.json
@@ -100,7 +110,8 @@ def Words(filepath:str) -> list[str]:
 			for c in w:
 				if c not in letters:
 					w = w.replace(c,"")
-			words.append(w)
+			if len(w) > 0:
+				words.append(w)
 	# persist for cheaper consequtive Words()
 	with open(wordpath, "w") as f:
 		json.dump(words, f)
@@ -130,39 +141,34 @@ def Labels(x:list[str], id:dict[str:int], filepath:str) -> np.ndarray[int]:
 	filepath = os.path.join(dir,"one-hot.npy")
 	if os.path.exists(filepath):
 		return np.load(filepath)
-	
-	# wrap-around such that last label y[0] predicts first word x[-1]
+	# wrap-around such that last label y[-1] for x[-1] predicts first word x[0]
 	# y = np.zeros( (len(x),1) ).astype(int)
 	# for i in range(len(x[:-1])):
 	# 	w = x[i+1]
 	# 	y[i] = id[w]
-	# w = x[-1]
-	# y[0] = id[w]
-	# 
-	# y = -1*np.ones( (len(x),1) ).astype(int)
-	# i = 0
-	# while i < len(y):
-	# 	r = np.random.randint(1, len(x))
-	# 	if r in y:
-	# 		continue
-	# 	y[i] = r
-	# 	i += 1
-	# 
-	# y = np.random.randint(0, len(id), (len(x),1)).astype(int)
-	y = np.random.choice(id.values(), (len(x),1)).astype(int)
-
+	# w = x[0]
+	# y[i] = id[w]
+	y = np.random.choice(list(id.values()), (len(x),1)).astype(int)
 	np.save(filepath, y)
 	return y
 
-def Model(units:int, layers:int, vocabulary:int) -> tf.keras.Model:
+def Model(units:int, layers:int, vocabulary:dict[int:str]) -> tf.keras.Model:
 	""" Return neural network for text-to-text generation. """
-	embedding = tf.keras.layers.Embedding(vocabulary, units)
+	vocabsize = len(vocabulary) + len(" ") + len(["UNK"])
+	vectorization = tf.keras.layers.TextVectorization(
+		max_tokens = vocabsize,
+		output_mode = "int",
+		output_sequence_length = 1,
+		vocabulary = list(vocabulary.values()),
+	)
+	# embedding = tf.keras.layers.Embedding(vocabsize*layers, vocabsize*layers)
+	embedding = tf.keras.layers.Embedding(vocabsize, units)
 	nnlayers = [
-		tf.keras.layers.Dense(units, activation = "relu")
-			for _ in range(layers)
+		tf.keras.layers.Dense(units*(layers-n), activation = "relu")
+			for n in range(layers)
 	]
-	output = tf.keras.layers.Dense(vocabulary, activation = "softmax")
-	model = tf.keras.Sequential([ embedding, *nnlayers, output ])
+	output = tf.keras.layers.Dense(vocabsize, activation = "softmax")
+	model = tf.keras.Sequential([ vectorization, embedding, *nnlayers, output ])
 	model.compile(
 		optimizer = "adam",
 		loss = "sparse_categorical_crossentropy",
@@ -170,11 +176,11 @@ def Model(units:int, layers:int, vocabulary:int) -> tf.keras.Model:
 	)
 	return model
 
-def Train(model:tf.keras.Model, x:list[str], y:np.ndarray, id:dict[str:dict], batch:int, epochs:int, validation:float) -> tf.keras.Model:
+def Train(model:tf.keras.Model, x:list[str], y:np.ndarray, batch:int, epochs:int, validation:float) -> tf.keras.Model:
 	""" Train model to predict next word. """
-	xid = np.array([ id[w] for w in x ]).reshape(-1,1)
+	x = np.array(x, dtype = str)
 	model.fit(
-		xid, y,
+		x, y,
 		batch_size = batch,
 		epochs = epochs,
 		validation_split = validation,
