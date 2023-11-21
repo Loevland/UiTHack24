@@ -16,50 +16,48 @@ import tensorflow as tf
 def Flags(argv:list[str]) -> argparse.Namespace:
 	""" Return parsed arguments. """
 	parse = argparse.ArgumentParser(description = __doc__)
-	modelpath = os.path.join("model","banquo")
+	modelpath = os.path.join("model","banquo.h5")
 	vocabpath = os.path.join("data","vocabulary.json")
-	parse.add_argument("--loadmodel",  type = str, default = modelpath, help = "Name for model loading")
-	parse.add_argument("--vocabpath",  type = str, default = vocabpath, help = "Path to training data")
-	parse.add_argument("--word",       type = str, default =  "random", help = "Word to start inferrence with")
-	parse.add_argument("--stoplength", type = int, default =        16, help = "Number of words to infer")
+	parse.add_argument("--loadmodel",  type = str, default = modelpath, help = "name for model loading")
+	parse.add_argument("--vocabpath",  type = str, default = vocabpath, help = "path to training data")
+	parse.add_argument("--word",       type = str, default =  "random", help = "word to start inferrence with")
+	parse.add_argument("--stoplength", type = int, default =        16, help = "number of words to infer")
 	args = parse.parse_args(argv)
-	if args.loadmodel and not args.loadmodel.endswith(".h5"):
-		args.loadmodel += ".h5"
 	return args
 
-def main(argv:list[str]) -> None:
+def Main(argv:list[str]) -> None:
 	args = Flags(argv)
 	
-	vocabulary = Vocabulary(args.vocabpath)
+	id, word = Vocabulary(args.vocabpath)
 	if args.word == "random":
-		args.word = np.random.choice(list(vocabulary["word"].values()))
-	if args.word not in vocabulary["id"].keys():
+		args.word = np.random.choice(list(word.values()))
+	if args.word not in id.keys():
 		exit(f"Starting --word '{args.word}' is not in the vocabulary")
 
 	model = tf.keras.models.load_model(args.loadmodel)
 	
-	out = Infer(model, args.word, vocabulary, args.stoplength)
+	out = Infer(model, args.word, id, word, args.stoplength)
 	
 	print(" ".join(out))
 	return
 
-def Vocabulary(filepath:str) -> dict[str:dict]:
+def Vocabulary(filepath:str) -> tuple[dict[str:int], dict[int:str]]:
 	""" Return dual mapping between word and id. """
 	with open(filepath,"r") as f:
-		vocabulary = json.load(f)
-	return vocabulary
+		v = json.load(f)
+	id, word = v["id"], v["word"]
+	id   = { w:int(i) for w,i in id.items() }
+	word = { int(i):w for i,w in word.items() }
+	return id, word
 
-def Infer(model:tf.keras.Model, start:str, vocabulary:dict[str:dict], stoplength:int) -> list[str]:
+def Infer(model:tf.keras.Model, start:str, id:dict[str:int], word:dict[int:str], stoplength:int) -> list[str]:
 	""" Return list of words predicted by model. """
-	id, word = vocabulary["id"], vocabulary["word"]
-	xid = np.array([ id[start] ]).astype(int).reshape(-1,1)
-	yid = np.array([ xid ] * stoplength)
 	out = [ start ] * stoplength
+	xid = id[start]
 	for i in range(1, stoplength):
-		w = np.array(out[i])
-		yid[i] = out[i] = model(w).numpy().argmax()
-		out[i] = word[str(out[i])]
+		xid = model(np.array([ xid ])).numpy().argmax()
+		out[i] = word[xid]
 	return out
 
 if __name__ == "__main__":
-	main(sys.argv[1:])
+	Main(sys.argv[1:])
