@@ -24,16 +24,13 @@ def Flags(argv:list[str]) -> argparse.Namespace:
     parse.add_argument("--summary",       action = "store_true", default =      False, help = "show model summary and exit")
     parse.add_argument("--datapath",      type   = str,          default =   datapath, help = "path to training data")
     parse.add_argument("--flag",          type   = str,          default = "flag.txt", help = "path to secret flag")
-    parse.add_argument("--units",         type   = int,          default =       1024, help = "neurons in neural network")
-    parse.add_argument("--layers",        type   = int,          default =          1, help = "number of fully-connected layers")
     parse.add_argument("--batch",         type   = int,          default =        128, help = "batch size")
     parse.add_argument("--epochs",        type   = int,          default =         10, help = "number of epochs to train")
-    parse.add_argument("--validation",    type   = float,        default =        0.2, help = "fraction of data to use for validation")
+    parse.add_argument("--validation",    type   = float,        default =        0.0, help = "fraction of data to use for validation")
     parse.add_argument("--inference",     action = "store_true", default =      False, help = "post training inference with random word")
     args = parse.parse_args(argv)
     with open(args.flag,"r") as f:
-        args.flag = f.read().strip()\
-            .replace("UiTHack24{","").replace("}","")
+        args.flag = f.read().strip().replace("UiTHack24{","").replace("}","")
     if args.savemodel and not args.savemodel.endswith(".h5"):
         args.savemodel += ".h5"
     if args.loadmodel and not args.loadmodel.endswith(".h5"):
@@ -48,7 +45,7 @@ def Main(argv:list[str]) -> None:
     if args.loadmodel:
         model = tf.keras.models.load_model(args.loadmodel)
     else:
-        model = Model(args.units, args.layers, word)
+        model = Model(word)
         model = Train(model, x, y, id, args.batch, args.epochs, args.validation)
     
     if args.summary:
@@ -132,16 +129,12 @@ def Labels(x:list[str], id:dict[str:int]) -> np.ndarray[int]:
     y = y.reshape(-1,1)
     return y.reshape(-1,1)
 
-def Model(units:int, layers:int, word:dict[int:str]) -> tf.keras.Model:
+def Model(word:dict[int:str]) -> tf.keras.Model:
     """ Return neural network for text-to-text generation. """
     vocabsize = len(word)
-    embedding = tf.keras.layers.Embedding(vocabsize, units)
-    nnlayers = [
-        tf.keras.layers.Dense(units*(layers-n), activation = "relu")
-            for n in range(layers)
-    ]
+    embedding = tf.keras.layers.Embedding(vocabsize, vocabsize)
     output = tf.keras.layers.Dense(vocabsize, activation = "softmax")
-    model = tf.keras.Sequential([ embedding, *nnlayers, output ])
+    model = tf.keras.Sequential([ embedding, output ])
     model.compile(
         optimizer = "adam",
         loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits = False),
