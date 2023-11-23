@@ -4,7 +4,6 @@ Train a neural network to predict the next word in a sequence of words.
 """
 
 import argparse
-from   infer import Infer
 import json
 import numpy as np
 import os
@@ -14,6 +13,7 @@ import sys
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
 import tensorflow as tf
+import util
 
 def Flags(argv:list[str]) -> argparse.Namespace:
     """ Return parsed arguments. """
@@ -29,8 +29,7 @@ def Flags(argv:list[str]) -> argparse.Namespace:
     parse.add_argument("--validation",    type   = float,        default =        0.0, help = "fraction of data to use for validation")
     parse.add_argument("--inference",     action = "store_true", default =      False, help = "post training inference with random word")
     args = parse.parse_args(argv)
-    with open(args.flag,"r") as f:
-        args.flag = f.read().strip().replace("UiTHack24{","").replace("}","")
+    args.flag = util.ReadFlag(args.flag)
     if args.savemodel and not args.savemodel.endswith(".h5"):
         args.savemodel += ".h5"
     if args.loadmodel and not args.loadmodel.endswith(".h5"):
@@ -57,37 +56,25 @@ def Main(argv:list[str]) -> None:
     
     if args.inference:
         r = np.random.randint(0, len(word))
-        w = Infer(model, word[r], id, word, stoplength = 8)
+        w = util.Infer(model, word[r], id, word, stoplength = 8)
         print(" ".join(w))
     return
 
-def Data(filepath:str, flag:str) -> tuple[list[str], np.ndarray[int], dict[str:int], dict[int:str]]:
+def Data(filepath:str, flag:list[str]) -> tuple[list[str], np.ndarray[int], dict[str:int], dict[int:str]]:
     """ Return words and dual mapping between word and id, and one hot labels where `y[i]` is label for `x[i+1]`. """
     x = Words(filepath)
 
     # add flag to data and vocabulary
     # NOTE: flag's words are not close or easily discernable in vocabulary.json
-    x = list(set(x + FromL33t(flag).split("_")))
+    x = list(set(x + flag))
     # np.random.shuffle(x)
 
     id, word = Vocabulary(x, filepath)
     y = Labels(x, id)
     return x, y, id, word
 
-def FromL33t(flag:str) -> str:
-    """ Return sanitized flag for l33tspeak characters. """
-    return flag\
-        .replace("0","o")\
-        .replace("1","i")\
-        .replace("3","e")\
-        .replace("4","a")\
-        .replace("5","s")\
-        .replace("7","t")\
-        .replace("8","b")\
-        .replace("9","g")
-
 def Words(filepath:str) -> list[str]:
-    """ Return list of words in data file. """
+    """ Return list of processed words in file. """
     # read file
     with open(filepath, "r") as f:
         lines = f.read().lower().split("\n")
@@ -108,7 +95,7 @@ def Words(filepath:str) -> list[str]:
     return words
 
 def Vocabulary(x:list[str], filepath:str) -> tuple[dict[str:int], dict[int:str]]:
-    """ Return dual mapping from word to vocabulary token id. """
+    """ Return and store dual mapping from word to vocabulary token id. """
     v = list(set(x))
     vocabulary = {
         "word" : { id:w for id, w in enumerate(v) },
