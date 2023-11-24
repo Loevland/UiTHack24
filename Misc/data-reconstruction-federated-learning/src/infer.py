@@ -11,7 +11,7 @@ import sys
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
 import tensorflow as tf
-import util
+import common
 
 def Flags(argv:list[str]) -> argparse.Namespace:
 	""" Return parsed arguments. """
@@ -28,7 +28,7 @@ def Flags(argv:list[str]) -> argparse.Namespace:
 def Main(argv:list[str]) -> None:
 	args = Flags(argv)
 	
-	id, word = util.Vocabulary(args.vocabpath)
+	id, word = common.Vocabulary(args.vocabpath)
 	if args.word == "random":
 		args.word = np.random.choice(list(word.values()))
 	if args.word not in id.keys():
@@ -36,7 +36,7 @@ def Main(argv:list[str]) -> None:
 
 	model = tf.keras.models.load_model(args.loadmodel)
 	
-	out = util.Infer(model, args.word, id, word, args.stoplength)
+	out = common.Infer(model, args.word, id, word, args.stoplength)
 	
 	print(" ".join(out))
 	return

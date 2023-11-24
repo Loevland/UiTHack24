@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.10
 """
-Utilities for the federated learning.
+Common utilities for the federated learning.
 """
 
 import json

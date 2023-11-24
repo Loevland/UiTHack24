@@ -13,7 +13,7 @@ import sys
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
 import tensorflow as tf
-import util
+import common
 
 def Flags(argv:list[str]) -> argparse.Namespace:
     """ Return parsed arguments. """
@@ -29,7 +29,7 @@ def Flags(argv:list[str]) -> argparse.Namespace:
     parse.add_argument("--validation",    type   = float,        default =        0.0, help = "fraction of data to use for validation")
     parse.add_argument("--inference",     action = "store_true", default =      False, help = "post training inference with random word")
     args = parse.parse_args(argv)
-    args.flag = util.ReadFlag(args.flag)
+    args.flag = common.ReadFlag(args.flag)
     if args.savemodel and not args.savemodel.endswith(".h5"):
         args.savemodel += ".h5"
     if args.loadmodel and not args.loadmodel.endswith(".h5"):
@@ -56,7 +56,7 @@ def Main(argv:list[str]) -> None:
     
     if args.inference:
         r = np.random.randint(0, len(word))
-        w = util.Infer(model, word[r], id, word, stoplength = 8)
+        w = common.Infer(model, word[r], id, word, stoplength = 8)
         print(" ".join(w))
     return
 

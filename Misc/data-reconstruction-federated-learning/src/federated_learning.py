@@ -12,7 +12,7 @@ import sys
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
 import tensorflow as tf
-import util
+import common
 
 def Flags(argv:list[str]) -> argparse.Namespace:
 	""" Return parsed arguments. """
@@ -24,7 +24,7 @@ def Flags(argv:list[str]) -> argparse.Namespace:
 	parse.add_argument("--flag",      type   = str,          default = "flag.txt", help = "path to secret flag")
 	parse.add_argument("--savegrad",  action = "store_true", default =      False, help = "save gradients to numpy files")
 	args = parse.parse_args(argv)
-	args.flag = util.ReadFlag(args.flag)
+	args.flag = common.ReadFlag(args.flag)
 	if not args.loadmodel.endswith(".h5"):
 		args.loadmodel += ".h5"
 	return args
