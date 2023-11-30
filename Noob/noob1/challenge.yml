@@ -1,0 +1,23 @@
+name: "noob1"
+author: "Loevland"
+category: noob
+value: 50
+type: standard
+description: >
+    Our flag was stolen from our spaceship, and we need your 1337 hacker skills to get it back for us.
+
+    You can connect to the server with the following command: `nc hostname 9005`
+    The username is `noob1`
+    The password is `noob1
+
+    Read up on the `cat` command to get the flag
+
+
+connection_info: nc hostname 9005
+tags:
+    - easy
+flags:
+    - UiTHack24{7h3_1337357_0f_3m_4ll}
+
+state: visible
+version: "0.1"

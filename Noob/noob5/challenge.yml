@@ -1,0 +1,21 @@
+name: "noob5"
+author: "Loevland"
+category: noob
+value: 500
+type: standard
+description: >
+    Get the flag to join the galactic elite!
+
+    You can connect to the server with the following command: `nc hostname 9005`
+    The username is `noob5`
+    The password is the flag from `noob4`
+
+
+connection_info: nc hostname 9005
+tags:
+    - hard
+flags:
+    - UiTHack24{7h3_n00b_g4l4ct1c_31337}
+
+state: visible
+version: "0.1"
