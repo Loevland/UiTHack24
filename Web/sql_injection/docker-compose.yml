@@ -1,0 +1,10 @@
+version: '3'
+services:
+  frontend:
+    image: my-nextjs-frontend
+    ports:
+      - "3000:3000"
+  backend:
+    image: my-flask-backend
+    ports:
+      - "6032:5000"
