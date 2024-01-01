@@ -22,7 +22,7 @@ RUN chown root:elite /home/elite/cat
 RUN chmod u+s /home/elite/cat
 
 USER ctf
-CMD ./ynetd -p 9001 ./login
+CMD ./ynetd -p 6004 ./login
 
 # docker build -t noob5 .
-# docker run -dp 9001:9001 -it --rm noob5
+# docker run -dp 6004:6004 -it --rm noob5

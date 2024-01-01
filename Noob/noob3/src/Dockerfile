@@ -12,7 +12,7 @@ RUN chown -R root:root /home/ctf
 RUN chmod -R a+rx /home/ctf
 
 USER ctf
-CMD ./ynetd -p 9001 ./login
+CMD ./ynetd -p 6002 ./login
 
 # docker build -t noob3 .
-# docker run -dp 9001:9001 -it --rm noob3
+# docker run -dp 6002:6002 -it --rm noob3
