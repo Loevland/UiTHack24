@@ -1,0 +1,21 @@
+name: "3D Cipher"
+author: "Sdalvik"
+category: crypto
+value: 300
+type: standard
+description: >
+    While I was navigating through Earth's space debris on my way to the moon, 
+    I came across a fascinating discovery - a Rubik's cube floating alongside a computer. 
+    My curiosity piqued, I decided to inspect the computer, 
+    unveiling not only an encryption algorithm,
+    but also some encrypted text! I need your help to decipher it.
+
+tags:
+    - medium
+flags:
+    - UiTHack24{7h3_m00n_15_l173r4lly_m4d3_0f_gr33n_ch3353!}
+files:
+    - uploads/3D_cipher.zip
+
+state: visible
+version: "0.1"
