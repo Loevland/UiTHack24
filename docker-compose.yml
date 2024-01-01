@@ -37,6 +37,12 @@ services:
       - "8001:8001"
     restart: on-failure
 
+  space_inspector:
+    build: ./Web/space_inspector/src
+    ports:
+      - "8002:8002"
+    restart: on-failure
+
   # Misc
 
   # Rev

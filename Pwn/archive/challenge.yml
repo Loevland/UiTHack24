@@ -8,7 +8,7 @@ description: >
     Retrieve the book of secrets from the archive!
 
 
-connection_info: nc hostname 9003
+connection_info: nc hostname 9002
 tags:
     - medium
 flags:
