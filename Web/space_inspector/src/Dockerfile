@@ -1,6 +1,6 @@
 FROM node:10.19.0
 LABEL Description="UiTHack24 Space Inspector"
-EXPOSE 8000
+EXPOSE 8002
 
 RUN useradd -d /home/ctf -m -p ctf -s /bin/bash ctf
 WORKDIR /home/ctf
@@ -15,4 +15,4 @@ RUN npm install express
 CMD ["node", "app.js"]
 
 # docker build -t space_inspector .
-# docker run -dp 8000:8000 -it --rm space_inspector
+# docker run -dp 8002:8002 -it --rm space_inspector

@@ -7,7 +7,7 @@ description: >
     The flag is lost in space, but if you inspect it closely you might find it.
 
 
-connection_info: "hostname:8000"
+connection_info: "hostname:8002"
 tags:
     - easy
 flags:

@@ -1,0 +1,6 @@
+services:
+  space_inspector:
+    build: ./Web/space_inspector/src
+    ports:
+      - "8002:8002"
+    restart: on-failure
