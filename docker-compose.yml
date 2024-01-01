@@ -1,0 +1,75 @@
+services:
+  # Pwn
+  radiation_shield:
+    build: ./Pwn/radiation_shield/src
+    ports:
+      - "9000:9000"
+    restart: on-failure
+
+  codebreaker:
+    build: ./Pwn/codebreaker/src
+    ports:
+      - "9001:9001"
+    restart: on-failure
+
+  archive:
+    build: ./Pwn/archive/src
+    ports:
+      - "9002:9002"
+    restart: on-failure
+
+  xenithian_doorway:
+    build: ./Pwn/xenithian_doorway/src
+    ports:
+      - "9003:9003"
+    restart: on-failure
+
+  the_great_escape:
+    build: ./Pwn/the_great_escape/src
+    ports:
+      - "9004:9004"
+    restart: on-failure
+
+  # Web
+  space_traversal:
+    build: ./Web/space_traversal/src
+    ports:
+      - "8001:8001"
+    restart: on-failure
+
+  # Misc
+
+  # Rev
+
+  # Crypto
+
+  # Noob
+  noob1:
+    build: ./Noob/noob1/src
+    ports:
+      - "6000:6000"
+    restart: on-failure
+
+  noob2:
+    build: ./Noob/noob2/src
+    ports:
+      - "6001:6001"
+    restart: on-failure
+
+  noob3:
+    build: ./Noob/noob3/src
+    ports:
+      - "6002:6002"
+    restart: on-failure
+
+  noob4:
+    build: ./Noob/noob4/src
+    ports:
+      - "6003:6003"
+    restart: on-failure
+
+  noob5:
+    build: ./Noob/noob5/src
+    ports:
+      - "6004:6004"
+    restart: on-failure
