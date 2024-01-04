@@ -48,6 +48,11 @@ services:
   # Rev
 
   # Crypto
+  3D_cipher:
+    build: ./Crypto/3D_cipher/src
+    ports:
+      - "7000:7000"
+    restart: on-failure
 
   # Noob
   noob1:
