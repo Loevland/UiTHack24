@@ -25,7 +25,7 @@ function LoginForm() {
           username
         )}&password=${encodeURIComponent(password)}`,
       });
-    
+
 
       console.log("response");
       console.log(response);
@@ -33,12 +33,11 @@ function LoginForm() {
       const responseText = await response.text();
       console.log("responseText");
       console.log(responseText);
-      
-      if(responseText === "Login failed!"){
+
+      if (responseText === "Login failed!") {
         throw new Error("Login failed");
       }
-      else if(responseText === "Naughty naughty!")
-      {
+      else if (responseText === "Naughty naughty!") {
         toast.warning(responseText, {
           autoClose: 5000,
           hideProgressBar: false,
@@ -46,8 +45,7 @@ function LoginForm() {
           draggable: true,
         });
       }
-      else
-      {
+      else {
         toast.success(responseText, {
           autoClose: 5000,
           hideProgressBar: false,

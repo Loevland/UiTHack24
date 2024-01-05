@@ -1,10 +1,18 @@
-version: '3'
+version: "3.5"
 services:
   frontend:
-    image: my-nextjs-frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - 3000:3000
+
+    stdin_open: true
+    tty: true
+
   backend:
-    image: my-flask-backend
+    build:
+      context: backend
+      dockerfile: Dockerfile
     ports:
-      - "6032:5000"
+      - 5000:5000
