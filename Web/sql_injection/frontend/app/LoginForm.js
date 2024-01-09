@@ -16,7 +16,7 @@ function LoginForm() {
     console.log(userCredentials);
 
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch("http://localhost:5001/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -75,7 +75,7 @@ function LoginForm() {
 
   return (
     <form
-      className="flex flex-col items-center justify-center min-h-screen"
+      className="flex flex-col items-center justify-center h-screen"
       onSubmit={handleSubmit}
     >
       <div className="flex flex-col">
