@@ -34,7 +34,7 @@ transmission which they think may be the final piece to locate the space station
 ## POST /post_decrypt
 *body*
 ```
-'key': 'bVZoSE00c2Z4NFlRMTEyYkoxV0I5a016S3c3dHFBcXk1NzFqZ1RlWUJDYz0'
+'key': 'bVZoSE00c2Z4NFlRMTEyYkoxV0I5a016S3c3dHFBcXk1NzFqZ1RlWUJDYz0='
 ```
 
 ```
