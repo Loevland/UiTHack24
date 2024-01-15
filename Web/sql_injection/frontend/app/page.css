@@ -1,0 +1,5 @@
+.matrix-style {
+  color: #0f0; /* Neon green typical of the Matrix digital rain */
+  font-family: 'Courier New', monospace; /* Monospace font for a digital look */
+  text-shadow: 0 0 3px #0f0; /* Optional: adds a glow effect */
+}

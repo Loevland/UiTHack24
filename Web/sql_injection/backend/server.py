@@ -26,6 +26,7 @@ def is_valid_input(input_str):
         "SELECT",
         "EXEC",
         "UNION",
+        "SCHEMA",
     ]
     if any(keyword in input_str.upper() for keyword in disallowed_keywords):
         return False

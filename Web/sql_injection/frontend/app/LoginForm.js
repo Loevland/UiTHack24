@@ -75,7 +75,7 @@ function LoginForm() {
 
   return (
     <form
-      className="flex flex-col items-center justify-center h-screen"
+      className="flex flex-col items-center justify-center" style={{ height: '50vh' }}
       onSubmit={handleSubmit}
     >
       <div className="flex flex-col">
@@ -98,7 +98,7 @@ function LoginForm() {
           />
         </label>
         <input
-          className="bg-blue-500 text-white p-2 rounded mt-4"
+          className="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded mt-4 transition duration-300 ease-in-out cursor-pointer"
           type="submit"
           value="Submit"
         />
