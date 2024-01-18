@@ -1,0 +1,13 @@
+name: "Needle in the Haystack"
+author: "Lorentzen"
+category: misc
+value: 100
+description: >
+
+tags:
+  - easy
+  - medium
+flags:
+  - UiTHack24{g4lg32}
+state: visible
+version: "0.1"
