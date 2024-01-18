@@ -1,0 +1,18 @@
+version: "3.5"
+services:
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+
+    stdin_open: true
+    tty: true
+
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
