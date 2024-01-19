@@ -8,7 +8,7 @@ description: >
     In their hurry they must have forgotten that there were more steps to do.
 
 tags:
-    - easy
+    - medium
 flags:
     - UiTHack24{bytemaster_rijndael}
 files:
