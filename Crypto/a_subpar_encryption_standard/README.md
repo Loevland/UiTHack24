@@ -1,6 +1,6 @@
 # A subpar encryption standard
 
-> Crypto - 50pts
+> Crypto - 80pts
 
 While looking around in the remains of an enemy spaceship you find some code.
 In their hurry they must have forgotten that there were more steps to do.
