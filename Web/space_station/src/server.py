@@ -86,7 +86,7 @@ def generate_flag():
 
     decrypt_test()
 
-scheduler.add_job(generate_flag, trigger='interval', seconds=30)
+scheduler.add_job(generate_flag, trigger='interval', seconds=20)
 
 def decrypt_test(): 
     
