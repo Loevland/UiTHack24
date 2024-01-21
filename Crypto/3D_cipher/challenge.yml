@@ -10,6 +10,7 @@ description: >
     unveiling not only an encryption algorithm,
     but also some encrypted text! I need your help to decipher it.
 
+connection_info: "hostname:7000"
 tags:
     - medium
 flags:

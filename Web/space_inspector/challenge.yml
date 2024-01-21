@@ -1,0 +1,17 @@
+name: "Space Inspector"
+author: "Loevland"
+category: web
+value: 50
+type: standard
+description: >
+    The flag is lost in space, but if you inspect it closely you might find it.
+
+
+connection_info: "hostname:8002"
+tags:
+    - easy
+flags:
+    - UiTHack24{insp3ct1ng_7h3_5p4c3_3l3men75!}
+
+state: visible
+version: "0.1"
