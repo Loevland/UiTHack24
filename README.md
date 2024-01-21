@@ -17,7 +17,7 @@ Add emoji!
 | | | Radiation shield :computer: | | Expired License :key: | Alienware :closed_lock_with_key: | |
 | | Space traversal :space_invader:| Xenithian doorway :door: | | Infiltration :video_game: | Rapid Encryption :zap: | |
 | | | Archive :book: | | Exfiltration :gift: | 3D Cipher :globe_with_meridians: | |
-| | | The great escape :rocket: | | | | |
+| | | The great escape :rocket: | | | A subpar encryption standard 🚢 | |
 
 # Developer guidelines
 
