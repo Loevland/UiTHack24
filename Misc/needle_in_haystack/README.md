@@ -18,7 +18,7 @@ The pattern is:
 - 1 letter between "c" and "m"
 - 1 digit
 - 2 letters between "f" and "z"
-- 1 number between 5 and 7
+- 1 number between 2 and 7
 - 1 number between 1 and 5
 
 and the correct key today is key 585937
