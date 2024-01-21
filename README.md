@@ -14,7 +14,7 @@ Add emoji!
 | Noob | Web | Pwn | Misc | Rev_Eng | Crypto | IRL |
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | noob1 :baby_bottle: | Space Inspector :eyes: | Codebreaker :fax: | Location :round_pushpin: | | Cosmic Caesar :dizzy: | |
-| noob2 :baby: | | Radiation shield :computer: | | Expired License :key: | Alienware :closed_lock_with_key: | |
+| noob2 :baby: | | Radiation shield :computer: | Needle in the Haystack :needle: | Expired License :key: | Alienware :closed_lock_with_key: | |
 | noob3 :cat: | Space traversal :space_invader:| Xenithian doorway :door: | | Infiltration :video_game: | Rapid Encryption :zap: | |
 | noob4 :crocodile: | | Archive :book: | | Exfiltration :gift: | 3D Cipher :globe_with_meridians: | |
 | noob5 :dragon: | | The great escape :rocket: | | | | |
