@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UiTHack Flag Bandit</title>
+    <link rel=icon href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>UiTHack Flag Bandit</h1>
+        <h2>Wallet: <span id="userCoins">0</span> coins<img id="coin-image" src="coin.png" alt="">
+        </h2>
+    </header>
+    <div id="slot-machine">
+        <div class="roll-box" id="roll1">0</div>
+        <div class="roll-box" id="roll2">0</div>
+        <div class="roll-box" id="roll3">0</div>
+        <div id="table-container">
+            <table id="cost-payout-table">
+                <thead>
+                    <tr>
+                        <th>Spin Cost</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <td>Win payout</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <th>Flag</th>
+                        <th></th>
+                    </tr>
+            </table>
+        </div>
+    </div>
+
+    <h2 id="win-condition">Try your luck! Match all 3 digits to win!</h2>
+    <button class="round-button" id="spin-button" onclick="spin()" disabled title="Cost: 20 coins">Spin</button>
+
+    <div id="message-box"></div>
+
+
+    <p>* This is a game of chance. You may lose all your coins.</p>
+    <p id="disclaimer">* The game is definitely not rigged...</p>
+
+    <script>
+        const _0x10eb30 = _0x34a2; (function (_0x24eb4a, _0xa8fd4c) { const _0x4af375 = _0x34a2, _0x52ff04 = _0x24eb4a(); while (!![]) { try { const _0x119f11 = -parseInt(_0x4af375(0x1cf)) / 0x1 * (-parseInt(_0x4af375(0x1c3)) / 0x2) + -parseInt(_0x4af375(0x1b9)) / 0x3 * (parseInt(_0x4af375(0x1ca)) / 0x4) + -parseInt(_0x4af375(0x1c6)) / 0x5 * (-parseInt(_0x4af375(0x1e4)) / 0x6) + -parseInt(_0x4af375(0x1e3)) / 0x7 * (parseInt(_0x4af375(0x1cc)) / 0x8) + parseInt(_0x4af375(0x1bb)) / 0x9 + -parseInt(_0x4af375(0x1e2)) / 0xa * (-parseInt(_0x4af375(0x1d3)) / 0xb) + parseInt(_0x4af375(0x1c8)) / 0xc * (-parseInt(_0x4af375(0x1da)) / 0xd); if (_0x119f11 === _0xa8fd4c) break; else _0x52ff04['push'](_0x52ff04['shift']()); } catch (_0x4acc14) { _0x52ff04['push'](_0x52ff04['shift']()); } } }(_0x8b3f, 0x19e73)); const ws = new WebSocket(_0x10eb30(0x1b5)), userCoinsElement = document[_0x10eb30(0x1c7)]('userCoins'), rollElements = [document[_0x10eb30(0x1c7)]('roll1'), document['getElementById'](_0x10eb30(0x1d6)), document[_0x10eb30(0x1c7)]('roll3')], resultElement = document[_0x10eb30(0x1c7)](_0x10eb30(0x1b6)), spinButton = document[_0x10eb30(0x1c7)](_0x10eb30(0x1b3)), messageBox = document[_0x10eb30(0x1c7)](_0x10eb30(0x1dd)), costPayoutTable = document['getElementById']('cost-payout-table'); ws[_0x10eb30(0x1d1)] = () => { const _0x459068 = _0x10eb30; console[_0x459068(0x1bf)](_0x459068(0x1bc)), ws[_0x459068(0x1b1)](JSON[_0x459068(0x1df)]({ 'type': _0x459068(0x1af) })), spinButton[_0x459068(0x1ae)] = ![], displayMessage(_0x459068(0x1de), ![]); }, ws[_0x10eb30(0x1e5)] = _0x2347ea => { const _0x1ca07c = _0x10eb30, _0x21c3ff = JSON[_0x1ca07c(0x1d5)](_0x2347ea[_0x1ca07c(0x1d9)]); if (_0x21c3ff['type'] === _0x1ca07c(0x1af)) userCoinsElement[_0x1ca07c(0x1c9)] = _0x21c3ff[_0x1ca07c(0x1ce)], costPayoutTable[_0x1ca07c(0x1d7)][0x0][_0x1ca07c(0x1b7)][0x1]['textContent'] = _0x21c3ff[_0x1ca07c(0x1b2)] + _0x1ca07c(0x1e1), costPayoutTable[_0x1ca07c(0x1d7)][0x1]['cells'][0x1][_0x1ca07c(0x1c9)] = _0x21c3ff['win_payout'] + '\x20coins', costPayoutTable['rows'][0x2][_0x1ca07c(0x1b7)][0x1][_0x1ca07c(0x1c9)] = _0x21c3ff[_0x1ca07c(0x1d2)] + _0x1ca07c(0x1e1); else { if (_0x21c3ff[_0x1ca07c(0x1cd)] === _0x1ca07c(0x1b8)) updateRolls(_0x21c3ff[_0x1ca07c(0x1ba)]), setTimeout(() => { const _0x300950 = _0x1ca07c; userCoinsElement[_0x300950(0x1c9)] = _0x21c3ff['coins'], displayWinCondition(_0x21c3ff['win'], _0x21c3ff['prize']); }, 0x3e8), setTimeout(() => { const _0x102f87 = _0x1ca07c; spinButton[_0x102f87(0x1ae)] = ![]; }, 0x7d0); else _0x21c3ff[_0x1ca07c(0x1cd)] === _0x1ca07c(0x1c0) && displayMessage(_0x21c3ff[_0x1ca07c(0x1e0)], !![]); } }, ws[_0x10eb30(0x1c5)] = () => { const _0x494628 = _0x10eb30; console[_0x494628(0x1bf)](_0x494628(0x1d8)); }; function _0x34a2(_0x44b794, _0x1c2ce6) { const _0x8b3f64 = _0x8b3f(); return _0x34a2 = function (_0x34a294, _0x11bb22) { _0x34a294 = _0x34a294 - 0x1ae; let _0x3dc85a = _0x8b3f64[_0x34a294]; return _0x3dc85a; }, _0x34a2(_0x44b794, _0x1c2ce6); } function spin() { const _0x315e0b = _0x10eb30; if (spinButton[_0x315e0b(0x1ae)]) return; spinButton[_0x315e0b(0x1ae)] = !![], ws[_0x315e0b(0x1b1)](JSON[_0x315e0b(0x1df)]({ 'type': _0x315e0b(0x1b8) })); } function updateRolls(_0x761a25) { const _0xd4a2dd = _0x10eb30; for (let _0x2146ca = 0x0; _0x2146ca < rollElements[_0xd4a2dd(0x1bd)]; _0x2146ca++) { rollElements[_0x2146ca][_0xd4a2dd(0x1b4)][_0xd4a2dd(0x1e6)] = _0xd4a2dd(0x1c1), rollElements[_0x2146ca][_0xd4a2dd(0x1d4)], rollElements[_0x2146ca][_0xd4a2dd(0x1b4)][_0xd4a2dd(0x1e6)] = _0xd4a2dd(0x1db), setTimeout(() => { const _0x55a73d = _0xd4a2dd; rollElements[_0x2146ca][_0x55a73d(0x1c9)] = _0x761a25[_0x2146ca]; }, 0x3e8); } } function displayWinCondition(_0x3d258f, _0x15658f) { const _0x54dd6d = _0x10eb30; _0x3d258f ? (resultElement[_0x54dd6d(0x1c9)] = _0x54dd6d(0x1d0) + _0x15658f + _0x54dd6d(0x1be), resultElement['style'][_0x54dd6d(0x1cb)] = _0x54dd6d(0x1c2)) : (resultElement[_0x54dd6d(0x1c9)] = _0x54dd6d(0x1b0), resultElement['style'][_0x54dd6d(0x1cb)] = '#FF5252'); } function _0x8b3f() { const _0x4962bb = ['onopen', 'flag_price', '718135WdXJUZ', 'offsetHeight', 'parse', 'roll2', 'rows', 'WebSocket\x20connection\x20closed', 'data', '130Fdefsd', 'spin\x201s\x20forwards', '#FF5252', 'message-box', 'Match\x20all\x203\x20digits\x20to\x20win!', 'stringify', 'message', '\x20coins', '10VhxgrG', '757337IMEova', '48MsYQPi', 'onmessage', 'animation', 'disabled', 'info', 'You\x20Lose!\x20Try\x20again.', 'send', 'spin_cost', 'spin-button', 'style', 'ws://localhost:5000/ws', 'win-condition', 'cells', 'spin', '15TDzoka', 'roll', '1179324NYZEUb', 'WebSocket\x20connection\x20opened', 'length', '\x20coins!', 'log', 'error', 'none', '#4CAF50', '10BlHJGD', '#ffffff', 'onclose', '113265RDXZBc', 'getElementById', '78972wpQFHU', 'textContent', '106340hzaHrW', 'color', '8KNqMVL', 'type', 'coins', '7096GTFeCG', 'You\x20Win\x20']; _0x8b3f = function () { return _0x4962bb; }; return _0x8b3f(); } function displayMessage(_0x23311b, _0x5a8940 = ![]) { const _0x928827 = _0x10eb30; messageBox[_0x928827(0x1c9)] = _0x23311b, messageBox[_0x928827(0x1b4)]['color'] = _0x5a8940 ? _0x928827(0x1dc) : _0x928827(0x1c4); }
+    </script>
+</body>
+
+</html>
