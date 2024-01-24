@@ -50,7 +50,8 @@ START_COINS = 200
 SPIN_COST = 20
 PAYOUT_MULTIPLIER = 5
 FLAG_PRICE = 10000
-LOG_KEEP_TIME = 60 * 5
+LOG_KEEP_TIME = 60 * 5  # value in seconds
+WS_TIMEOUT = 60 * 5  # value in seconds
 
 
 @sock.route("/ws")
@@ -73,7 +74,12 @@ def connect(ws):
 
     while True:
         try:
-            msg = json.loads(ws.receive())
+            body = ws.receive(timeout=WS_TIMEOUT)
+            if body is None:
+                app.logger.info(f"Session timed out: {session['id']}, after {WS_TIMEOUT}s")
+                break
+            msg = json.loads(body)
+
             method = msg["type"]
             if method == "info":
                 ws.send(
@@ -133,7 +139,7 @@ def connect(ws):
                     app.logger.info(f"Someone got the flag! {addr=}, {msg=}")
                 # use this to add flag to session dict
                 elif session["admin"] == True:
-                    session["flag"] = open("/flag.txt").read()
+                    session["flag"] = open("flag.txt").read()
                 else:
                     ws.send(
                         json.dumps(
@@ -157,8 +163,7 @@ def connect(ws):
                     app.logger.setLevel(DEBUG)
                     ws.send(json.dumps({"type": "admin", "message": "Debug mode enabled"}))
             elif method == "motherload":
-                # not the intended solve, but a test of knowledge for the ancients among us
-                if session.get("admin", False):
+                if session.get("admin", False) and verify_knowledge(msg["password"]):
                     session["coins"] += FLAG_PRICE * 100
                     ws.send(
                         json.dumps(
@@ -184,14 +189,15 @@ def connect(ws):
                     {"type": "error", "message": "Don't be mean, the server got feelings 2 ;/"}
                 )
             )
-        finally:
-            # remove session log file from logging handler
-            app.logger.removeHandler(handler)
-            # clean up old session logs
-            # remove all logs older than LOG_KEEP_TIME seconds
-            for f in os.listdir("log"):
-                if time.time() - os.path.getmtime(f"log/{f}") > LOG_KEEP_TIME:
-                    os.remove(f"log/{f}")
+    # remove session log file from logging handler
+    app.logger.removeHandler(handler)
+    # clean up old session logs
+    # remove all logs older than LOG_KEEP_TIME seconds
+    for f in os.listdir("log"):
+        if time.time() - os.path.getmtime(f"log/{f}") > LOG_KEEP_TIME:
+            os.remove(f"log/{f}")
+
+    ws.close()
 
 
 if __name__ == "__main__":
