@@ -36,6 +36,8 @@ However there is and additional password protecting the api, along with the need
 By first reversing the admin password, many will recognise the admin password "hunter2" as a reference to a well known [irc conversation](https://knowyourmeme.com/memes/hunter2).
 The password for the motherload api is a reference to the same conversation, and therefore beeing possible but still hard to guess. The password is `AzureDiamondCthon98` and was initially used as a testing feature, but was left/*intentionally forgotten*.
 
+Flag:
+
 ```txt
 UiTHack23{Passw0rd_1s_*******}
 ```

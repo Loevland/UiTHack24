@@ -174,6 +174,10 @@ def connect(ws):
                             }
                         )
                     )
+                else:
+                    ws.send(json.dumps({"type": "admin", "message": "Invalid authentification"}))
+            else:
+                ws.send(json.dumps({"type": "error", "message": "Unknown method"}))
 
         except ConnectionClosed:
             break
@@ -194,7 +198,7 @@ def connect(ws):
     # clean up old session logs
     # remove all logs older than LOG_KEEP_TIME seconds
     for f in os.listdir("log"):
-        if time.time() - os.path.getmtime(f"log/{f}.log") > LOG_KEEP_TIME:
+        if time.time() - os.path.getmtime(f"log/{f}") > LOG_KEEP_TIME:
             os.remove(f"log/{f}")
 
     ws.close()
