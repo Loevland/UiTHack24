@@ -25,6 +25,7 @@ def static_files(path: str):
     elif path == "flag.txt":
         return flask.make_response("No flag for you :P")
     elif path.startswith("log/"):
+        path = path.split("/")[-1]
         return flask.send_from_directory("log", path)
     return flask.send_from_directory("static", path)
     return flask.render_template("index.html", name=path, items=None)
@@ -137,7 +138,6 @@ def connect(ws):
                     session["coins"] -= FLAG_PRICE
                     ws.send(json.dumps({"type": "flag", "flag": open("/flag.txt").read()}))
                     app.logger.info(f"Someone got the flag! {addr=}, {msg=}")
-                # use this to add flag to session dict
                 elif session["admin"] == True:
                     session["flag"] = open("flag.txt").read()
                 else:
@@ -194,7 +194,7 @@ def connect(ws):
     # clean up old session logs
     # remove all logs older than LOG_KEEP_TIME seconds
     for f in os.listdir("log"):
-        if time.time() - os.path.getmtime(f"log/{f}") > LOG_KEEP_TIME:
+        if time.time() - os.path.getmtime(f"log/{f}.log") > LOG_KEEP_TIME:
             os.remove(f"log/{f}")
 
     ws.close()
