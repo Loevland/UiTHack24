@@ -1,0 +1,15 @@
+name: "F#ck"
+author: "mrtz"
+category: rev
+value: 100
+type: standard
+description: >
+    TODO
+tags:
+    - medium
+flags:
+    - UiTHack24{f#ck_this_sh1t}
+files:
+    - F#ck
+state: visible
+version: "0.1"  

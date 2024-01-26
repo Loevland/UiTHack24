@@ -1,0 +1,21 @@
+open System
+
+[<EntryPoint>]
+let main args =
+    match args.Length with
+    | x when x < 1 ->
+            printfn $"Expected at least one argument, got %i{args.Length}."
+    | _ ->
+        let secret = args |> Array.head
+        let flag = 
+            "t!hs_siht_kc@f".ToCharArray()
+            |> Seq.map (fun c -> char (int c + 1))
+            |> Seq.map (fun c -> char (int c - 1))
+            |> Array.ofSeq
+            |> Array.rev
+            |> String
+        
+        if secret = "D2005S" then
+           printfn $"TD{{%s{flag}}}"
+    0
+    

@@ -1,0 +1,4 @@
+default:
+	dotnet build -tl --configuration Release
+	mv -if bin/Release/net8.0/F\#ck .
+
