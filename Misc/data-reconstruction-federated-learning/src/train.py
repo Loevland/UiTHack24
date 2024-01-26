@@ -90,8 +90,6 @@ def Words(filepath:str) -> list[str]:
                     w = w.replace(c,"")
             if len(w) > 0:
                 words.append(w)
-    # add eos tokens first for TextVectorization
-    words = ["","[UNK]"] + words
     return words
 
 def Vocabulary(x:list[str], filepath:str) -> tuple[dict[str:int], dict[int:str]]:
