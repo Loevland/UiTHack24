@@ -80,6 +80,7 @@ def FindKnown(words:list[str]) -> str:
 	return "model"
 
 def Reconstruct(known:str, grads:list[dict[str:np.ndarray]], model:tf.keras.Model, id:dict[str:int], word:dict[int:str]) -> list[str]:
+	""" Return flag from known word and gradients. """
 	flag = [ '|' ] * len(grads)
 	t = 0.0
 	while '|' in flag:
