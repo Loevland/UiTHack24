@@ -1,0 +1,11 @@
+
+__pycache__
+.vscode
+.venv
+
+# data
+data/*
+!data/coriolanus.txt
+
+# models
+model/*
