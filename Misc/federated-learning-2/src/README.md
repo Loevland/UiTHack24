@@ -25,6 +25,9 @@ Run this to store them under `data/grad/`.
 python federated_learning.py --loadmodel model/banquo.h5 --savegrad
 ```
 
+This script is different from federated-learning-1 in which gradients are kept.
+In this script, the first indice layer is not included.
+
 ## Solve Challenge Through Known Flag Exploit
 
 This solution exploits that the word **"model"** is known to be in the flag.
