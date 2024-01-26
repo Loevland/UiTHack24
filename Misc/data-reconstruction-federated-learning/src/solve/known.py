@@ -28,7 +28,8 @@ def Main(argv:list[str]) -> None:
 	id, word = Vocabulary(args.vocabulary)
 	model:tf.keras.Model = tf.keras.models.load_model(args.loadmodel)
 	grads = Gradients(args.loadgrad)
-	flag = Reconstruct(grads, model, id, word)
+	known = FindKnown(list(word.values()))
+	flag = Reconstruct(known, grads, model, id, word)
 	
 	flag = "_".join([ ToL33t(w) for w in flag ])
 	print(f"flag := '{flag}'")
@@ -61,9 +62,25 @@ def Gradients(path:str) -> list[dict[str:np.ndarray]]:
 		grad.append(dict(np.load(file)))
 	return grad
 
-def Reconstruct(grads:list[dict[str:np.ndarray]], model:tf.keras.Model, id:dict[str:int], word:dict[int:str]) -> list[str]:
+def FindKnown(words:list[str]) -> str:
+	""" Return outstanding word in vocabulary from set difference of original text. """
+	# Google hit from partial search of vocabulary, e.g. ctrl-paste into browser after
+	# `python -c "import json; print(*list(json.load(open('data/vocabulary.json'))['word'].values())[400:500], end = '')" | xclip -selection clipboard`
+	# Top result:
+	# https://www.shakespearegeek.com/shakespeare_plays/macbeth.html
+	datapath = os.path.join(os.path.abspath(""),"solve","original-data.txt")
+	# Process words like in train.py
+	parent = os.path.join(os.path.dirname(__file__),"..")
+	sys.path.append(parent)
+	from train import Words
+	other = Words(datapath)
+	# Difference.
+	known = set(words) - set(other)
+	assert "model" in known
+	return "model"
+
+def Reconstruct(known:str, grads:list[dict[str:np.ndarray]], model:tf.keras.Model, id:dict[str:int], word:dict[int:str]) -> list[str]:
 	flag = [ '|' ] * len(grads)
-	known = "model"
 	t = 0.0
 	while '|' in flag:
 		s = time.time()
@@ -86,7 +103,7 @@ def FindFlagPosition(known:str, grads:list[dict[str:np.ndarray]], model:tf.keras
 	# Assume hit when gradients for last layer are close enough.
 	last = model.trainable_weights[-1].name
 	# Try each word in vocabulary as next for `known`.
-	for w in word.items():
+	for w in word.values():
 		x = np.array([ id[known] ])
 		y = np.array([ id[w] ])
 		with tf.GradientTape() as tape:
