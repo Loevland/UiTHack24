@@ -1,0 +1,21 @@
+name: "noob3"
+author: "Loevland"
+category: noob
+value: 250
+type: standard
+description: >
+    Oh no! Someone deleted `flag.txt` from our system, and our spaceship is broken, so we are not able to go back in `history` to retrieve it.
+
+    You can connect to the server with the following command: `nc hostname 9005`
+    The username is `noob3`
+    The password is the flag from `noob2`
+
+
+connection_info: nc hostname 9005
+tags:
+    - medium
+flags:
+    - UiTHack24{1337_t1m3_tr4v3ll3r}
+
+state: visible
+version: "0.1"
