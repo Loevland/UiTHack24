@@ -1,14 +1,14 @@
 name: "Admin Access"
 author: "IlyaTTT"
 category: web
-value: ???
+value: 150
 type: standard
 description: >
   You have to inflitraite the admin area of this website to get the flag. But how do you access it?
 
 connection_info: "hostname:3000"
 tags:
-  - ???
+  - medium
 flags:
   - UiTHack24{SqL_1nj3ct10n_1s_4m4z1ng}
 
