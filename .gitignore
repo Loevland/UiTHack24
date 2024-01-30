@@ -1,1 +1,3 @@
 Web/bandit/src/log/*
+Web/bandit/src/logs/*
+*__pycache__*

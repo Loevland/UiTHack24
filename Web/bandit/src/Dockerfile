@@ -1,6 +1,6 @@
 FROM python
 
-WORKDIR /app/placeholder
+WORKDIR /app/bandit
 ADD ./requirements.txt .
 RUN pip install -r requirements.txt
 
@@ -9,7 +9,7 @@ ADD ./templates/ ./templates/
 ADD ./app.py .
 ADD ./flag.txt /flag.txt
 ADD ./pswd.txt /pswd.txt
-RUN mkdir /log
+RUN mkdir ./logs
 
 EXPOSE 5000
 

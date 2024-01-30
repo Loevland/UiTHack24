@@ -3,35 +3,65 @@ import flask
 from flask_sock import Sock
 from simple_websocket.ws import ConnectionClosed
 
-from argon2 import PasswordHasher
-import json, uuid
+import uuid
 import random, secrets
-import logging
-from logging import DEBUG
+from argon2 import PasswordHasher
 from json import JSONDecodeError
 
+# logging
+import logging, logging.config, logging.handlers
+from logging import DEBUG, INFO
+from logging.config import dictConfig
 
-app = flask.Flask("placeholder")
+APP_NAME = "UiTHack24-bandit"
+
+os.makedirs("log", exist_ok=True)  # system logging
+os.makedirs("logs", exist_ok=True)  # session/user logging
+
+dictConfig(
+    {
+        "version": 1,
+        "formatters": {
+            "default": {
+                "format": "%(asctime)s %(levelname)s %(name)s: %(message)s",
+                "datefmt": "%Y-%m-%dT%H:%M:%S%z",
+            },
+            "simple": {
+                "format": "%(asctime)s %(levelname)s %(message)s",
+                "datefmt": "%H:%M:%S%",
+            },
+            "plain": {"format": "%(message)s"},
+        },
+        "handlers": {
+            "stdout": {
+                "class": "logging.StreamHandler",
+                "level": "INFO",  # TODO: change to WARNING
+                "formatter": "simple",
+                "stream": "ext://sys.stdout",
+            },
+            "file": {
+                "class": "logging.handlers.RotatingFileHandler",
+                "formatter": "default",
+                "filename": f"log/{APP_NAME}.log",
+                "maxBytes": 1024**2 * 20,  # 20MB
+                "backupCount": 5,
+            },
+        },
+        "loggers": {APP_NAME: {"level": "INFO", "handlers": ["stdout", "file"]}},
+    }
+)
+
+
+# init flask
+app = flask.Flask(APP_NAME, static_folder="static_files", template_folder="templates")
 app.secret_key = secrets.token_bytes(32)
 sock = Sock(app)
 
 
-@app.route("/", defaults={"path": "index.html"})
-@app.route("/<path:path>")
-def static_files(path: str):
-    print("requesting", path)
-    if path == "index.html":
-        return flask.render_template("index.html", name=path)
-    elif path == "flag.txt":
-        return flask.make_response("No flag for you :P")
-    elif path.startswith("log/"):
-        path = path.split("/")[-1]
-        return flask.send_from_directory("log", path)
-    return flask.send_from_directory("static", path)
-    return flask.render_template("index.html", name=path, items=None)
-
-
 def verify_admin(pswd: str) -> bool:
+    if len(pswd) == 0:
+        return False
+
     p = bytearray(pswd, "utf-8")
     x = bytearray("*" * len(pswd), "utf-8")
     for i in range(len(pswd)):
@@ -47,12 +77,37 @@ def verify_knowledge(pswd: str) -> bool:
     return False
 
 
+## Webserver ##
+
 START_COINS = 200
 SPIN_COST = 20
 PAYOUT_MULTIPLIER = 5
 FLAG_PRICE = 10000
 LOG_KEEP_TIME = 60 * 5  # value in seconds
 WS_TIMEOUT = 60 * 5  # value in seconds
+
+
+@app.route("/")
+@app.route("/index.html")
+def index():
+    return flask.render_template("index.html", name="index.html")
+
+
+@app.route("/log/<uuid:log_id>", methods=["GET"])
+@app.route("/logs/<uuid:log_id>", methods=["GET"])
+def log(log_id):
+    try:
+        with open(f"logs/{log_id}.log", "r") as log_file:
+            log_content = log_file.read()
+            return flask.Response(log_content, mimetype="text/plain")
+    except FileNotFoundError:
+        return flask.abort(404)
+
+
+@app.route("/favicon.ico", defaults={"path": "coin.png"}, methods=["GET"])
+@app.route("/<path:path>", methods=["GET"])
+def static_files(path: str):
+    return flask.send_from_directory("static", path)
 
 
 @sock.route("/ws")
@@ -66,25 +121,30 @@ def connect(ws):
         "coins": START_COINS,
     }
 
-    app.logger.info(f"New WS connection from {addr}")
+    # create a session logger
+    session_log = logging.getLogger(f"{APP_NAME}.ws:" + session["id"])
+    session_log.setLevel(DEBUG)
+    handler = logging.FileHandler(f"logs/{session['id']}.log")
+    formatter = logging.Formatter(f"{session_id}%(levelname)s %(message)s")
+    handler.setFormatter(formatter)
+    session_log.addHandler(handler)
 
-    # add a session log file to logging handler
-    handler = logging.FileHandler(f"log/{session['id']}.log")
-    app.logger.addHandler(handler)
-    app.logger.info(f"New connection from {addr}")
+    session_log.info(f"New WS connection from {addr}, assigned session id: {session['id']}")
 
     while True:
         try:
             body = ws.receive(timeout=WS_TIMEOUT)
             if body is None:
-                app.logger.info(f"Session timed out: {session['id']}, after {WS_TIMEOUT}s")
+                session_log.info(f"Session timed out after {WS_TIMEOUT}s")
                 break
-            msg = json.loads(body)
 
+            msg = flask.json.loads(body)
             method = msg["type"]
+            session_log.debug(f"request: {msg}")
+
             if method == "info":
                 ws.send(
-                    json.dumps(
+                    flask.json.dumps(
                         {
                             "type": "info",
                             "session_id": session["id"],
@@ -101,20 +161,22 @@ def connect(ws):
                     roll = [random.randint(0, 9) for i in range(3)]
                     if roll[0] == roll[1] == roll[2]:
                         session["coins"] += SPIN_COST * PAYOUT_MULTIPLIER
-                        ws.send(
-                            json.dumps(
-                                {
-                                    "type": "spin",
-                                    "coins": session["coins"],
-                                    "roll": roll,
-                                    "prize": SPIN_COST * 5,
-                                    "win": True,
-                                }
-                            )
+                        info = flask.json.dumps(
+                            {
+                                "type": "spin",
+                                "coins": session["coins"],
+                                "roll": roll,
+                                "prize": SPIN_COST * 5,
+                                "win": True,
+                            }
                         )
+                        session_log.info(
+                            f"Player won! What an incredible achievement. {addr=}, {msg=}, {info=}"
+                        )
+                        ws.send(info)
                     else:
                         ws.send(
-                            json.dumps(
+                            flask.json.dumps(
                                 {
                                     "type": "spin",
                                     "coins": session["coins"],
@@ -124,8 +186,11 @@ def connect(ws):
                             )
                         )
                 else:
+                    session_log.info(
+                        f"Player is broke, you should probably pull yourself up by the bootstraps {addr=}, {msg=}"
+                    )
                     ws.send(
-                        json.dumps(
+                        flask.json.dumps(
                             {
                                 "type": "error",
                                 "message": "You are broke, come back when you got some more money.\nYou need more than 20 coins to spin!",
@@ -136,13 +201,16 @@ def connect(ws):
             elif method == "flag":
                 if session["coins"] >= FLAG_PRICE:
                     session["coins"] -= FLAG_PRICE
-                    ws.send(json.dumps({"type": "flag", "flag": open("/flag.txt").read()}))
-                    app.logger.info(f"Someone got the flag! {addr=}, {msg=}")
+                    ws.send(flask.json.dumps({"type": "flag", "flag": open("flag.txt").read()}))
+                    app.logger.warning(f"Someone got the flag! {addr=}, {msg=}")
                 elif session["admin"] == True:
                     session["flag"] = open("flag.txt").read()
                 else:
+                    session_log.info(
+                        f"An uncualified player tried to get the flag, you should probably just give up. {addr=}, {msg=}"
+                    )
                     ws.send(
-                        json.dumps(
+                        flask.json.dumps(
                             {
                                 "type": "error",
                                 "message": "You need more than 1 million coins to get the flag!",
@@ -152,21 +220,25 @@ def connect(ws):
 
             # admin api
             elif method == "login":
-                if verify_admin(msg["password"]):
+                if verify_admin(msg.get("password", "")):
+                    session_log.info(f"Admin logged in, welcome back me! {addr=}, {msg=}")
                     session["admin"] = True
-                    ws.send(json.dumps({"type": "admin", "message": "Logged in"}))
+                    ws.send(flask.json.dumps({"type": "admin", "message": "Logged in"}))
             elif method == "logout":
                 session.pop("admin")
-                ws.send(json.dumps({"type": "admin", "message": "Logged out"}))
+                ws.send(flask.json.dumps({"type": "admin", "message": "Logged out"}))
             elif method == "debug":
                 if session.get("admin", False):
-                    app.logger.setLevel(DEBUG)
-                    ws.send(json.dumps({"type": "admin", "message": "Debug mode enabled"}))
+                    session_log.setLevel(DEBUG)
+                    ws.send(flask.json.dumps({"type": "admin", "message": "Debug mode enabled"}))
             elif method == "motherload":
                 if session.get("admin", False) and verify_knowledge(msg["password"]):
                     session["coins"] += FLAG_PRICE * 100
+                    app.logger.warning(
+                        f"Motherload activated by {addr} look at this guy, money is literally falling out of his pockets. msg: {msg}, session: {session['id']}, session: {session}"
+                    )
                     ws.send(
-                        json.dumps(
+                        flask.json.dumps(
                             {
                                 "type": "admin",
                                 "message": "Motherload activated!",
@@ -175,34 +247,38 @@ def connect(ws):
                         )
                     )
                 else:
-                    ws.send(json.dumps({"type": "admin", "message": "Invalid authentification"}))
+                    ws.send(
+                        flask.json.dumps({"type": "admin", "message": "Invalid authentification"})
+                    )
             else:
-                ws.send(json.dumps({"type": "error", "message": "Unknown method"}))
+                ws.send(flask.json.dumps({"type": "error", "message": "Unknown method"}))
 
         except ConnectionClosed:
-            break
+            session_log.info(f"Session closed by client, u ok?")
         except JSONDecodeError or TypeError:
-            app.logger.error(f"Invalid JSON from {addr}")
-            ws.send(json.dumps({"type": "error", "message": "Invalid JSON"}))
+            session_log.warning(f"Invalid JSON from {addr}")
+            ws.send(flask.json.dumps({"type": "error", "message": "Invalid JSON"}))
         except Exception as e:
-            app.logger.error(f"Error from {addr}:", e)
-            # if the flag is added to the session dict, this will leak it
-            app.logger.debug("Session terminated: ", session)
+            session_log.exception(f"Error from {addr}:", e)
+            session_log.debug("Session terminated: ", session)
             ws.send(
-                json.dumps(
-                    {"type": "error", "message": "Don't be mean, the server got feelings 2 ;/"}
+                flask.json.dumps(
+                    {
+                        "type": "error",
+                        "message": "Don't be mean to the server, it got feelings 2 :(",
+                    }
                 )
             )
-    # remove session log file from logging handler
-    app.logger.removeHandler(handler)
+
+    del session_log
     # clean up old session logs
     # remove all logs older than LOG_KEEP_TIME seconds
-    for f in os.listdir("log"):
-        if time.time() - os.path.getmtime(f"log/{f}") > LOG_KEEP_TIME:
-            os.remove(f"log/{f}")
+    for f in os.listdir("logs"):
+        if time.time() - os.path.getmtime(f"logs/{f}") > LOG_KEEP_TIME:
+            os.remove(f"logs/{f}")
 
     ws.close()
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True, threaded=True)

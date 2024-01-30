@@ -14,19 +14,29 @@ The challenge can be solved in three different intended ways:
 - [The hacker](#the-hacker)
 - [The loremaster](#the-loremaster)
 
+### Connecting to the websocket
+
+Both [the-hacker](#the-hacker) and [the-loremaster](#the-loremaster) requires the player to connect to the websocket of the server. There are several ways to do this, however [wscat](https://github.com/websockets/wscat) is often recommended. This can be done through the following command:
+
+```bash
+wscat -c ws://<ip>:<port>/ws
+```
+
 ### The lucky
 
 Getting the flag through sheer luck is possible according to the law of big numbers. However, the chances beating the challenge this way is very low. Definetely so within the timeslot of the ctf.
 
 ### The hacker
 
-The most likely way to solve the challenge. The solution requires several steps to be performed in order:
+The most likely way to solve the challenge, and utilises the websocket api. The solution requires several steps to be performed in order:
 
-- Reversing the admin password
+- Reversing the admin password (exercise left to the reader, hint)
 - Logging in as admin
 - Adding the flag to the session dictionary
 - Use the admin api to enable debug mode
-- Create an exception so that the session dict is written to the log
+- Create an exception that is not catched by the specific handlers. This will add the session dict to the session log, including the flag. Some ways to create exceptions
+  - Use the motherload api with a non existing item *password*, since it does not utilize `dict.get()` method.
+  - Logout twice, since the logout handler does not check if the user is logged in and `session.pop()` will throw an exception (KeyError), since no default value is provided.
 - Access the log through the url.
 
 ### The loremaster
