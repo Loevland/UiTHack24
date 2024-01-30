@@ -13,6 +13,7 @@ void ignore_me(){
     setvbuf(stdin, NULL, _IONBF, 0);
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
+    dup2(1,2);
 }
 
 int main(){
