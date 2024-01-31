@@ -9,6 +9,5 @@ File:
 
 - [Yanme'e.jpg](src/Yanme'e.jpg)
 
-Hint: There seems to be some hidden text...
 
 [Writeup](writeup/README.md)
