@@ -18,7 +18,8 @@ import common
 def Flags(argv:list[str]) -> argparse.Namespace:
     """ Return parsed arguments. """
     parse = argparse.ArgumentParser(description = __doc__)
-    datapath = os.path.join("data","coriolanus.txt")
+    # datapath = os.path.join("data","coriolanus.txt")
+    datapath = os.path.join("data","macbeth.txt")
     parse.add_argument("--savemodel",     type   = str,          default =       None, help = "name for model saving")
     parse.add_argument("--loadmodel",     type   = str,          default =       None, help = "name for model loading")
     parse.add_argument("--summary",       action = "store_true", default =      False, help = "show model summary and exit")
