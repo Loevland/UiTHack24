@@ -1,5 +1,5 @@
-# Crypto - Hidden Covenant Info
-> Crypto - 150 pts
+# Misc - Hidden Covenant Info
+> Misc - 150 pts
 
 The covenant is slowly advancing to New Mombasa. We managed to catch a photo they sent in their communications channel, however we do not have their location. We believe the covenant is communicating with photos. <br />
 
