@@ -59,5 +59,5 @@ To solve the task, you need to decrypt the key before the rotors change which is
 
 flag: 
 ```
-UiTHack2024{Wow_this_flag_is_way_to_long_to_find_manually_is_it_not_?}
+UiTHack24{Wow_this_flag_is_way_to_long_to_find_manually_is_it_not_?}
 ```

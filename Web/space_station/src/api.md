@@ -1,10 +1,3 @@
-# Space Station
-> Web - ???pts
-
-The Spaceship Enigma is trying to locate the Stellar Nexus Alpha space station but are 
-having troubles due to treacherous space dust in the area. The ship is receiving strange 
-transmission which they think may be the final piece to locate the space station. 
-
 ## GET /get_encrypted
 ```
 [
