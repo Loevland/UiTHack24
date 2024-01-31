@@ -12,11 +12,9 @@ function LoginForm() {
     e.preventDefault();
     const userCredentials = { username, password };
 
-    console.log("userCredentials");
-    console.log(userCredentials);
 
     try {
-      const response = await fetch("http://localhost:5001/api/login", {
+      const response = await fetch("http://uithack.td.org.uit.no:5000/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -27,12 +25,8 @@ function LoginForm() {
       });
 
 
-      console.log("response");
-      console.log(response);
 
       const responseText = await response.text();
-      console.log("responseText");
-      console.log(responseText);
 
       if (responseText === "Login failed!") {
         throw new Error("Login failed");
