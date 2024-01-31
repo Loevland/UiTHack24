@@ -1,0 +1,21 @@
+name: "Space Station"
+author: "alexander-stimpsonkarlsson"
+category: web
+value: 200
+type: standard
+description:
+    The Spaceship Enigma is trying to locate the Stellar Nexus Alpha space station but are 
+    having troubles due to treacherous space dust in the area. The ship is receiving strange 
+    transmission which they think may be the final piece to locate the space station. 
+
+connection_info: "hostname:8009"
+tags:
+    - medium
+flags:
+    - UiTHack2024{Wow_this_flag_is_way_to_long_to_find_manually_is_it_not_?}
+
+files: 
+    - README.md
+
+state: visible
+version: "0.1"
