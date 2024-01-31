@@ -1,10 +1,11 @@
-# Web - One armed bandit
+# Web - Intergalactic bandit
 
 > > Web - 300pts
 >
+> The neighbouring aliens have been enjoying the classical *One Armed Bandit* at the casino.
+> However, they can't seem to win anything. Can you show them how?
 >
 > Files: [Source code](../src/app.py)
->
 
 ## Writeup
 
@@ -16,7 +17,7 @@ The challenge can be solved in three different intended ways:
 
 ### Connecting to the websocket
 
-Both [the-hacker](#the-hacker) and [the-loremaster](#the-loremaster) requires the player to connect to the websocket of the server. There are several ways to do this, however [wscat](https://github.com/websockets/wscat) is often recommended. This can be done through the following command:
+Both [the-hacker](#the-hacker) and [the-loremaster](#the-loremaster) requires the player to connect to the websocket of the server. There are several ways to do this, however [wscat](https://github.com/websockets/wscat) is often recommended. Connecting to a websocket with wscat can be done with the following command:
 
 ```bash
 wscat -c ws://<ip>:<port>/ws
@@ -38,6 +39,31 @@ The most likely way to solve the challenge, and utilises the websocket api. The 
   - Use the motherload api with a non existing item *password*, since it does not utilize `dict.get()` method.
   - Logout twice, since the logout handler does not check if the user is logged in and `session.pop()` will throw an exception (KeyError), since no default value is provided.
 - Access the log through the url.
+
+The sequence will look something like this:
+
+```json
+{"type":"info"}
+{"type":"login","password":"hunter2"}
+{"type":"debug"}
+{"type":"flag"}
+{"type":"motherload"}
+```
+
+This will generate a log similar to this:
+
+```txt
+59670de7-c6bc-44a0-affa-71c5f07b1d9f INFO New WS connection from ('129.242.236.89', 44730), assigned session id: 59670de7-c6bc-44a0-affa-71c5f07b1d9f
+59670de7-c6bc-44a0-affa-71c5f07b1d9f INFO Admin logged in, welcome back me! addr="('129.242.236.89', 44730)"
+59670de7-c6bc-44a0-affa-71c5f07b1d9f DEBUG request: {'type': 'flag'}
+59670de7-c6bc-44a0-affa-71c5f07b1d9f DEBUG request: {'type': 'motherload'}
+59670de7-c6bc-44a0-affa-71c5f07b1d9f DEBUG User state: session={'id': '59670de7-c6bc-44a0-affa-71c5f07b1d9f', 'addr': "('129.242.236.89', 44730)", 'coins': 200, 'admin': True, 'flag': 'UiTHack24{Passw0rd_1s_*******}'}
+59670de7-c6bc-44a0-affa-71c5f07b1d9f ERROR Error from addr="('129.242.236.89', 44730)":
+Traceback (most recent call last):
+  File "/home/user/Documents/repo/UiTHack24/Web/bandit/src/app.py", line 248, in connect
+    if session.get("admin", False) and (msg["password"]):
+KeyError: 'password'
+```
 
 ### The loremaster
 

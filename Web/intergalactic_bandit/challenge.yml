@@ -1,11 +1,11 @@
-name: "One-armed-bandit"
+name: "Intergalactic bandit"
 author: "SondreUM"
 category: web
-value: 250
+value: 400
 type: standard
 description: >
-    It seems like the casino has a new slot machine. Can you figure out how to win?
-    One would think that it's impossible to win with the odds stacked against you.
+    The neighbouring aliens have been enjoying the classical *One Armed Bandit* at the casino.
+    However, they can't seem to win anything. Can you show them how?
 
 
 # Settings used for Dockerfile deployment
@@ -23,7 +23,7 @@ protocol: tcp
 # Optional settings
 
 # connection_info is used to provide a link, hostname, or instructions on how to connect to a challenge
-connection_info: nc hostname 8000
+connection_info: https://hostname:5000
 
 # healthcheck is a tool/script used to check a challenge
 # If connection_info was provided to CTFd when the challenge was installed, it will be passed to the healthcheck script:
@@ -39,12 +39,11 @@ flags:
 topics:
     - python
     - websocket
+    - hard
 
 tags:
     - web
     - python
-    # not decided if it should be medium om hard
-    - medium
     - hard
 
 files:

@@ -22,3 +22,18 @@ print(res)
 print(res2)
 with open("pswd.txt", "w") as f:
     f.write(res2)
+
+
+def verify_admin(pswd: str):
+    if len(pswd) == 0:
+        return False
+
+    p = bytearray(pswd, "utf-8")
+    x = bytearray("*" * len(pswd), "utf-8")
+    for i in range(len(pswd)):
+        x[i] = (p[i] ^ i) ^ x[i]
+
+    return x == b"B^F]K]\x1e"
+
+
+print(verify_admin("hunter2"))

@@ -5,7 +5,7 @@ from simple_websocket.ws import ConnectionClosed
 
 import uuid
 import random, secrets
-from argon2 import PasswordHasher
+from argon2 import PasswordHasher, exceptions as argon2_exceptions
 from json import JSONDecodeError
 
 # logging
@@ -22,9 +22,13 @@ dictConfig(
     {
         "version": 1,
         "formatters": {
+            "verbose": {
+                "format": "%(asctime)s %(levelname)s %(name)s:%(lineno)d | %(message)s %(exc_info)s",
+                "datefmt": "%Y-%m-%dT%H:%M:%S%z",
+            },
             "default": {
                 "format": "%(asctime)s %(levelname)s %(name)s: %(message)s",
-                "datefmt": "%Y-%m-%dT%H:%M:%S%z",
+                "datefmt": "%Y-%m-%dT%H:%M:%S",
             },
             "simple": {
                 "format": "%(asctime)s %(levelname)s %(message)s",
@@ -35,13 +39,13 @@ dictConfig(
         "handlers": {
             "stdout": {
                 "class": "logging.StreamHandler",
-                "level": "INFO",  # TODO: change to WARNING
+                "level": "WARNING",
                 "formatter": "simple",
                 "stream": "ext://sys.stdout",
             },
             "file": {
                 "class": "logging.handlers.RotatingFileHandler",
-                "formatter": "default",
+                "formatter": "verbose",
                 "filename": f"log/{APP_NAME}.log",
                 "maxBytes": 1024**2 * 20,  # 20MB
                 "backupCount": 5,
@@ -65,13 +69,14 @@ def verify_admin(pswd: str) -> bool:
     p = bytearray(pswd, "utf-8")
     x = bytearray("*" * len(pswd), "utf-8")
     for i in range(len(pswd)):
-        x[i] = (p[i] | i) ^ x[i]
+        x[i] = (p[i] ^ i) ^ x[i]
 
-    return x == b"B_D]O]\x1c"
+    return x == b"B^F]K]\x1e"
 
 
 def verify_knowledge(pswd: str) -> bool:
     ph = PasswordHasher()
+    print("here", pswd)
     with open("pswd.txt", "r") as f:
         return ph.verify(f.read(), pswd)
     return False
@@ -115,7 +120,6 @@ def connect(ws):
     addr = repr(ws.sock).split("=")[-1][:-1]
     session_id = uuid.uuid4()
     session = {
-        "secret": app.secret_key,
         "id": session_id.__str__(),
         "addr": addr,
         "coins": START_COINS,
@@ -123,9 +127,9 @@ def connect(ws):
 
     # create a session logger
     session_log = logging.getLogger(f"{APP_NAME}.ws:" + session["id"])
-    session_log.setLevel(DEBUG)
+    session_log.setLevel(INFO)
     handler = logging.FileHandler(f"logs/{session['id']}.log")
-    formatter = logging.Formatter(f"{session_id}%(levelname)s %(message)s")
+    formatter = logging.Formatter(f"{session_id} %(levelname)s %(message)s")
     handler.setFormatter(formatter)
     session_log.addHandler(handler)
 
@@ -138,6 +142,8 @@ def connect(ws):
                 session_log.info(f"Session timed out after {WS_TIMEOUT}s")
                 break
 
+            if body == "":
+                continue
             msg = flask.json.loads(body)
             method = msg["type"]
             session_log.debug(f"request: {msg}")
@@ -205,6 +211,7 @@ def connect(ws):
                     app.logger.warning(f"Someone got the flag! {addr=}, {msg=}")
                 elif session["admin"] == True:
                     session["flag"] = open("flag.txt").read()
+                    app.logger.warning(f"Admin got the flag! {addr=}, {msg=}")
                 else:
                     session_log.info(
                         f"An uncualified player tried to get the flag, you should probably just give up. {addr=}, {msg=}"
@@ -221,9 +228,14 @@ def connect(ws):
             # admin api
             elif method == "login":
                 if verify_admin(msg.get("password", "")):
-                    session_log.info(f"Admin logged in, welcome back me! {addr=}, {msg=}")
+                    session_log.info(f"Admin logged in, welcome back me! {addr=}")
                     session["admin"] = True
                     ws.send(flask.json.dumps({"type": "admin", "message": "Logged in"}))
+                else:
+                    session_log.info(f"Admin login failed, you are not me! {addr=}, {msg=}")
+                    ws.send(
+                        flask.json.dumps({"type": "error", "message": "Invalid authentification"})
+                    )
             elif method == "logout":
                 session.pop("admin")
                 ws.send(flask.json.dumps({"type": "admin", "message": "Logged out"}))
@@ -232,10 +244,10 @@ def connect(ws):
                     session_log.setLevel(DEBUG)
                     ws.send(flask.json.dumps({"type": "admin", "message": "Debug mode enabled"}))
             elif method == "motherload":
-                if session.get("admin", False) and verify_knowledge(msg["password"]):
+                if session.get("admin", False) and (msg["password"]):
                     session["coins"] += FLAG_PRICE * 100
                     app.logger.warning(
-                        f"Motherload activated by {addr} look at this guy, money is literally falling out of his pockets. msg: {msg}, session: {session['id']}, session: {session}"
+                        f"Motherload activated by {addr=} look at this guy, money is literally falling out of his pockets. msg: {msg}, session: {session['id']}, session: {session}"
                     )
                     ws.send(
                         flask.json.dumps(
@@ -254,13 +266,15 @@ def connect(ws):
                 ws.send(flask.json.dumps({"type": "error", "message": "Unknown method"}))
 
         except ConnectionClosed:
-            session_log.info(f"Session closed by client, u ok?")
+            break
         except JSONDecodeError or TypeError:
-            session_log.warning(f"Invalid JSON from {addr}")
+            session_log.warning(f"Invalid JSON from {addr=}")
             ws.send(flask.json.dumps({"type": "error", "message": "Invalid JSON"}))
-        except Exception as e:
-            session_log.exception(f"Error from {addr}:", e)
-            session_log.debug("Session terminated: ", session)
+        except Exception:
+            # print(session)
+            print(addr)
+            session_log.debug(f"User state: {session=}")
+            session_log.exception(f"Error from {addr=}:")
             ws.send(
                 flask.json.dumps(
                     {
