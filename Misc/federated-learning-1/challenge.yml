@@ -1,0 +1,45 @@
+
+name: "Federated Learning 1"
+author: "Marius"
+category: misc
+value: 500
+type: standard
+description: >
+    Isn't open source great?
+    You know what's also great? Machine learning
+    Did you know federated learning is basically the monster-mash of both?
+
+    And what's absolutely mind boggling is that it comes with complete data privacy!
+
+tags:
+    - hard
+    - misc
+    - machine learning
+    - offline
+
+healthcheck: python src/solve/indices.py
+
+flags:
+    - UiTHack24{8y_7h3_pr1ck1n9_0f_my_n3ur0n5_50m37h1n9_w1ck3d_7h15_w4y_c0m35}
+
+topics:
+    - machine learning
+    - model architecture
+
+files:
+    - src/data/grad/*.npz
+    - src/data/training.txt
+    - src/data/vocabulary.json
+    - src/model/banquo.h5
+    - src/common.py
+    - src/federated_learning.py
+    - src/infer.py
+    - src/requirements.txt
+    - src/train.py
+
+# hints:
+    # - Model's first layer
+
+state: visible
+
+version: "0.1"
