@@ -3,9 +3,9 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <PublishAot>true</PublishAot>
-    <UseSystemResourceKeys>true</UseSystemResourceKeys>
-    <InvariantGlobalization>true</InvariantGlobalization>
-    <StripSymbols>true</StripSymbols>
+    <!-- <UseSystemResourceKeys>true</UseSystemResourceKeys> -->
+    <!-- <InvariantGlobalization>true</InvariantGlobalization> -->
+    <!-- <StripSymbols>true</StripSymbols> -->
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Program.fs" />

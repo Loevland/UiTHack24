@@ -8,7 +8,7 @@ let main args =
     | _ ->
         let secret = args |> Array.head
         let flag = 
-            "t!hs_siht_kc@f".ToCharArray()
+            "lano!tkc@f".ToCharArray()
             |> Seq.map (fun c -> char (int c + 1))
             |> Seq.map (fun c -> char (int c - 1))
             |> Array.ofSeq
