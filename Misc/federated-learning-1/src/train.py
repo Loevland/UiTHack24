@@ -4,16 +4,13 @@ Train a neural network to predict the next word in a sequence of words.
 """
 
 import argparse
+import common
 import json
 import numpy as np
 import os
 import string
 import sys
-
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-
 import tensorflow as tf
-import common
 
 def Flags(argv:list[str]) -> argparse.Namespace:
     """ Return parsed arguments. """
@@ -75,7 +72,7 @@ def Data(filepath:str, flag:list[str]) -> tuple[list[str], np.ndarray[int], dict
 
 def Words(filepath:str) -> list[str]:
     """ Return list of processed words in file. """
-    # read file
+    # read training file
     with open(filepath, "r") as f:
         lines = f.read().lower().split("\n")
         lines = [ line.strip("\n") for line in lines if not line.startswith("\n") ]

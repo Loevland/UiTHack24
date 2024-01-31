@@ -1,4 +1,6 @@
 
+export TF_CPP_MIN_LOG_LEVEL=3
+
 create() {
     # Create model, vocabulary and gradients.
     python train.py --savemodel model/banquo.h5 --epochs 4

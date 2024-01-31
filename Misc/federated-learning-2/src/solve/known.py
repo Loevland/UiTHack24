@@ -10,8 +10,6 @@ import os
 import sys
 import time
 
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-
 import tensorflow as tf
 
 def Flags(argv:list[str]) -> argparse.Namespace:

@@ -9,8 +9,6 @@ import numpy as np
 import os
 import sys
 
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-
 import tensorflow as tf
 import common
 
@@ -32,7 +30,7 @@ def Flags(argv:list[str]) -> argparse.Namespace:
 def Main(argv:list[str]) -> None:
 	args = Flags(argv)
 
-	id, word = Vocabulary(args.vocabpath)
+	id, _ = Vocabulary(args.vocabpath)
 	
 	model = tf.keras.models.load_model(args.loadmodel)
 	grad = FederatedLearning(model, id, args.flag)

@@ -10,7 +10,8 @@ import os
 # Read gradients.
 grads:list[dict[str:np.ndarray]] = []
 gradpath = os.path.join(os.path.abspath(""),"data","grad")
-for file in os.listdir(gradpath):
+npzfiles = sorted(os.listdir(gradpath), key = lambda x: int(x.split(".")[0]))
+for file in npzfiles:
 	if not file.endswith(".npz"):
 		continue
 	filepath = os.path.join(gradpath,file)
@@ -22,11 +23,12 @@ with open(vocabpath,"r") as f:
 	vocabulary = json.load(f)
 word = { int(id):w for id,w in vocabulary["word"].items() }
 
-# Extract flag from gradients.
+# Extract flag from gradients using indices from first layer.
 flag = [ '|' ] * len(grads)
 for i,grad in enumerate(grads):
-	indices = [ layername for layername in grad.keys() if "indices" in layername ][0]
-	id = grad[indices][0]
+	layers = list(grad.keys())
+	indices = layers.pop(layers.index("embedding/embeddings:0indices"))
+	id = int(grad[indices][0])
 	flag[i] = word[id]
 
 # Reverse format flag to l33t-speech as seen in src/common.py
@@ -41,5 +43,5 @@ def ToL33t(s:str) -> str:
 		.replace("t","7")\
 		.replace("b","8")\
 		.replace("g","9")
-flag = "_".join([ ToL33t(w) for w in flag ])
+flag = ToL33t("_".join(flag))
 print(f"flag := '{flag}'")

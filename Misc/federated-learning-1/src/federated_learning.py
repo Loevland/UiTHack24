@@ -4,15 +4,12 @@ Federated Learning with on secret flag.
 """
 
 import argparse
+import common
 import json
 import numpy as np
 import os
 import sys
-
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-
 import tensorflow as tf
-import common
 
 def Flags(argv:list[str]) -> argparse.Namespace:
 	""" Return parsed arguments. """

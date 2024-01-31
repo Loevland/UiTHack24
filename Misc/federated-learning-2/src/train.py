@@ -10,8 +10,6 @@ import os
 import string
 import sys
 
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-
 import tensorflow as tf
 import common
 
@@ -67,9 +65,8 @@ def Data(filepath:str, flag:list[str]) -> tuple[list[str], np.ndarray[int], dict
     # add flag to data and vocabulary
     # NOTE: flag's words are not close or easily discernable in vocabulary.json
     x = list(set(x + flag))
-    # np.random.shuffle(x)
 
-    id, word = Vocabulary(x, filepath)
+    id, word = CreateVocabulary(x, filepath)
     y = Labels(x, id)
     return x, y, id, word
 
@@ -92,7 +89,7 @@ def Words(filepath:str) -> list[str]:
                 words.append(w)
     return words
 
-def Vocabulary(x:list[str], filepath:str) -> tuple[dict[str:int], dict[int:str]]:
+def CreateVocabulary(x:list[str], filepath:str) -> tuple[dict[str:int], dict[int:str]]:
     """ Return and store dual mapping from word to vocabulary token id. """
     v = list(set(x))
     vocabulary = {
