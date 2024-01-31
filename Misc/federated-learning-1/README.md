@@ -1,8 +1,10 @@
-# Misc. - Join :fist: The Learning :book: Federation Hype-Train
-> Misc. - 1000pts
+# Misc. - Federated Learning 1
+## Join :fist: The Learning :book: Federation Hype-Train :train:
 
-In true fashion, we also drank the cool-aid and started training machine learning models.
-In fact, we're going open source and are hosting a collaboratory learning session with FULL data privacy support!
-Just train on your data, send us the model update, and we'll return the favor.
+Isn't open source great?
+You know what's also great? Machine learning :bowtie:
+Did you know federated learning is basically the monster-mash of both?
+
+And what's absolutely mind boggling is that it comes with complete data privacy! :relieved:
 
 [Writeup](writeup/README.md)
