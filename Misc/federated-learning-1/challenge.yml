@@ -17,8 +17,6 @@ tags:
     - machine learning
     - offline
 
-healthcheck: python src/solve/indices.py
-
 flags:
     - UiTHack24{8y_7h3_pr1ck1n9_0f_my_n3ur0n5_50m37h1n9_w1ck3d_7h15_w4y_c0m35}
 
