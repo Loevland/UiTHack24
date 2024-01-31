@@ -2,7 +2,7 @@ version: "3.5"
 services:
   frontend:
     build:
-      context: frontend
+      context: src/frontend
       dockerfile: Dockerfile
     ports:
       - 3000:3000
@@ -12,7 +12,7 @@ services:
 
   backend:
     build:
-      context: backend
+      context: src/backend
       dockerfile: Dockerfile
     ports:
       - 5000:5000
