@@ -6,7 +6,9 @@ __pycache__
 # data
 data/*
 !data/coriolanus.txt
-!data/macbeth.txt
 
 # models
 model/*
+
+handout/
+handout.zip

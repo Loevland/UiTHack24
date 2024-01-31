@@ -5,7 +5,10 @@ __pycache__
 
 # data
 data/*
-!data/coriolanus.txt
+!data/*.txt
 
 # models
 model/*
+
+handout/
+handout.zip
