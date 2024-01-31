@@ -4,7 +4,7 @@ open System
 let main args =
     match args.Length with
     | x when x < 1 ->
-            printfn $"Expected at least one argument, got %i{args.Length}."
+            Console.WriteLine("Expected at least one argument, got %i.", args.Length)
     | _ ->
         let secret = args |> Array.head
         let flag = 
@@ -16,6 +16,6 @@ let main args =
             |> String
         
         if secret = "D2005S" then
-           printfn $"TD{{%s{flag}}}"
+           Console.WriteLine("TD{{%s}", flag)
     0
     
