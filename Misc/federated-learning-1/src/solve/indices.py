@@ -24,7 +24,7 @@ with open(vocabpath,"r") as f:
 word = { int(id):w for id,w in vocabulary["word"].items() }
 
 # Extract flag from gradients using indices from first layer.
-flag = [ '|' ] * len(grads)
+flag = [ None ] * len(grads)
 for i,grad in enumerate(grads):
 	layers = list(grad.keys())
 	indices = layers.pop(layers.index("embedding/embeddings:0indices"))

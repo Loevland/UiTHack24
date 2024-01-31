@@ -1,5 +1,5 @@
 
-export TF_CPP_MIN_LOG_LEVEL=3
+export TF_CPP_MIN_LOG_LEVEL="3"
 
 create() {
     # Create model, vocabulary and gradients.
@@ -31,12 +31,25 @@ clean() {
         handout.zip
 }
 
-if [ "$1" == "create" ]; then
+solve() {
+    if [ ! -d "handout" ]; then
+        echo "no handout/ directory to solve"
+        exit 1
+    fi
+    cp -r solve/ handout/
+    cd handout
+    python solve/known.py
+    cd - > /dev/null
+}
+
+options=("create" "clean" "solve")
+if echo $options|grep -q "$1"; then
+    echo "usage: ./$(basename $BASH_SOURCE) <${options[@]}>"
+    exit 1
+elif [ "$1" == "create" ]; then
     create
 elif [ "$1" == "clean" ]; then
     clean
-else
-    echo "usage: ./$(basename $BASH_SOURCE) <create|clean>"
-    exit 1
+elif [ "$1" == "solve" ]; then
+    solve
 fi
-

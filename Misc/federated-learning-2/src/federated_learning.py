@@ -4,13 +4,12 @@ Federated Learning with on secret flag.
 """
 
 import argparse
+import common
 import json
 import numpy as np
 import os
 import sys
-
 import tensorflow as tf
-import common
 
 def Flags(argv:list[str]) -> argparse.Namespace:
 	""" Return parsed arguments. """
@@ -30,7 +29,7 @@ def Flags(argv:list[str]) -> argparse.Namespace:
 def Main(argv:list[str]) -> None:
 	args = Flags(argv)
 
-	id, _ = Vocabulary(args.vocabpath)
+	id, word = Vocabulary(args.vocabpath)
 	
 	model = tf.keras.models.load_model(args.loadmodel)
 	grad = FederatedLearning(model, id, args.flag)
@@ -66,13 +65,13 @@ def FederatedLearning(model:tf.keras.Model, id:dict[str:int], flag:list[str]) ->
 			tape.watch(model.trainable_weights)
 			pred = model(x)
 			loss = Loss(y, pred)
-		# NOTE: careful, the tf.IndexedSlices tensor contains the word's vocabulary ID
-		# NOTE: maybe not expose the flag like a bare-ass in a snowstorm?
 		dw = tape.gradient(loss, model.trainable_weights)
 		UpdateWeights(model, dw)
 		# append federated gradients
 		grad[i] = {}
 		for w,g in zip(model.trainable_weights, dw):
+			# NOTE: careful, the tf.IndexedSlices tensor contains the word's vocabulary ID
+			# NOTE: maybe not expose the flag like a bare-ass in a snowstorm?
 			grad[i][w.name] = g.values.numpy() if isinstance(g, tf.IndexedSlices) else g.numpy()
 	return grad
 	

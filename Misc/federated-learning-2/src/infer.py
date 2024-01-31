@@ -4,12 +4,11 @@ Execute inference on a model trained to predict words in `vocabulary.json`.
 """
 
 import argparse
+import common
 import numpy as np
 import os
 import sys
-
 import tensorflow as tf
-import common
 
 def Flags(argv:list[str]) -> argparse.Namespace:
 	""" Return parsed arguments. """

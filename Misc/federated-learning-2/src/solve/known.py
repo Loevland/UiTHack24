@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Solve federated learning challenge with one known flag word.
+use like: python solve/known.py -d data/training.txt -v data/vocabulary.json -m model/banquo.h5 -g data/grad
 """
 
 import argparse
@@ -8,12 +9,15 @@ import json
 import numpy as np
 import os
 import sys
-import time
-
 import tensorflow as tf
+import time
+parent = os.path.join(os.path.dirname(__file__), "..")
+sys.path.append(parent)
+import train
 
 def Flags(argv:list[str]) -> argparse.Namespace:
 	parse = argparse.ArgumentParser()
+	parse.add_argument("--datapath",   "-d", type = str, default =    "data/training.txt", help = "path to training text data")
 	parse.add_argument("--vocabulary", "-v", type = str, default = "data/vocabulary.json", help = "vocabulary path")
 	parse.add_argument("--loadmodel",  "-m", type = str, default =      "model/banquo.h5", help = "model path")
 	parse.add_argument("--loadgrad",   "-g", type = str, default =            "data/grad", help = "gradient path")
@@ -26,10 +30,10 @@ def Main(argv:list[str]) -> None:
 	id, word = Vocabulary(args.vocabulary)
 	model:tf.keras.Model = tf.keras.models.load_model(args.loadmodel)
 	grads = Gradients(args.loadgrad)
-	known = FindKnown(list(word.values()))
+	known = FindKnown(args.datapath, list(word.values()))
 	flag = Reconstruct(known, grads, model, id, word)
 	
-	flag = "_".join([ ToL33t(w) for w in flag ])
+	flag = ToL33t("_".join(flag))
 	print(f"flag := '{flag}'")
 	return
 
@@ -54,34 +58,28 @@ def Vocabulary(filepath:str) -> tuple[dict[str:int], dict[int:str]]:
     return id, word
 
 def Gradients(path:str) -> list[dict[str:np.ndarray]]:
+	""" Return list of gradients from numpy files. """
 	grad = []
-	for file in sorted(os.listdir(path)):
+	npzfiles = sorted(os.listdir(path), key = lambda x: int(x.split(".")[0]))
+	for file in npzfiles:
 		file = os.path.join(path,file)
 		grad.append(dict(np.load(file)))
 	return grad
 
-def FindKnown(words:list[str]) -> str:
+def FindKnown(datapath:str, words:list[str]) -> str:
 	""" Return outstanding word in vocabulary from set difference of original text. """
-	# Google hit from partial search of vocabulary, e.g. ctrl-paste into browser after
-	# `python -c "import json; print(*list(json.load(open('data/vocabulary.json'))['word'].values())[400:500], end = '')" | xclip -selection clipboard`
-	# Top result:
-	# https://www.shakespearegeek.com/shakespeare_plays/macbeth.html
-	datapath = os.path.join(os.path.abspath(""),"solve","original-data.txt")
 	# Process words like in train.py
-	parent = os.path.join(os.path.dirname(__file__),"..")
-	sys.path.append(parent)
-	from train import Words
-	other = Words(datapath)
+	other = train.Words(datapath)
 	# Difference.
 	known = set(words) - set(other)
-	assert "model" in known
+	assert len(known) == 1 and len(set(words)) == len(set(other))+1 and "model" == known.pop()
 	return "model"
 
 def Reconstruct(known:str, grads:list[dict[str:np.ndarray]], model:tf.keras.Model, id:dict[str:int], word:dict[int:str]) -> list[str]:
 	""" Return flag from known word and gradients. """
-	flag = [ '|' ] * len(grads)
+	flag = [ None ] * len(grads)
 	t = 0.0
-	while '|' in flag:
+	while None in flag:
 		s = time.time()
 		i, next = FindFlagPosition(known, grads, model, id, word)
 		s = time.time() - s
@@ -96,7 +94,7 @@ def Reconstruct(known:str, grads:list[dict[str:np.ndarray]], model:tf.keras.Mode
 	print(f"Total time := {t:.2f}s")
 	return flag
 
-def FindFlagPosition(known:str, grads:list[dict[str:np.ndarray]], model:tf.keras.Model, id:dict[str:int], word:dict[int:str], tol:float = 0.1) -> tuple[int, str]:
+def FindFlagPosition(known:str, grads:list[dict[str:np.ndarray]], model:tf.keras.Model, id:dict[str:int], word:dict[int:str], tol:float = 0.001) -> tuple[int, str]:
 	""" Return index in flag with length `len(grads)` where `known` belongs and the word which succeeds it. """
 	Loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits = False)
 	# Assume hit when gradients for last layer are close enough.
@@ -112,6 +110,7 @@ def FindFlagPosition(known:str, grads:list[dict[str:np.ndarray]], model:tf.keras
 		dw = tape.gradient(loss, model.trainable_weights)
 		# Look for close enough match in last layer for all gradients.
 		for i in range(len(grads)):
+			# Allow some variance in computed gradients.
 			if np.allclose(dw[-1], grads[i][last], rtol = tol, atol = tol):
 				return i, w
 	raise ValueError(f"Could not find flag position for partially known word '{known}'")
