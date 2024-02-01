@@ -38,7 +38,7 @@ solve() {
     fi
     cp -r solve/ handout/
     cd handout
-    python solve/known.py
+    python solve/indices.py
     cd - > /dev/null
 }
 

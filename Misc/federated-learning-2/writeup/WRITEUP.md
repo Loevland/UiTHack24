@@ -40,7 +40,7 @@ After that we rinse and repeat the process, but now with the word found followin
 This complexity becomes far lower because we always know `x` and reduce $\mathcal{O}(3,442^{2} \times 7)$ into $\mathcal{O}(3,442^{1} \times 7) = \mathcal{O}(24,094)$, which is a reduction of $1-\frac{24,094}{82,931,548} = 0.9997 \approx 99.97$%.
 
 > See [known.py](../src/solve/known.py) for an implementation.
-> On a decent CPU it takes roughly 2 minutes to reconstruct the entire flag.
+> On a decent CPU it takes roughly 20 seconds to reconstruct the entire flag.
 
 ### Flag
 > [flag.txt](../src/flag.txt)

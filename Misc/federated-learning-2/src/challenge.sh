@@ -38,7 +38,8 @@ solve() {
     fi
     cp -r solve/ handout/
     cd handout
-    python solve/known.py
+    # Solve with CPU, not GPU.
+    CUDA_VISIBLE_DEVICES="" python solve/known.py
     cd - > /dev/null
 }
 
