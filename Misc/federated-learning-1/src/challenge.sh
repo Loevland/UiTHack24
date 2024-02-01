@@ -27,7 +27,7 @@ clean() {
         model/ \
         __pycache__/ \
         solve/__pycache__/ \
-        handout/ \
+        handout/
 }
 
 solve() {
