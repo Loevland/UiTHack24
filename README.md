@@ -39,9 +39,10 @@ Add emoji!
 CTFd is the application we are eusing to host the challenges and keep track of contestants/teams and scoreboards
 It will be served on `uithack.no` ---DNS---> `uithack.td.org.uit.no`
 
-# Resrouces
+# Resources
 
 ## Previous UiTHacks
+
 [UiTHack23 - Nostalgi](https://github.com/td-org-uit-no/UiTHack23)
 
 [UiTHack22 - Star Wars](https://github.com/td-org-uit-no/UiTHack22)

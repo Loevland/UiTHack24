@@ -1,0 +1,3 @@
+flask
+flask-sock
+argon2-cffi
