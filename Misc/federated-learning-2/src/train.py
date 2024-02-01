@@ -21,6 +21,7 @@ def Flags(argv:list[str]) -> argparse.Namespace:
     parse.add_argument("--summary",       action = "store_true", default =      False, help = "show model summary and exit")
     parse.add_argument("--datapath",      type   = str,          default =   datapath, help = "path to training data")
     parse.add_argument("--flag",          type   = str,          default = "flag.txt", help = "path to secret flag")
+    parse.add_argument("--embedspace",    type   = int,          default =        128, help = "size of embedding vector space")
     parse.add_argument("--batch",         type   = int,          default =        128, help = "batch size")
     parse.add_argument("--epochs",        type   = int,          default =         10, help = "number of epochs to train")
     parse.add_argument("--validation",    type   = float,        default =        0.0, help = "fraction of data to use for validation")
@@ -41,7 +42,7 @@ def Main(argv:list[str]) -> None:
     if args.loadmodel:
         model = tf.keras.models.load_model(args.loadmodel)
     else:
-        model = Model(word)
+        model = Model(word, args.embedspace)
         model = Train(model, x, y, id, args.batch, args.epochs, args.validation)
     
     if args.summary:
@@ -111,10 +112,10 @@ def Labels(x:list[str], id:dict[str:int]) -> np.ndarray[int]:
     y = y.reshape(-1,1)
     return y.reshape(-1,1)
 
-def Model(word:dict[int:str]) -> tf.keras.Model:
+def Model(word:dict[int:str], embedspace:int) -> tf.keras.Model:
     """ Return neural network for text-to-text generation. """
     vocabsize = len(word)
-    embedding = tf.keras.layers.Embedding(vocabsize, vocabsize)
+    embedding = tf.keras.layers.Embedding(vocabsize, embedspace)
     output = tf.keras.layers.Dense(vocabsize, activation = "softmax")
     model = tf.keras.Sequential([ embedding, output ])
     model.compile(

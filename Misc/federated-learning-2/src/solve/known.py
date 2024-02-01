@@ -94,7 +94,15 @@ def Reconstruct(known:str, grads:list[dict[str:np.ndarray]], model:tf.keras.Mode
 	print(f"Total time := {t:.2f}s")
 	return flag
 
-def FindFlagPosition(known:str, grads:list[dict[str:np.ndarray]], model:tf.keras.Model, id:dict[str:int], word:dict[int:str], tol:float = 0.001) -> tuple[int, str]:
+def FindFlagPosition(
+		known:str,
+		grads:list[dict[str:np.ndarray]],
+		model:tf.keras.Model,
+		id:dict[str:int],
+		word:dict[int:str],
+		tol:float = 1e-5, # NOTE: if the solution repeatedly finds the same words and gets stuck, 
+						  # NOTE: decrease `tol`-value such that np.allclose is more strict on similarity.
+	) -> tuple[int, str]:
 	""" Return index in flag with length `len(grads)` where `known` belongs and the word which succeeds it. """
 	Loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits = False)
 	# Assume hit when gradients for last layer are close enough.
