@@ -25,15 +25,7 @@ topics:
     - model architecture
 
 files:
-    - src/data/grad/*.npz
-    - src/data/training.txt
-    - src/data/vocabulary.json
-    - src/model/banquo.h5
-    - src/common.py
-    - src/federated_learning.py
-    - src/infer.py
-    - src/requirements.txt
-    - src/train.py
+    - src/handout.zip
 
 # hints:
     # - Model's first layer
