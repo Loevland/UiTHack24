@@ -8,6 +8,5 @@ However, they can't seem to win anything. Can you show them how?
 Files:
 
 - [app.py](src/app.py)
-- [Dockerfile](src/Dockerfile)
 
 [Writeup](writeup/README.md)

@@ -23,7 +23,8 @@ protocol: tcp
 # Optional settings
 
 # connection_info is used to provide a link, hostname, or instructions on how to connect to a challenge
-connection_info: https://hostname:5000
+# if reverse proxied, remove port number
+connection_info: https://hostname:8888
 
 # healthcheck is a tool/script used to check a challenge
 # If connection_info was provided to CTFd when the challenge was installed, it will be passed to the healthcheck script:

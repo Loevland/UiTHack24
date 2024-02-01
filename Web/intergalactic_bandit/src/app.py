@@ -5,13 +5,14 @@ from simple_websocket.ws import ConnectionClosed
 
 import uuid
 import random, secrets
-from argon2 import PasswordHasher, exceptions as argon2_exceptions
+from argon2 import PasswordHasher
 from json import JSONDecodeError
 
 # logging
 import logging, logging.config, logging.handlers
 from logging import DEBUG, INFO
 from logging.config import dictConfig
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 APP_NAME = "UiTHack24-bandit"
 
@@ -45,6 +46,7 @@ dictConfig(
             },
             "file": {
                 "class": "logging.handlers.RotatingFileHandler",
+                "level": "INFO",
                 "formatter": "verbose",
                 "filename": f"log/{APP_NAME}.log",
                 "maxBytes": 1024**2 * 20,  # 20MB
@@ -60,6 +62,11 @@ dictConfig(
 app = flask.Flask(APP_NAME, static_folder="static_files", template_folder="templates")
 app.secret_key = secrets.token_bytes(32)
 sock = Sock(app)
+# enable this for reverse proxy support
+# src: https://flask.palletsprojects.com/en/3.0.x/deploying/proxy_fix/
+# app.wsgi_app = ProxyFix(
+#     app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+# )
 
 
 def verify_admin(pswd: str) -> bool:
@@ -95,7 +102,7 @@ WS_TIMEOUT = 60 * 5  # value in seconds
 @app.route("/")
 @app.route("/index.html")
 def index():
-    return flask.render_template("index.html", name="index.html")
+    return flask.render_template("index.html", name="index.html", )
 
 
 @app.route("/log/<uuid:log_id>", methods=["GET"])
@@ -244,7 +251,7 @@ def connect(ws):
                     session_log.setLevel(DEBUG)
                     ws.send(flask.json.dumps({"type": "admin", "message": "Debug mode enabled"}))
             elif method == "motherload":
-                if session.get("admin", False) and (msg["password"]):
+                if session.get("admin", False) and verify_knowledge(msg["password"]):
                     session["coins"] += FLAG_PRICE * 100
                     app.logger.warning(
                         f"Motherload activated by {addr=} look at this guy, money is literally falling out of his pockets. msg: {msg}, session: {session['id']}, session: {session}"
@@ -271,8 +278,6 @@ def connect(ws):
             session_log.warning(f"Invalid JSON from {addr=}")
             ws.send(flask.json.dumps({"type": "error", "message": "Invalid JSON"}))
         except Exception:
-            # print(session)
-            print(addr)
             session_log.debug(f"User state: {session=}")
             session_log.exception(f"Error from {addr=}:")
             ws.send(
@@ -295,4 +300,4 @@ def connect(ws):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True, threaded=True)
+    app.run(host="0.0.0.0", port=8888, threaded=True)

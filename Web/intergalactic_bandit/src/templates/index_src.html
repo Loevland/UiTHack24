@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel=icon href="favicon.ico" type="image/x-icon">
+    <!-- <link rel=icon href="favicon.ico" type="image/x-icon"> -->
     <link rel="stylesheet" href="style.css">
     <title>UiTHack Flag Bandit</title>
 </head>
@@ -11,7 +11,7 @@
 <body>
     <header>
         <h1>UiTHack Flag Bandit</h1>
-        <h2>Wallet: <span id="userCoins">0</span> coins<img id="coin-image" src="coin.png" alt="">
+        <h2>Wallet: <span id="userCoins">0</span> coins<img id="coin-image" class="coin" src="coin.png" alt="">
         </h2>
     </header>
     <div id="slot-machine">
@@ -51,7 +51,8 @@
     <p id="disclaimer">* The game is definitely not rigged...</p>
 
     <script>
-        const ws = new WebSocket("ws://localhost:5000/ws");
+        // js is obfuscated with https://obfuscator.io/
+        const ws = new WebSocket("ws://" + window.location.host + "/ws");
         const userCoinsElement = document.getElementById("userCoins");
         const rollElements = [document.getElementById("roll1"), document.getElementById("roll2"), document.getElementById("roll3")];
         const resultElement = document.getElementById("win-condition");
