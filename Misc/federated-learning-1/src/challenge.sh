@@ -28,7 +28,6 @@ clean() {
         __pycache__/ \
         solve/__pycache__/ \
         handout/ \
-        handout.zip
 }
 
 solve() {
