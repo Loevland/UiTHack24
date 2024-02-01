@@ -43,7 +43,7 @@ solve() {
 }
 
 options=("create" "clean" "solve")
-if echo $options|grep -q "$1"; then
+if echo ${options[@]}|grep -vq "$1"; then
     echo "usage: ./$(basename $BASH_SOURCE) <${options[@]}>"
     exit 1
 elif [ "$1" == "create" ]; then
