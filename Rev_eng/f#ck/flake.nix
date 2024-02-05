@@ -24,10 +24,15 @@
             nixpkgs-fmt
           ];
 
-          nativeBuildinputs = with pkgs; [
-            dotnet-sdk_8
+          nativeBuildInputs = with pkgs; [
+            (with dotnetCorePackages;
+            combinePackages [
+              dotnet-sdk_8
+              dotnetPackages.Nuget
+            ])
+            just
             fsautocomplete
-          ];
+          ] ++ [ pkgs.zlib pkgs.zlib.dev pkgs.openssl pkgs.icu ];
         };
       });
     };
