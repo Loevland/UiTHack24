@@ -1,4 +1,4 @@
 default:
-	dotnet publish -tl --runtime linux-x64 --configuration Release
-	# mv -if bin/Release/net8.0/linux-x64/F\#ck .
+	dotnet build -tl --runtime linux-x64 --configuration Release
+	mv -if bin/Release/net8.0/linux-x64/F\#ck.dll .
 
