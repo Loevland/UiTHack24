@@ -11,21 +11,16 @@ description:
 tags:
     - hard
 flags:
-    - UiTHack24{humansarentsobadatchessafterall}
+    - UiTHack24{YouAreNowGM}
 files:
     - src/board.py
     - src/chess.py
     - src/piece.py
 hints:
     - {
-      content: "White has force mate in 3 moves",
+      content: "White has force mate in 4 moves",
       cost: 10,
     }
-    - {
-      content: "Blacks second move doesnt matter",
-      cost: 10,
-    }
-    - Example move Queen 5c7c
 
 state: visible
 version: "0.1"

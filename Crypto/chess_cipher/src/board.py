@@ -42,28 +42,15 @@ class Board():
         for i in range(8):
             self.board.append([None] * 8)
 
-        self.board[5][5] = piece.King(True)
-        self.board[7][7] = piece.Rook(True)
-        self.board[6][4] = piece.Bishop(True)
-        self.board[4][4] = piece.Knight(True)
-        self.board[6][0] = piece.Pawn(True)
-        self.board[5][2] = piece.Pawn(True)
-        self.board[4][3] = piece.Pawn(True)
-        self.board[3][4] = piece.Pawn(True)
-        self.board[6][5] = piece.Pawn(True)
+        self.board[0][7] = piece.King(True)
+        self.board[0][4] = piece.Bishop(True)
+        self.board[0][3] = piece.Bishop(True)
+        self.board[6][7] = piece.Pawn(True)
+        self.board[5][5] = piece.Pawn(True)
 
-        #rad fra topp, kollone fra venstre
-        self.board[2][6] = piece.King(False)
-        self.board[1][3] = piece.Queen(False)
-        self.board[0][4] = piece.Rook(False)
-        self.board[2][2] = piece.Knight(False)
-        self.board[0][5] = piece.Bishop(False)
-        self.board[1][5] = piece.Pawn(False)
-        self.board[1][6] = piece.Pawn(False)
-        self.board[1][1] = piece.Pawn(False)
-        self.board[2][0] = piece.Pawn(False)
-        self.board[3][2] = piece.Pawn(False)
-        self.board[3][5] = piece.Pawn(False)
+        self.board[2][7] = piece.King(False)
+        self.board[5][7] = piece.Pawn(False)
+        self.board[1][7] = piece.Pawn(False)
 
     def print_board(self):
         """

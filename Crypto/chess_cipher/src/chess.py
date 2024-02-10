@@ -142,8 +142,8 @@ def translate(s):
     Translates traditional board coordinates of chess into list indices
     """
     try:
-        row = int(s[0])
-        col = s[1]
+        row = int(s[1])
+        col = s[0]
         if row < 1 or row > 8:
             print(s[0] + "is not in the range from 1 - 8")
             return None
@@ -166,11 +166,10 @@ def decrypt_sequence(encrypted_string, key):
     return decrypted_text
 
 if __name__ == "__main__":
-   
+    
     chess = Chess()
     chess.board.print_board()
     moves = ""
-    encrypted_flag = ['f', '\x0f', '`', '.', 'Y', '\x06', ']', 'W', '\x05', '\x13', 'P', '\x1d', '_', '\x04', '[', '\x1b', 'R', '\x14', 'Q', '\x08', 'L', '\x16', 'Y', '\x07', 'P', '\x0c', 'Y', '\x1c', 'Q', '\r', 'P', '\x1b', '@', '\x07', 'R', '\x12', ']', '\x17', 'W', '\t', ']', '\x15']
     flagg = ""
     while True:
         start = input("From: ")
@@ -200,8 +199,9 @@ if __name__ == "__main__":
             i += 1
         chess.board.print_board()
 
-        if (len(moves) >= 0b10100):
+        if (len(moves) >= 0b11100):
             print("Sequence: " + moves)
-            moves = moves[:0b1100] + moves[0b10000:]
+            with open("encrypted_flag", "r") as f: 
+                encrypted_flag = f.read()
             flagg = decrypt_sequence(encrypted_flag, moves)
             print("Flagg: " + flagg)
