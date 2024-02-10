@@ -1,0 +1,54 @@
+name: "Intergalactic bandit"
+author: "SondreUM"
+category: web
+value: 400
+type: standard
+description: >
+    The neighbouring aliens have been enjoying the classical *One Armed Bandit* at the casino.
+    However, they can't seem to win anything. Can you show them how?
+
+
+# Settings used for Dockerfile deployment
+# If not used, remove or set to null
+# If you have a Dockerfile set to .
+# If you have an imaged hosted on Docker set to the image url (e.g. python/3.8:latest, registry.gitlab.com/python/3.8:latest)
+# Follow Docker best practices and assign a tag
+image: .
+
+# Specify a protocol that should be used to connect to the running image
+# For example if the image is a website you can specify http or https
+# Otherwise you can specify tcp
+protocol: tcp
+
+# Optional settings
+
+# connection_info is used to provide a link, hostname, or instructions on how to connect to a challenge
+# if reverse proxied, remove port number
+connection_info: https://hostname:8888
+
+# healthcheck is a tool/script used to check a challenge
+# If connection_info was provided to CTFd when the challenge was installed, it will be passed to the healthcheck script:
+# ./writeup/exploit.sh --connection-info "nc hostname 12345"
+# healthcheck: writeup/exploit.sh
+
+flags:
+    - flag{UiTHack24{Passw0rd_1s_*******}}
+
+# Topics are used to help tell what techniques/information a challenge involves
+# They are generally only visible to admins
+# Accepts strings
+topics:
+    - python
+    - websocket
+    - hard
+
+tags:
+    - web
+    - python
+    - hard
+
+files:
+    - src/app.py
+
+state: visible
+version: "0.1"

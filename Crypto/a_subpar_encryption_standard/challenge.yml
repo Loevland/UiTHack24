@@ -13,6 +13,7 @@ flags:
     - UiTHack24{bytemaster_rijndael}
 files:
     - src/flag.txt.enc
+    - src/encrypt.py
 
 state: visible
 version: "0.1"
