@@ -16,7 +16,9 @@ tags:
 flags:
     - UiTHack24{oslo_tallinn_partizanske}
 files:
-    - src/location.png
+    - src/city1.png
+    - src/city2.png
+    - src/city3.png
 
 state: visible
 version: "0.1"
