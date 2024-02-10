@@ -13,11 +13,7 @@ tags:
 flags:
     - UiTHack24{slamdunk}
 files:
-    - src/flag.txt
-    - src/secret.py
-    - src/weights.pt
-    - images/secret_number.png
-    - images/secret.png
+    - operation_galactic_dunk.zip
 
 state: visible
 version: "0.1"
