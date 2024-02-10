@@ -19,7 +19,7 @@
 > - 1 number between 2 and 7
 > - 1 number between 1 and 5
 >
-> I remember key number 0 and 1 were c0f21 and c0f22 respectively.
+> I remember key number 0 and 1 were c0ff21 and c0ff22 respectively.
 >
 > and the correct key today is key number 585937
 
