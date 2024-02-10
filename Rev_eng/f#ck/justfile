@@ -1,0 +1,12 @@
+default:
+	dotnet build -tl --runtime linux-x64 --configuration Release
+	cp -f bin/Release/net8.0/linux-x64/F\#ck.dll .
+	zip -r F\#ck.zip F\#ck.dll
+	rm -r F\#ck.dll
+
+solve:
+	dotnet run "D2005S"
+
+clean:
+	dotnet clean
+	rm -r F\#ck.zip
