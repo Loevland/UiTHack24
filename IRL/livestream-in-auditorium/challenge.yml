@@ -12,9 +12,8 @@ tags:
     - easy
 flags:
     - UiTHack24{1nt0-th3-broadc4st}
-Files:
-- [clue](src/clue.jpg)
-    
+files:
+    - src/clue.jpg
 
 state: visible
 version: "0.1"
