@@ -7,33 +7,38 @@
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz";
   };
 
-  outputs = { self, flake-schemas, nixpkgs }:
-    let
-      supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];
-      forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
-        pkgs = import nixpkgs { inherit system; };
-      });
-    in
-    {
-      schemas = flake-schemas.schemas;
+  outputs = {
+    self,
+    flake-schemas,
+    nixpkgs,
+  }: let
+    supportedSystems = ["x86_64-linux" "aarch64-darwin"];
+    forEachSupportedSystem = f:
+      nixpkgs.lib.genAttrs supportedSystems (system:
+        f {
+          pkgs = import nixpkgs {inherit system;};
+        });
+  in {
+    schemas = flake-schemas.schemas;
 
-      devShells = forEachSupportedSystem ({ pkgs }: {
-        default = pkgs.mkShell {
+    devShells = forEachSupportedSystem ({pkgs}: {
+      default = pkgs.mkShell {
+        packages = with pkgs; [
+          nixpkgs-fmt
+        ];
 
-          packages = with pkgs; [
-            nixpkgs-fmt
-          ];
-
-          nativeBuildInputs = with pkgs; [
+        nativeBuildInputs = with pkgs;
+          [
             (with dotnetCorePackages;
-            combinePackages [
-              dotnet-sdk_8
-              dotnetPackages.Nuget
-            ])
+              combinePackages [
+                dotnet-sdk_8
+                dotnetPackages.Nuget
+              ])
             just
-            fsautocomplete
-          ] ++ [ pkgs.zlib pkgs.zlib.dev pkgs.openssl pkgs.icu ];
-        };
-      });
-    };
+            # fsautocomplete
+          ]
+          ++ [pkgs.zlib pkgs.zlib.dev pkgs.openssl pkgs.icu];
+      };
+    });
+  };
 }

@@ -16,6 +16,6 @@ let main args =
             |> String
         
         if secret = "D2005S" then
-            printfn "TD{%s}" flag
+            printfn "UiTHack24{%s}" flag
     0
     

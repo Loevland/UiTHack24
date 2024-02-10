@@ -2,9 +2,10 @@
 
 > Rev - 100pts
 
-Some text here
+Prepare to embark on an adventure into the realm of functional programming. 
+Some say that the language is so powerful that it can even be used to solve the most complex of problems. Find the flag in the following file: 
 
-[File](./F#ck)
+[File](./F#ck.dll)
 
 ---
 
