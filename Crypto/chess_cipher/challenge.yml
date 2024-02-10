@@ -18,7 +18,7 @@ files:
     - src/piece.py
 hints:
     - {
-      content: "White has force mate in 4 moves",
+      content: "White has forced mate in 4 moves",
       cost: 10,
     }
 
