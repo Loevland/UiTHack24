@@ -8,9 +8,9 @@ def decrypt(encrypted_text, key):
     return decrypted_text
 
 if __name__ == "__main__":
-
     key = input("Enter key: ")
     with open("flag.txt", "r") as f: 
        encrypted_flag = f.read()
     flag = decrypt(encrypted_flag, key)
+
     print(flag)

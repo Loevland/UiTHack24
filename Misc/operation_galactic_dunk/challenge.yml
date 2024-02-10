@@ -11,7 +11,7 @@ description:
 tags:
     - medium
 flags:
-    - UiTHack2024{slamdunk}
+    - UiTHack24{slamdunk}
 files:
     - src/flag.txt
     - src/secret.py

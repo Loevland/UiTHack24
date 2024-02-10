@@ -17,5 +17,5 @@ Secret key is:
 
 Flag: 
 ```
-UiTHack2024{slamdunk}
+UiTHack24{slamdunk}
 ```
