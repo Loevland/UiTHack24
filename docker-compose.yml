@@ -43,6 +43,17 @@ services:
       - "8002:8002"
     restart: on-failure
 
+  admin_access_frontend:
+    build: ./Web/admin_access/src/frontend
+    ports:
+      - "3000:3000"
+    restart: on-failure
+
+  admin_access_backend:
+    build: ./Web/admin_access/src/backend
+    ports:
+      - "5000:5000"
+    restart: on-failure
   # Misc
 
   # Rev
@@ -84,3 +95,4 @@ services:
     ports:
       - "6004:6004"
     restart: on-failure
+

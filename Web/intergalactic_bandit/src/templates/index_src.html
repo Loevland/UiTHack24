@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel=icon href="favicon.ico" type="image/x-icon"> -->
+    <link rel="stylesheet" href="style.css">
+    <title>UiTHack Flag Bandit</title>
+</head>
+
+<body>
+    <header>
+        <h1>UiTHack Flag Bandit</h1>
+        <h2>Wallet: <span id="userCoins">0</span> coins<img id="coin-image" class="coin" src="coin.png" alt="">
+        </h2>
+    </header>
+    <div id="slot-machine">
+        <div class="roll-box" id="roll1">0</div>
+        <div class="roll-box" id="roll2">0</div>
+        <div class="roll-box" id="roll3">0</div>
+        <div id="table-container">
+            <table id="cost-payout-table">
+                <thead>
+                    <tr>
+                        <th>Spin Cost</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <td>Win payout</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <th>Flag</th>
+                        <th></th>
+                    </tr>
+            </table>
+        </div>
+    </div>
+
+    <h2 id="win-condition">Try your luck! Match all 3 digits to win!</h2>
+    <button class="round-button" id="spin-button" onclick="spin()" disabled title="Cost: 20 coins">Spin</button>
+
+    <div id="message-box"></div>
+
+
+    <p>* This is a game of chance. You may lose all your coins.</p>
+    <p id="disclaimer">* The game is definitely not rigged...</p>
+
+    <script>
+        // js is obfuscated with https://obfuscator.io/
+        const ws = new WebSocket("ws://" + window.location.host + "/ws");
+        const userCoinsElement = document.getElementById("userCoins");
+        const rollElements = [document.getElementById("roll1"), document.getElementById("roll2"), document.getElementById("roll3")];
+        const resultElement = document.getElementById("win-condition");
+        const spinButton = document.getElementById("spin-button");
+        const messageBox = document.getElementById("message-box");
+        const costPayoutTable = document.getElementById("cost-payout-table");
+
+
+        ws.onopen = () => {
+            console.log("WebSocket connection opened");
+            ws.send(JSON.stringify({ type: "info" }));
+            spinButton.disabled = false;
+            displayMessage("Match all 3 digits to win!", false);
+        };
+
+
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+
+            if (data.type === "info") {
+                // Update user coins on the page
+                userCoinsElement.textContent = data.coins;
+
+                // Update the cost value table
+                costPayoutTable.rows[0].cells[1].textContent = data.spin_cost + " coins";
+                costPayoutTable.rows[1].cells[1].textContent = data.win_payout + " coins";
+                costPayoutTable.rows[2].cells[1].textContent = data.flag_price + " coins";
+            } else if (data.type === "spin") {
+                // Update the slot machine result
+                updateRolls(data.roll);
+                // Speedrunning prevention
+                setTimeout(() => {
+                    userCoinsElement.textContent = data.coins;
+                    displayWinCondition(data.win, data.prize);
+                }, 1000);
+                // disable the spin button for 2 seconds
+                setTimeout(() => {
+                    spinButton.disabled = false;
+                }, 2000);
+
+            } else if (data.type === "error") {
+                // Display a message from the server
+                displayMessage(data.message, true);
+            }
+        };
+
+        ws.onclose = () => {
+            console.log("WebSocket connection closed");
+        };
+
+
+        function spin() {
+            // Prevent multiple clicks
+            if (spinButton.disabled) {
+                return;
+            }
+            spinButton.disabled = true;
+            // Send a spin request to the server
+            ws.send(JSON.stringify({ type: "spin" }));
+
+        }
+        function updateRolls(roll) {
+            // Update the values in the roll boxes with a spinning animation
+            for (let i = 0; i < rollElements.length; i++) {
+                rollElements[i].style.animation = "none";
+                rollElements[i].offsetHeight; // Trigger a reflow to apply the reset
+                rollElements[i].style.animation = "spin 1s forwards"; // Add a spinning animation
+                setTimeout(() => {
+                    rollElements[i].textContent = roll[i];
+                }, 1000); // Update the value after the spinning animation
+            }
+        }
+
+        function displayWinCondition(isWin, prize) {
+            // Display the win condition message
+            if (isWin) {
+                resultElement.textContent = `You Win ${prize} coins!`;
+                resultElement.style.color = "#4CAF50"; // Green color for win
+            } else {
+                resultElement.textContent = "You Lose! Try again.";
+                resultElement.style.color = "#FF5252"; // Red color for loss
+            }
+
+        }
+
+        function displayMessage(message, isError = false) {
+            messageBox.textContent = message;
+            messageBox.style.color = isError ? "#FF5252" : "#ffffff"; // Red color for errors, white for normal messages
+        }
+    </script>
+</body>
+
+</html>
