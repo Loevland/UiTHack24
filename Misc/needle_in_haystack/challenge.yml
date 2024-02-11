@@ -1,7 +1,13 @@
 name: "Needle in the Haystack"
 author: "Lorentzen"
 category: misc
-value: 100
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
   While walkin around in the home base a soldier comes running up to you.
 
@@ -14,7 +20,7 @@ description: >
   We know the pattern of the list, but manually writing it out would take years.
   You must help us solve this problem.
 
-  The pattern is: 
+  The pattern is:
 
   - 1 letter between "c" and "m"
   - 1 digit
@@ -31,5 +37,6 @@ tags:
   - medium
 flags:
   - UiTHack24{g4lg32}
+
 state: visible
 version: "0.1"

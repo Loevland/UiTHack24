@@ -1,8 +1,13 @@
 name: "Rapid Encryption"
 author: "Loevland"
 category: crypto
-value: 150
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     Those pesky aliens keep sniffing our messages and stealing our supplies!
     Luckily I have come up with a way to encrypt our messages so that they

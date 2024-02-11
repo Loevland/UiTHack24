@@ -1,8 +1,13 @@
 name: "Radiation Shield"
 author: "Loevland"
 category: pwn
-value: 50
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     Deep within the space station "Pandora",
     a looming solar flare threatens the lives of the station's crew.
@@ -11,7 +16,7 @@ description: >
     so you must hack into the system to increase the shield's protection to `maximum`.
 
 
-connection_info: nc hostname 9000
+connection_info: nc uithack.td.org.uit.no 9000
 tags:
     - easy
 flags:

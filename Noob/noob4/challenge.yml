@@ -1,17 +1,22 @@
 name: "noob4"
 author: "Loevland"
 category: noob
-value: 400
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     Our trip through space and time seems to have messed with the future, and now we cannot access our flag!
 
-    You can connect to the server with the following command: `nc hostname 9005`
+    You can connect to the server with the following command: `nc uithack.td.org.uit.no 6003`
     The username is `noob4`
     The password is the flag from `noob3`
 
 
-connection_info: nc hostname 9005
+connection_info: nc uithack.td.org.uit.no 6003
 tags:
     - medium
 flags:

@@ -3,7 +3,7 @@
 
 Get the flag to join the galactic elite!
 
-You can connect to the server with the following command: `nc hostname 9005`
+You can connect to the server with the following command: `nc uithack.td.org.uit.no 6004`
 The username is `noob5`
 The password is the flag from `noob4`
 

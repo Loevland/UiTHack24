@@ -2,17 +2,23 @@ name: "noob5"
 author: "Loevland"
 category: noob
 value: 500
-type: standard
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     Get the flag to join the galactic elite!
 
-    You can connect to the server with the following command: `nc hostname 9005`
+    You can connect to the server with the following command: `nc uithack.td.org.uit.no 6004`
     The username is `noob5`
     The password is the flag from `noob4`
 
 
-connection_info: nc hostname 9005
+connection_info: nc uithack.td.org.uit.no 6004
 tags:
+    - medium
     - hard
 flags:
     - UiTHack24{7h3_n00b_g4l4ct1c_31337}
