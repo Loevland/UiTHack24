@@ -65,7 +65,7 @@ services:
   # Rev
 
   # Crypto
-  3D_cipher:
+  3d_cipher:
     build: ./Crypto/3D_cipher/src
     ports:
       - "7000:7000"
