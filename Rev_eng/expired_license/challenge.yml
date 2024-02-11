@@ -1,14 +1,18 @@
 name: "Expired License"
 author: "Loevland"
 category: rev
-value: 100
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     The subscription on the software for our spaceship has expired,
     and we can't get back to Earth without it.
     We don't want to pay for a new license.
     Can you find the license key?
-
 
 tags:
     - easy

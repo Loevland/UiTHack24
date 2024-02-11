@@ -1,15 +1,21 @@
 name: "Alien Supremacy"
 author: "alexander-stimpsonkarlsson"
 category: crypto
-value: 150
-type: standard
-description: 
-    The aliens have composed a challenge for the petty humans using their own game against them - CHESS. 
-    Play out the sequence using the best possible moves starting as white. 
-    A chess piece move is represented by first stating where the piece moved from to where it is going. 
-    
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
+description:
+    The aliens have composed a challenge for the petty humans using their own game against them - CHESS.
+    Play out the sequence using the best possible moves starting as white.
+    A chess piece move is represented by first stating where the piece moved from to where it is going.
+
 tags:
-    - hard
+    - easy
+    - medium
 flags:
     - UiTHack24{YouAreNowGM}
 files:

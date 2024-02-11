@@ -1,14 +1,18 @@
 name: "Space traverse"
 author: "Loevland"
 category: web
-value: 250
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     In the search for a new planet to inhabit, we have found a couple different candidates.
     I have collected images of them, so that you can help me decide which one to go to.
 
-
-connection_info: "hostname:8001"
+connection_info: "http://uithack.td.org.uit.no:8001"
 tags:
     - medium
 flags:

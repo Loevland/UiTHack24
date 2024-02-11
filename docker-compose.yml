@@ -43,6 +43,12 @@ services:
       - "8002:8002"
     restart: on-failure
 
+  intergalactic_bandit:
+    build: ./Web/intergalactic_bandit/src
+    ports:
+      - "8888:8888"
+    restart: on-failure
+
   admin_access_frontend:
     build: ./Web/admin_access/src/frontend
     ports:
@@ -59,7 +65,7 @@ services:
   # Rev
 
   # Crypto
-  3D_cipher:
+  3d_cipher:
     build: ./Crypto/3D_cipher/src
     ports:
       - "7000:7000"
@@ -95,4 +101,3 @@ services:
     ports:
       - "6004:6004"
     restart: on-failure
-

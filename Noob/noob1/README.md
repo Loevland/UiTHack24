@@ -3,7 +3,7 @@
 
 Our flag was stolen from our spaceship, and we need your 1337 hacker skills to get it back for us.
 
-You can connect to the server with the following command: `nc hostname 9005`
+You can connect to the server with the following command: `nc uithack.td.org.uit.no 6000`
 The username is `noob1`
 The password is `noob1.
 

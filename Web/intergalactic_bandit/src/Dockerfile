@@ -16,4 +16,4 @@ EXPOSE 8888
 
 STOPSIGNAL SIGKILL
 
-CMD ["python", "-b", "app.py" "--port=8888", "--host=0.0.0.0"]
+CMD python3 -b app.py --port=8888 --host="0.0.0.0"

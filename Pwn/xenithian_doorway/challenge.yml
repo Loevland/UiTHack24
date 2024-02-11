@@ -1,8 +1,13 @@
 name: "Xenithian doorway"
 author: "Loevland"
 category: pwn
-value: 300
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     Inside the book you retrieved from the archived you find a map which leads to the exit.
     After following the map you reach a door marked as the exit.
@@ -10,7 +15,7 @@ description: >
     and the slight malfunction of the door you can try to escape!
 
 
-connection_info: nc hostname 9003
+connection_info: nc uithack.td.org.uit.no 9003
 tags:
     - medium
 flags:

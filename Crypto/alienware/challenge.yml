@@ -1,26 +1,23 @@
-name: "{{Alienware}}"
+name: "Alienware"
 author: "Sondre"
 category: crypto
-value: 200
-type: standard
-description: > 
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
+description: >
     Aliens have encrypted my very important file!
     Luckily they forgot to delete the software from the trash folder, can you help me decrypt it?
-
 
 flags:
     - UiTHack24{E.T._ph0ne_h0me_plsss}
 
-topics:
-    - crypto
-    - Reverse engineering
-    - ransomware
-
 tags:
     - easy
     - medium
-    - python
-    - ransomware
 
 files:
     - src/word.py
