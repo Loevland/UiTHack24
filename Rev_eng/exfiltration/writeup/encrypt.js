@@ -1,4 +1,3 @@
-//const flag = "UiTHack24{t3st_fl4g}"
 const enc_flag = "3c3d1c29020859064f0f4740072b390a58531a7d"
 
 const encrypt = input => {
