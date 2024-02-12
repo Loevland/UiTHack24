@@ -18,7 +18,8 @@ Add emoji!
 | noob3 :cat:         | Space traversal :space_invader: | Xenithian doorway :door:    | Hidden Covenant Info :mag:         | Infiltration :video_game:             | Rapid Encryption :zap:              |     |
 | noob4 :crocodile:   |                                 | Archive :book:              | Federated Learning 1 :closed_book: | Exfiltration :gift:                   | 3D Cipher :globe_with_meridians:    |     |
 | noob5 :dragon:      | Intergalactic bandit :underage: | The great escape :rocket:   | Federated Learning 2 :orange_book: |                                       | A subpar encryption standard :ship: |     |
-|                     |                                 |                             | Operation Galactic Dunk :wastebasket: |                                    | Chess cipher :checkered_flag:       |      |       
+|                     |                                 |                             | Operation Galactic Dunk :wastebasket: |                                    | Chess cipher :checkered_flag:       |      |      
+| | | | Deus-Ex :technologist: | | | 
 
 # Developer guidelines
 

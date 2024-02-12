@@ -1,0 +1,25 @@
+name: "Deus-Ex"
+author: "Anders Søreide"
+category: misc
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+description: >
+    Hey it's me, JC.
+    I've heard you could use some help, so I whipped up something special just for you.
+    Make you sure you go to the right place. Oh, and you will also need a 4-digit code for the padlock.
+    Don't worry, If you know me you probably already know the code. 
+    If not, you'll just have to learn to immerse yourself in the simulation.
+
+tags:
+    - medium
+flags:
+    - UiTHack24{d3nt0n-in-7he-machin3}
+files:
+    - src/location.png
+
+state: visible
+version: "0.1"
