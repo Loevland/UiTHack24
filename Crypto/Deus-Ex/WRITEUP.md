@@ -10,4 +10,4 @@
 Solution to challenge goes here (scripts can be added in separate files)
 
 ```
-UiTHack23{d3nt0n-in-7he-machin3}
+UiTHack24{d3nt0n-in-7he-machin3}
