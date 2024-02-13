@@ -43,6 +43,12 @@ services:
       - "8002:8002"
     restart: on-failure
 
+  space_station:
+    build: ./Web/space_station/src
+    ports:
+      - "8009:8009"
+    restart: on-failure
+
   intergalactic_bandit:
     build: ./Web/intergalactic_bandit/src
     ports:
@@ -60,6 +66,7 @@ services:
     ports:
       - "5000:5000"
     restart: on-failure
+
   # Misc
 
   # Rev
