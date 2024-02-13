@@ -2,15 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char enc_flag[24] = {0x15, 0x06, 0x09, 0x4b, 0x14, 0x18, 0x4b, 0x17, 0x24, 0x13, 0x0f, 0x13, 0x08, 0x4a, 0x4f, 0x00, 0x10, 0x49, 0x1a, 0x18, 0x2f, 0x33, 0x2e, 0x12};
-
-void *enc3(char *str){
-    for(int i = 0; i < 24; i += 2){
-        char tmp = str[i];
-        str[i] = str[i + 1];
-        str[i + 1] = tmp;
-    }
-}
+char enc_flag[24] = {0x6c, 0x50, 0x6d, 0x71, 0x58, 0x5a, 0x52, 0x0b, 0x0d, 0x42, 0x4a, 0x08, 0x4d, 0x51, 0x66, 0x51, 0x09, 0x55, 0x56, 0x5a, 0x4b, 0x09, 0x57, 0x44};
 
 void *enc1(char *str, int key){
     for(int i = 0; i < 24; i++){
@@ -18,20 +10,8 @@ void *enc1(char *str, int key){
     }
 }
 
-void *enc2(char *str){
-    for(int i = 0; i < 12; i++){
-        char tmp = str[i];
-        str[i] = str[23 - i];
-        str[23 - i] = tmp;
-    }
-}
-
 int validate_key(char *input){
     enc1(input, 0x39);
-    enc2(input);
-    enc1(input, 0x42);
-    enc3(input);
-
     if(!memcmp(input, enc_flag, 24)){
         return 1;
     } else {
