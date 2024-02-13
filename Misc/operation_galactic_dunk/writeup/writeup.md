@@ -8,7 +8,7 @@
 
 ## Writeup 
 
-To solve the task you must correctly overlapp both of the images. The numbers that are located behind the basketball is part of the key needed to get the flag. There are two apporoaches that can be used. One can either use the weights provided to "mask" all of the basketball and use the coordinates from this to determine the numbers. Or one can manually locate them by for example clicking on the basketballs and get image coordinates. 
+To solve the task you must correctly overlap both of the images. The numbers that are located behind the basketball is part of the key needed to get the flag. There are two apporoaches that can be used. One can either use the weights provided to "mask" all of the basketball and use the coordinates from this to determine the numbers. Or one can manually locate them by for example clicking on the basketballs and get image coordinates. 
 
 Secret key is: 
 ```
