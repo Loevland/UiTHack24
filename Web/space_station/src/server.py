@@ -164,4 +164,4 @@ def post_decrypt():
 
 if __name__ == '__main__': 
     generate_flag()
-    app.run(host="0.0.0.0", debug=True, port=8009)
+    app.run(host="0.0.0.0", debug=False, port=8009)
