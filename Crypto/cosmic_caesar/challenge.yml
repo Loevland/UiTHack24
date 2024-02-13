@@ -1,8 +1,13 @@
 name: "Cosmic Caesar"
 author: "Loevland"
 category: crypto
-value: 50
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     While traveling through the debris of exploded planets, a signal arrived.
     We've determined the alien alphabet used, but the message is still encrypted.

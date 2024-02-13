@@ -1,18 +1,24 @@
 name: "noob3"
 author: "Loevland"
 category: noob
-value: 250
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     Oh no! Someone deleted `flag.txt` from our system, and our spaceship is broken, so we are not able to go back in `history` to retrieve it.
 
-    You can connect to the server with the following command: `nc hostname 9005`
+    You can connect to the server with the following command: `nc uithack.td.org.uit.no 6002`
     The username is `noob3`
     The password is the flag from `noob2`
 
 
-connection_info: nc hostname 9005
+connection_info: nc uithack.td.org.uit.no 6002
 tags:
+    - easy
     - medium
 flags:
     - UiTHack24{1337_t1m3_tr4v3ll3r}

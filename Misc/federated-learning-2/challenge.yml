@@ -1,0 +1,33 @@
+
+name: "Federated Learning 2"
+author: "Marius"
+category: misc
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
+description: >
+    Well, it's not exactly right to claim data privacy against those who knows how federated learning works.
+    Anyways, good luck trying that again without those precious indices!
+
+tags:
+    - hard
+
+flags:
+    - UiTHack24{0_full_0f_5c0rp10n5_15_my_m0d3l}
+
+files:
+    - src/handout.zip
+
+# hints:
+    # - Training data and vocabulary
+    # - Reconstruct gradients
+
+requirements:
+    - "Federated Learning 1"
+
+state: visible
+version: "0.1"

@@ -1,8 +1,13 @@
 name: "A subpar encryption standard"
 author: "Lorentzen"
 category: crypto
-value: 80
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     While looking around in the remains of an enemy spaceship you find some code.
     In their hurry they must have forgotten that there were more steps to do.
@@ -13,6 +18,7 @@ flags:
     - UiTHack24{bytemaster_rijndael}
 files:
     - src/flag.txt.enc
+    - src/encrypt.py
 
 state: visible
 version: "0.1"

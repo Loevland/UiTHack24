@@ -1,19 +1,23 @@
 name: "noob1"
 author: "Loevland"
 category: noob
-value: 50
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     Our flag was stolen from our spaceship, and we need your 1337 hacker skills to get it back for us.
 
-    You can connect to the server with the following command: `nc hostname 9005`
+    You can connect to the server with the following command: `nc uithack.td.org.uit.no 6000`
     The username is `noob1`
-    The password is `noob1
+    The password is `noob1`
 
     Read up on the `cat` command to get the flag
 
-
-connection_info: nc hostname 9005
+connection_info: nc uithack.td.org.uit.no 6000
 tags:
     - easy
 flags:

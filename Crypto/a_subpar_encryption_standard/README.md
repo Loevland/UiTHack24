@@ -8,5 +8,6 @@ Your priority is to decrypt the code to maybe find some indication of who the sh
 
 Files:
 - [flag.txt.enc](src/flag.txt.enc)
+- [encrypt.py](src/encrypt.py)
 
 [writeup](writeup/README.md)

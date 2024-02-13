@@ -1,8 +1,13 @@
 name: "Codebreaker"
 author: "Loevland"
 category: pwn
-value: 100
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     After saving the crew you've been captured by the Xenithians,
     and your escape depends on predicting the next three numbers of their code which changes each attempt.
@@ -10,7 +15,7 @@ description: >
     generating their code. Crack the code to be set free!
 
 
-connection_info: nc hostname 9001
+connection_info: nc uithack.td.org.uit.no 9001
 tags:
     - easy
 flags:
