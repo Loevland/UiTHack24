@@ -3,7 +3,12 @@ name: "Federated Learning 1"
 author: "Marius"
 category: misc
 value: 500
-type: standard
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     Isn't open source great?
     You know what's also great? Machine learning
@@ -13,16 +18,9 @@ description: >
 
 tags:
     - hard
-    - misc
-    - machine learning
-    - offline
 
 flags:
     - UiTHack24{8y_7h3_pr1ck1n9_0f_my_n3ur0n5_50m37h1n9_w1ck3d_7h15_w4y_c0m35}
-
-topics:
-    - machine learning
-    - model architecture
 
 files:
     - src/handout.zip
@@ -31,5 +29,4 @@ files:
     # - Model's first layer
 
 state: visible
-
 version: "0.1"

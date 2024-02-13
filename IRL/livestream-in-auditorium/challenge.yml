@@ -1,8 +1,13 @@
 name: "Recover the lost keys"
 author: "Anders Soreide"
 category: IRL
-value: 100
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     One of our agents were supposed to drop off valuable intel, but they got burned before they could deliver the decryption keys.
     Despite their cover being blow they were luckily able to hide the keys somewhere safe for us, but the exact location is unknown.
@@ -12,9 +17,8 @@ tags:
     - easy
 flags:
     - UiTHack24{1nt0-th3-broadc4st}
-Files:
-- [clue](src/clue.jpg)
-    
+files:
+    - src/clue.jpg
 
 state: visible
 version: "0.1"

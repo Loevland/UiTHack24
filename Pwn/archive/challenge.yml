@@ -1,14 +1,19 @@
 name: "Archive"
 author: "Loevland"
 category: pwn
-value: 200
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     Having escaped the Xenithians, you now stand before a cryptic Xenithian archive.
     Retrieve the book of secrets from the archive!
 
 
-connection_info: nc hostname 9002
+connection_info: nc uithack.td.org.uit.no 9002
 tags:
     - medium
 flags:

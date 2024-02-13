@@ -1,8 +1,13 @@
 name: "Location"
 author: "Loevland"
 category: misc
-value: 100
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     The aliens have captured three of our crew members and is holding them hostage at different locations. Luckily, they managed to send us pictures of their surroundings. Can you figure out where they are being held captive?
 
@@ -16,7 +21,9 @@ tags:
 flags:
     - UiTHack24{oslo_tallinn_partizanske}
 files:
-    - src/location.png
+    - src/city1.png
+    - src/city2.png
+    - src/city3.png
 
 state: visible
 version: "0.1"

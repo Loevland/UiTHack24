@@ -1,8 +1,13 @@
 name: "The great escape"
 author: "Loevland"
 category: pwn
-value: 400
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     You have reached the dashboard of a ship, and you're ready to get away. However,
     the activation of the ship requires a password.
@@ -10,7 +15,7 @@ description: >
     You must find the password to activate the ship do your great escape!
 
 
-connection_info: nc hostname 9004
+connection_info: nc uithack.td.org.uit.no 9004
 tags:
     - hard
 flags:

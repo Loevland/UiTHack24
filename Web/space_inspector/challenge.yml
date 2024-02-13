@@ -1,13 +1,17 @@
 name: "Space Inspector"
 author: "Loevland"
 category: web
-value: 50
-type: standard
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
 description: >
     The flag is lost in space, but if you inspect it closely you might find it.
 
-
-connection_info: "hostname:8002"
+connection_info: "http://uithack.td.org.uit.no:8002"
 tags:
     - easy
 flags:
