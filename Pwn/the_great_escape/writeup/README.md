@@ -28,7 +28,7 @@ The libc-version on Ubuntu 22 (which is used, look in the Dockerfile) uses the `
 
 Now that we have the password (it is in bytes, so most of it will not be ascii characters) we can create a new guess (which will be our actual guess), and put in the password which we know is correct.
 
-For full exploit script see [exploit.py](./exploit.py)
+For full exploit script see [solve.py](./solve.py)
 
 ```
 UiTHack24{h1pp17y_h0ppi7y_y0u_g0t_off_th3_pr0p3r7y}
