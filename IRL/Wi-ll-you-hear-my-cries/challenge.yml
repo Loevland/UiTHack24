@@ -1,0 +1,21 @@
+name: "Wi-ll you hear my cires"
+author: "Lorentzen"
+category: IRL
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
+description: >
+    Silent cries eccho through our homebase in the basement.
+    Can you hear the message they bring?
+
+tags:
+    - easy
+flags:
+    - UiTHack24{the_sound_of_silence}
+
+state: visible
+version: "0.1"
