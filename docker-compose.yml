@@ -33,39 +33,51 @@ services:
   # Web
   space_traversal:
     build: ./Web/space_traversal/src
-    ports:
-      - "8001:8001"
+    # ports:
+    #   - "8001:8001"
     restart: on-failure
+    networks:
+      - nginx_network
 
   space_inspector:
     build: ./Web/space_inspector/src
-    ports:
-      - "8002:8002"
-    restart: on-failure
+    restart: on-failure 
+    # ports:
+    #   - "8002:8002"
+    networks:
+      - nginx_network
 
   space_station:
     build: ./Web/space_station/src
-    ports:
-      - "8009:8009"
+    # ports:
+    #   - "8009:8009"
     restart: on-failure
+    networks:
+      - nginx_network
 
   intergalactic_bandit:
     build: ./Web/intergalactic_bandit/src
-    ports:
-      - "8888:8888"
+    # ports:
+    #   - "8888:8888"
     restart: on-failure
+    networks:
+      - nginx_network
 
   admin_access_frontend:
     build: ./Web/admin_access/src/frontend
-    ports:
-      - "3000:3000"
+    # ports:
+    #   - "3000:3000"
     restart: on-failure
+    networks:
+      - nginx_network
 
   admin_access_backend:
     build: ./Web/admin_access/src/backend
-    ports:
-      - "5000:5000"
+    # ports:
+    #   - "5000:5000"
     restart: on-failure
+    networks:
+      - nginx_network
 
   # Misc
 
@@ -74,9 +86,11 @@ services:
   # Crypto
   3d_cipher:
     build: ./Crypto/3D_cipher/src
-    ports:
-      - "7000:7000"
+    # ports:
+    #   - "7000:7000"
     restart: on-failure
+    networks:
+      - nginx_network
 
   # Noob
   noob1:
@@ -108,3 +122,7 @@ services:
     ports:
       - "6004:6004"
     restart: on-failure
+
+networks:
+  nginx_network:
+    external: true
