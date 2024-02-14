@@ -17,5 +17,5 @@ tags:
 flags:
     - UiTHack24{the_sound_of_silence}
 
-state: visible
+state: hidden
 version: "0.1"
