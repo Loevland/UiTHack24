@@ -15,7 +15,7 @@ description: >
 connection_info: https://uithack.td.org.uit.no:8888
 
 flags:
-    - flag{UiTHack24{Passw0rd_1s_*******}}
+    - UiTHack24{Passw0rd_1s_*******}
 
 tags:
     - hard
