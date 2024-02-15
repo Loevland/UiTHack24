@@ -6,7 +6,7 @@ WORKDIR /home/ctf
 
 COPY ynetd .
 COPY login .
-RUN touch -- "-flag.txt "
+RUN touch -- "-flag.txt"
 RUN echo "UiTHack24{d4sh_31337}" > "-flag.txt "
 
 RUN chown -R root:root /home/ctf
