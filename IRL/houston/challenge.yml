@@ -15,8 +15,6 @@ flags:
     - UiTHack24{t1m3_tr4v31}
 tags:
     - easy
-files:
-    - ./src/houston.jpg
 
 state: visible
 version: "0.1"
