@@ -21,8 +21,7 @@ tags:
 flags:
     - UiTHack24{X3n1th14n_3sc4p3}
 files:
-    - src/codebreaker.c
-    - src/codebreaker
+    - ./codebreaker.zip
 
 state: visible
 version: "0.1"

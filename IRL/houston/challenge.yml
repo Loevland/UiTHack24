@@ -1,0 +1,22 @@
+name: "Houston"
+author: "Loevland"
+category: irl
+description: >
+    Houston, we have a problem! The time travel broke our flag...
+
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
+flags:
+    - UiTHack24{t1m3_tr4v31}
+tags:
+    - easy
+files:
+    - ./src/houston.jpg
+
+state: visible
+version: "0.1"

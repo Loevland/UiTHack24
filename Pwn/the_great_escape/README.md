@@ -6,6 +6,6 @@ the activation of the ship requires a password.<br/>
 You must find the password to activate the ship do your great escape!
 
 Files:
-- [escape](src/escape)
+- [the_great_escape.zip](./the_great_escape.zip)
 
 [Writeup](writeup/README.md)

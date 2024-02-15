@@ -21,8 +21,7 @@ tags:
 flags:
     - UiTHack24{Op3nS3z4m3}
 files:
-    - src/doorway.c
-    - src/doorway
+    - ./xenithian_doorway.zip
 
 state: visible
 version: "0.1"

@@ -21,9 +21,7 @@ tags:
 flags:
     - UiTHack24{h1pp17y_h0ppi7y_y0u_g0t_off_th3_pr0p3r7y}
 files:
-    - src/escape.c
-    - src/escape
-    - src/Dockerfile
+    - ./the_great_escape.zip
 
 state: visible
 version: "0.1"
