@@ -12,7 +12,7 @@ description: >
     The neighbouring aliens have been enjoying the classical *One Armed Bandit* at the casino.
     However, they can't seem to win anything. Can you show them how?
 
-connection_info: http://uithack.td.org.uit.no:8888
+connection_info: https://uithack.td.org.uit.no:8888
 
 flags:
     - flag{UiTHack24{Passw0rd_1s_*******}}

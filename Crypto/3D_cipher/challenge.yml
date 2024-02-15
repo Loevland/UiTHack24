@@ -15,7 +15,7 @@ description: >
     unveiling not only an encryption algorithm,
     but also some encrypted text! I need your help to decipher it.
 
-connection_info: "http://uithack.td.org.uit.no:7000"
+connection_info: "https://uithack.td.org.uit.no:7000"
 tags:
     - medium
 flags:

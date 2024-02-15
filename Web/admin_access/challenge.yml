@@ -11,7 +11,7 @@ extra:
 description: >
   You have to inflitraite the admin area of this website to get the flag. But how do you access it?
 
-connection_info: "http://uithack.td.org.uit.no:3000"
+connection_info: "https://uithack.td.org.uit.no:3000"
 tags:
   - medium
 flags:

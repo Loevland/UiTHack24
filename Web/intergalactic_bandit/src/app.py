@@ -133,7 +133,7 @@ def connect(ws):
     }
 
     # create a session logger
-    session_log = logging.getLogger(f"{APP_NAME}.ws:" + session["id"])
+    session_log = logging.getLogger(f"{APP_NAME}.wss:" + session["id"])
     session_log.setLevel(INFO)
     handler = logging.FileHandler(f"logs/{session['id']}.log")
     formatter = logging.Formatter(f"{session_id} %(levelname)s %(message)s")
@@ -300,4 +300,4 @@ def connect(ws):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8888, threaded=True)
+    app.run(host="0.0.0.0", port=8888, threaded=True, ssl_context='adhoc')
