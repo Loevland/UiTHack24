@@ -11,7 +11,7 @@ extra:
 description: >
     The flag is lost in space, but if you inspect it closely you might find it.
 
-connection_info: "http://uithack.td.org.uit.no:8002"
+connection_info: "https://uithack.td.org.uit.no:8002"
 tags:
     - easy
 flags:
