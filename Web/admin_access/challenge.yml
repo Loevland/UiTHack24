@@ -13,7 +13,7 @@ description: >
 
 connection_info: "https://uithack.td.org.uit.no:3000"
 tags:
-  - medium
+  - easy
 flags:
   - UiTHack24{SqL_1nj3ct10n_1s_4m4z1ng}
 

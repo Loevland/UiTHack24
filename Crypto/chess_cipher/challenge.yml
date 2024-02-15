@@ -19,9 +19,7 @@ tags:
 flags:
     - UiTHack24{YouAreNowGM}
 files:
-    - src/board.py
-    - src/chess.py
-    - src/piece.py
+    - ./alien_supremacy.zip
 hints:
     - {
       content: "White has forced mate in 4 moves",
