@@ -20,7 +20,7 @@ The challenge can be solved in three different intended ways:
 Both [the-hacker](#the-hacker) and [the-loremaster](#the-loremaster) requires the player to connect to the websocket of the server. There are several ways to do this, however [wscat](https://github.com/websockets/wscat) is often recommended. Connecting to a websocket with wscat can be done with the following command:
 
 ```bash
-wscat -c ws://<ip>:<port>/ws
+wscat -c wss://<ip>:<port>/ws
 ```
 
 ### The lucky

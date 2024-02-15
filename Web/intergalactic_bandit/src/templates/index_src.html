@@ -52,7 +52,7 @@
 
     <script>
         // js is obfuscated with https://obfuscator.io/
-        const ws = new WebSocket("ws://" + window.location.host + "/ws");
+        const ws = new WebSocket("wss://" + window.location.host + "/ws");
         const userCoinsElement = document.getElementById("userCoins");
         const rollElements = [document.getElementById("roll1"), document.getElementById("roll2"), document.getElementById("roll3")];
         const resultElement = document.getElementById("win-condition");
