@@ -1,5 +1,3 @@
-// ROP based CTF
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -50,14 +48,11 @@ int main() {
 
     printf("Enter password: ");
     scanf("%s", input);
-    
+
     if (fnv1a<uint64_t>::hash(input) != password) {
         fail();
     } else {
         success();
     }
-
     return 0;
 }
-
-

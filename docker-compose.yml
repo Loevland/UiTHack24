@@ -30,6 +30,12 @@ services:
       - "9004:9004"
     restart: on-failure
 
+  yet_another_overflow:
+    build: ./Pwn/yet_another_overflow/src
+    ports:
+      - "9005:9005"
+    restart: on-failure
+
   # Web
   space_traversal:
     build: ./Web/space_traversal/src
@@ -41,7 +47,7 @@ services:
 
   space_inspector:
     build: ./Web/space_inspector/src
-    restart: on-failure 
+    restart: on-failure
     # ports:
     #   - "8002:8002"
     networks:
