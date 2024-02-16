@@ -20,7 +20,7 @@ tags:
 flags:
     - UiTHack24{but_wh4t$_th3_p4$$w0rd}
 files:
-    - ./overflow
+    - ./src/overflow
 
 state: visible
 version: "0.1"
