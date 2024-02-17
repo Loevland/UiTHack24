@@ -1,0 +1,22 @@
+name: "String Theory"
+author: "Loevland"
+category: rev
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 100
+
+description: >
+    Did you know the universe is made up of `strings`?
+
+tags:
+    - easy
+flags:
+    - UiTHack24{str1111ngs!}
+files:
+    - src/string_theory
+
+state: visible
+version: "0.1"
