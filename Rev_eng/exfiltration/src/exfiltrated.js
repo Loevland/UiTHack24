@@ -1,10 +1,8 @@
-const enc_flag = "3c3d1c29020859064f0f4740072b390a58531a7d";
+const enc_flag = "3c3d1c29020859064f115e4242471011434147686e046a3e0f316b585d540b3133585a09124153544e7d";
 const _0x6ee0 = "never gonna give you up";
 const _0x10fafd = "never gonna let you down";
 
 function _beard(_0xed, _0xca, _0xbea_) {
-    var _ab0ad = _0x6ee0;
-    var tr_80 = _0x10fafd + _0x6ee0[5] + _0x6ee0;
     return (_0xed["ch" + _0x6ee0[10] + "rC" + _0x10fafd[21] + _0x10fafd[20] + "eAt"](_0xbea_) ^ _0xed["ch" + _0x6ee0[10] + "rC" + _0x10fafd[21] + _0x10fafd[20] + "eAt"](_0xbea_+1 % _0xca)).toString(0x10).padStart(0b10, "0");
 };
 
@@ -28,14 +26,13 @@ const _aldk = (_0x12e, _0x12f) => {
     return _0x1697;
 };
 
-const _0x123basd = require(_0x1695(14));
-const bl_3 = _aldk(0x34,0x21)();
-const al = _0x123basd["createInterface"]({
-    "input": process["stdin"],
-    "output": process[_0x1695(17)]
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
 });
 
-al[_0x1695(0x8)](_0x1695(0x00000), (_ab1d2f3) => {
+rl.question('What is the password? ', (_ab1d2f3) => {
     const _a0be = _aldk(0x68, 0x1)();
-    forEach(_ab1d2f3) === enc_flag ? _a0be(_0x1695(3)) : bl_3(_0x1695(20)), al["close"]();
+    forEach(_ab1d2f3) === enc_flag ? _a0be(_0x1695(3)) : bl_3(_0x1695(20)), rl["close"]();
 });
