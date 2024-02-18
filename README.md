@@ -13,13 +13,13 @@ Repository for the yearly CTF challenge by UiT students
 Add emoji!
 | Noob | Web | Pwn | Misc | Rev_Eng | Crypto | IRL |
 | ------------------- | ------------------------------- | --------------------------- | ---------------------------------- | ------------------------------------- | ----------------------------------- | --- |
-| noob1 :baby_bottle: | Space Inspector :eyes: | Codebreaker :fax: | Location :round_pushpin: | F#ck :fu: | Cosmic Caesar :dizzy: | Recover the lost keys :detective: |
-| noob2 :baby:        | Admin access :guardsman:        | Radiation shield :computer: | Needle in the Haystack 🪡🪡        | Expired License :key:                 | Alienware :closed_lock_with_key:    | Wi-ll you hear my cries 😱 |
-| noob3 :cat:         | Space traversal :space_invader: | Xenithian doorway :door:    | Hidden Covenant Info :mag:         | Infiltration :video_game:             | Rapid Encryption :zap:              |  Houston :newspaper: |
-| noob4 :crocodile:   | Enigma Wannabe :computer:       | Archive :book:              | Federated Learning 1 :closed_book: | Exfiltration :gift:                   | 3D Cipher :globe_with_meridians:    |     |
-| noob5 :dragon:      | Intergalactic bandit :underage: | The great escape :rocket:   | Federated Learning 2 :orange_book: | String Theory :fireworks:                                | A subpar encryption standard :ship: |     |
-|                     |                                 | Yet Another Overflow :v:    | Operation Galactic Dunk :wastebasket: |                                    | Alien Supremacy :checkered_flag:       |      |
-| | | | Deus-Ex :technologist: | | |
+| noob1 :baby_bottle: | Space Inspector :eyes:          | Radiation shield :computer: | Location :round_pushpin:              | String Theory :fireworks:          | Cosmic Caesar :dizzy:               | Wi-ll you hear my cries 😱 |
+| noob2 :baby:        | Admin access :guardsman:        | Codebreaker :fax:           | Hidden Covenant Info :mag:            | Expired License :key:              | Rapid Encryption :zap:              | Houston :newspaper: |
+| noob3 :cat:         | Space traverse :space_invader:  | Yet Another Overflow :v:    | Needle in the Haystack 🪡             | F#ck :fu:                          | Alien Supremacy :checkered_flag:    | Recover the lost keys :detective: |
+| noob4 :crocodile:   | Intergalactic bandit :underage: | Archive :book:              | Deus-Ex :technologist:                | Infiltration :video_game:          | A subpar encryption standard :ship: |     |
+| noob5 :dragon:      | Space station :computer:        | Xenithian doorway :door:    | Operation Galactic Dunk :wastebasket: | Exfiltration :gift:                | Alienware :closed_lock_with_key: |     |
+|                     |                                 | The great escape :rocket:   | Federated Learning 1 :closed_book:    |                                    | 3D Cipher :globe_with_meridians:    |      |
+|                     |                                 |                             | Federated Learning 2 :orange_book:    |                                    | |
 
 # Developer guidelines
 
