@@ -95,14 +95,17 @@ START_COINS = 200
 SPIN_COST = 20
 PAYOUT_MULTIPLIER = 5
 FLAG_PRICE = 10000
-LOG_KEEP_TIME = 60 * 5  # value in seconds
+LOG_KEEP_TIME = 60 * 10  # value in seconds
 WS_TIMEOUT = 60 * 5  # value in seconds
 
 
 @app.route("/")
 @app.route("/index.html")
 def index():
-    return flask.render_template("index.html", name="index.html", )
+    return flask.render_template(
+        "index.html",
+        name="index.html",
+    )
 
 
 @app.route("/log/<uuid:log_id>", methods=["GET"])
@@ -300,4 +303,4 @@ def connect(ws):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8888, threaded=True, ssl_context='adhoc')
+    app.run(host="0.0.0.0", port=8888, threaded=True, ssl_context="adhoc")

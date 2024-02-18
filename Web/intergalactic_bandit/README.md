@@ -1,4 +1,5 @@
 # Intergalactic bandit
+
 > Web - 488pts/10 solves
 
 The neighbouring aliens have been enjoying the classical *One Armed Bandit* at the casino.

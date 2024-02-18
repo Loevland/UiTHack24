@@ -14,6 +14,12 @@ description: >
 
 connection_info: https://uithack.td.org.uit.no:8888
 
+hints:
+    - {
+      content: "logs tell no lies, have you seen yours?",
+      cost: 50,
+    }
+
 flags:
     - UiTHack24{Passw0rd_1s_*******}
 
