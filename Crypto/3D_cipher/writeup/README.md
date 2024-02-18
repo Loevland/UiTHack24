@@ -25,16 +25,3 @@ L(2);F(2);B(1);D(-1);B(-1);R(1);F(2);B(2);R(-1);U(-1);F(1);R(1);U(1);R(2);B(2);D
 ```
 
 Printing the cube will now show the flag.
-
-\
-**TLDR**:
-
-```c
-int main(){
-    init();
-    L(2);F(2);B(1);D(3);B(3);R(1);F(2);B(2);R(3);U(3);F(1);R(1);U(1);R(2);B(2);D(3);B(2);R(2);U(3);
-    print_cube();
-    
-    return 0;
-}
-```
