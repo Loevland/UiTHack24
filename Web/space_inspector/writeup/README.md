@@ -1,8 +1,7 @@
 > # Space Inspector
-> > Web - 50pts
+> > Web - 100pts/53 solves
 >
 > The flag is lost in space, but if you inspect it closely you might find it.
-
 
 ## Writeup
 The website looks empty, but if we use `inspect element` we can see that the flag is commented out at the bottom of the HTML.

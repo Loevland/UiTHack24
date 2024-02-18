@@ -1,6 +1,5 @@
 # A subpar encryption standard
-
-> Crypto - 80pts
+> Crypto - 481pts/12 solves
 
 While looking around in the remains of an enemy spaceship you find some code.
 In their hurry they must have forgotten that there were more steps to do.

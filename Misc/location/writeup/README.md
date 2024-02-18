@@ -1,5 +1,5 @@
 > # Location
-> > Misc - 100pts
+> > Misc - 269pts/39 solves
 >
 > The aliens have captured three of our crew members and is holding them hostage at different locations. Luckily, they managed to send us pictures of their surroundings. Can you figure out where they are being held captive?
 >

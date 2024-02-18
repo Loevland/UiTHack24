@@ -1,15 +1,13 @@
 # Web - Intergalactic bandit
 
-> > Web - 10 solves / 488 points
+> > Web - 400pts
 >
 > The neighbouring aliens have been enjoying the classical *One Armed Bandit* at the casino.
 > However, they can't seem to win anything. Can you show them how?
->
-> Files: [Source code](../src/app.py)
 
 ## Writeup
 
-The challenge has three different intended solves:
+The challenge can be solved in three different intended ways:
 
 - [Web - Intergalactic bandit](#web---intergalactic-bandit)
   - [Writeup](#writeup)

@@ -1,5 +1,5 @@
 > # Exfiltration
-> > Rev - 200pts
+> > Rev - 495pts/7 solves
 >
 > Congratulations, Agent! You've successfully infiltrated the enigmatic alien base and managed to steal their highly classified code. However, it seems that it is written in some weird foreign language. Your next mission is to find out what the code does!
 
@@ -13,7 +13,7 @@ After some cleanup the code will look like [encrypt.js](./encrypt.js).
 
 The password the program checks against is hex characters. The password check calculates the XOR of the first and second character, then the second and third character, etc. The last character is unencrypted, and is a `}`, so to decrypt it we can XOR the last character with the second last, second last with third last, etc.
 
-A decryption script can be found in [solve.js](./solve.js)
+A decryption script can be found in [solve.py](./solve.py)
 
 ```
 UiTHack24{j4v4scr1p7_15_an_4l1en_l4ngu4g3}

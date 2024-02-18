@@ -1,5 +1,5 @@
-> # Noob - Noob1
-> > Noob - 50pts
+> # Noob1
+> > Noob - 116pts/50 solves
 >
 > Our flag was stolen from our spaceship, and we need your 1337 hacker skills to get it back for us.
 >

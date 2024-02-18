@@ -18,7 +18,7 @@ tags:
 flags:
     - UiTHack24{f@ckt!onal}
 files:
-    - F#ck.zip
+    - ./src/F#ck.zip
 
 state: visible
 version: "0.1"

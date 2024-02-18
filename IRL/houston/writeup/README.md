@@ -1,7 +1,8 @@
-> # IRL - Houston
-> > Misc - Xpts
->
-> Houston, we have a problem! The time travel broke our flag...
+# Houston
+> IRL - 473pts/14 solves
+
+Houston, we have a problem! The time travel broke our flag...
+The challenge can be found hanging on the opposite wall of lab `A 053`
 
 ## Writeup
 Assembling the flag from the pieces we get the flag.
