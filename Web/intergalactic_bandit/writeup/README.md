@@ -1,6 +1,6 @@
-# Web - Intergalactic bandit
+# Intergalactic bandit
 
-> > Web - 400pts
+> > Web - 488pts/10 solves
 >
 > The neighbouring aliens have been enjoying the classical *One Armed Bandit* at the casino.
 > However, they can't seem to win anything. Can you show them how?
@@ -9,7 +9,7 @@
 
 The challenge can be solved in three different intended ways:
 
-- [Web - Intergalactic bandit](#web---intergalactic-bandit)
+- [Intergalactic bandit](#intergalactic-bandit)
   - [Writeup](#writeup)
     - [Connecting to the websocket](#connecting-to-the-websocket)
     - [The lucky](#the-lucky)
