@@ -1,5 +1,5 @@
 # Recover the lost keys
-> IRL - 100pts
+> IRL - 484pts/11 solves
 
 One of our agents were supposed to drop off valuable intel, but they got burned before they could deliver the decryption keys.
 Despite their cover being blow they were luckily able to hide the keys somewhere safe for us, but the exact location is unknown.

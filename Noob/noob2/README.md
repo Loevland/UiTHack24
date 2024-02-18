@@ -1,5 +1,5 @@
-# Noob - Noob2
-> Noob - 100pts
+# Noob2
+> Noob - 132pts/49 solves
 
 Our flag was stolen once again. This time we think they have `hidden` it. Can you get it back for us?
 

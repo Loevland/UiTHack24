@@ -1,5 +1,5 @@
-> # Noob - Noob5
-> > Noob - 500pts
+> # Noob5
+> > Noob - 326pts/34 solves
 >
 > Get the flag to join the galactic elite!
 >

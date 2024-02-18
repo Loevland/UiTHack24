@@ -1,13 +1,9 @@
 > # F#ck
+> > Rev - 484pts/11 solves
 
-> > Rev - 100pts
-
-> Prepare to embark on an adventure into the realm of functional programming. Some say that the language is so powerful that it can even be used to solve the most complex of problems. Find the flag in the following file: 
-
-> [File](../F#ck.dll)
+> Prepare to embark on an adventure into the realm of functional programming. Some say that the language is so powerful that it can even be used to solve the most complex of problems. Find the flag in the following file:
 
 # Writeup
-
 The attached file is a .NET assembly, which can be decompiled using a tool such as dnSpy. After decompiling the assembly, we end up with the following code:
 
 ```csharp
@@ -89,7 +85,7 @@ The code is a simple .NET assembly with a single entry point. The program takes 
 2. Increment each character by 1
 3. Decrement each character by 1
 
-The result of these transformations is the flag: 
+The result of these transformations is the flag:
 
 ```
 UiTHack24{f@ckt!onal}

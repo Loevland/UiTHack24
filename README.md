@@ -11,14 +11,14 @@ Repository for the yearly CTF challenge by UiT students
 ## Challenges
 
 Add emoji!
-| Noob                | Web                             | Pwn                         | Misc                               | Rev_Eng                               | Crypto                              | IRL |
+| Noob | Web | Pwn | Misc | Rev_Eng | Crypto | IRL |
 | ------------------- | ------------------------------- | --------------------------- | ---------------------------------- | ------------------------------------- | ----------------------------------- | --- |
-| noob1 :baby_bottle: | Space Inspector :eyes:          | Codebreaker :fax:           | Location :round_pushpin:           | F#ck :fu:                             | Cosmic Caesar :dizzy:               | Recover the lost keys :detective: |
+| noob1 :baby_bottle: | Space Inspector :eyes: | Codebreaker :fax: | Location :round_pushpin: | F#ck :fu: | Cosmic Caesar :dizzy: | Recover the lost keys :detective: |
 | noob2 :baby:        | Admin access :guardsman:        | Radiation shield :computer: | Needle in the Haystack 🪡🪡        | Expired License :key:                 | Alienware :closed_lock_with_key:    | Wi-ll you hear my cries 😱 |
 | noob3 :cat:         | Space traversal :space_invader: | Xenithian doorway :door:    | Hidden Covenant Info :mag:         | Infiltration :video_game:             | Rapid Encryption :zap:              |  Houston :newspaper: |
 | noob4 :crocodile:   | Enigma Wannabe :computer:       | Archive :book:              | Federated Learning 1 :closed_book: | Exfiltration :gift:                   | 3D Cipher :globe_with_meridians:    |     |
 | noob5 :dragon:      | Intergalactic bandit :underage: | The great escape :rocket:   | Federated Learning 2 :orange_book: | String Theory :fireworks:                                | A subpar encryption standard :ship: |     |
-|                     |                                 | Yet Another Overflow :v:    | Operation Galactic Dunk :wastebasket: |                                    | Chess cipher :checkered_flag:       |      |
+|                     |                                 | Yet Another Overflow :v:    | Operation Galactic Dunk :wastebasket: |                                    | Alien Supremacy :checkered_flag:       |      |
 | | | | Deus-Ex :technologist: | | |
 
 # Developer guidelines

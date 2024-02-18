@@ -1,10 +1,10 @@
-
-# Misc. - Join :fist: The Learning :book: Federation Hype-Train
-
-> [README](../README.md)
+> # Federated Learning 2
+> > Misc - 500pts/0 solves
+>
+> Well, it's not exactly right to claim data privacy against those who knows how federated learning works.
+> Anyways, good luck trying that again without those precious indices!
 
 ## Writeup
-
 The main difference from federated-learning-1 is that function `FederatedLearning()` in [federated_learning.py](../src/federated_learning.py) no longer store the indices for the embedding layer.
 
 The next clue is that in [train.py](../src/train.py), the vocabulary is created from a mix of [training.txt](../src/data/training.txt) and the flag's words.
@@ -28,7 +28,7 @@ print(
 )
 ```
 
-We can see the number of words in the flag from the number of [gradient](../src/data/grad/) files. 
+We can see the number of words in the flag from the number of [gradient](../src/data/grad/) files.
 Furthermore, we know in [federated_learning.py](../src/federated_learning.py) the gradients are computed with an input `x` and a truth label `y` which come from each word in the flag and the word immediately following (with loop around).
 To reconstruct which words are in the flag, our aim is to find `x` and `y` for each `data/grad/*.npz` file such that the gradients match.
 Although, brute-forcing `x` and `y` for all positions/gradient-files is a heavy computation and propbably requires appropriate hardware.

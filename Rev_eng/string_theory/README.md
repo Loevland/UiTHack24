@@ -1,5 +1,5 @@
 # String Theory
-> Rev - Xpts
+> Rev - 162pts/47 solves
 
 Did you know the universe is made up of `strings`?
 

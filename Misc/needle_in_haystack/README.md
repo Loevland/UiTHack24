@@ -1,6 +1,5 @@
-# Needle in the Haystack 
-
-> Misc - 100pts
+# Needle in the Haystack
+> Misc - 454pts/18 solves
 
 While walkin around in the home base a soldier comes running up to you.
 
@@ -26,3 +25,5 @@ I remember key number 0 and 1 were c0ff21 and c0ff22 respectively.
 and the correct key today is key number 585937
 
 The flag will be in the form "UiTHack24{*insert key*}"
+
+[Writeup](./writeup/README.md)

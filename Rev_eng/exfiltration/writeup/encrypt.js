@@ -1,4 +1,4 @@
-const enc_flag = "3c3d1c29020859064f0f4740072b390a58531a7d"
+const enc_flag = "3c3d1c29020859064f115e4242471011434147686e046a3e0f316b585d540b3133585a09124153544e7d"
 
 const encrypt = input => {
     let encrypted = ""

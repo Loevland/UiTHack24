@@ -1,19 +1,18 @@
-# Web - Intergalactic bandit
-
-> > Web - 400pts
+# Intergalactic bandit
+> > Web - 488pts/10 solves
 >
 > The neighbouring aliens have been enjoying the classical *One Armed Bandit* at the casino.
 > However, they can't seem to win anything. Can you show them how?
->
-> Files: [Source code](../src/app.py)
 
 ## Writeup
-
 The challenge can be solved in three different intended ways:
 
-- [The lucky](#the-lucky)
-- [The hacker](#the-hacker)
-- [The loremaster](#the-loremaster)
+- [Intergalactic bandit](#intergalactic-bandit)
+  - [Writeup](#writeup)
+    - [Connecting to the websocket](#connecting-to-the-websocket)
+    - [The lucky](#the-lucky)
+    - [The hacker](#the-hacker)
+    - [The loremaster](#the-loremaster)
 
 ### Connecting to the websocket
 

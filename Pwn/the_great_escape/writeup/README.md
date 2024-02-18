@@ -1,5 +1,5 @@
 > # The great escape
-> > Pwn - 400pts
+> > Pwn - 499pts/4 solves
 >
 > You have reached the dashboard of a ship, and you're ready to get away. However,
 > the activation of the ship requires a password.<br/>

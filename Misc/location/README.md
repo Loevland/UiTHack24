@@ -1,7 +1,9 @@
 # Location
-> Misc - 100pts
+> Misc - 269pts/39 solves
 
 The aliens have captured three of our crew members and is holding them hostage at different locations. Luckily, they managed to send us pictures of their surroundings. Can you figure out where they are being held captive?
+
+If I remember correctly, there is a town symbol in the image of the third city.
 
 The flag is the cities where these picture was taken, in lowercase, wrapped in UiTHack24{}. If you encouter any acute accent characters (e.g. à) in the city name, replace them with their non-accented counterparts (e.g. a).
 

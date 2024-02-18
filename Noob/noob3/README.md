@@ -1,5 +1,5 @@
-# Noob - Noob3
-> Noob - 250pts
+# Noob3
+> Noob - 147pts/48 solves
 
 Oh no! Someone deleted `flag.txt` from our system, and our spaceship is broken, so we are not able to go back in `history` to retrieve it.
 
