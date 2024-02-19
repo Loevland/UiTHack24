@@ -1,4 +1,5 @@
-> # Alienware
+# Alienware
+
 > > Crypto - 499pts/4 solves
 >
 > Aliens have encrypted my very important file! Luckily they forgot to delete the software from the trash folder, can you help me decrypt it?
@@ -29,11 +30,31 @@ with open(sys.argv[1] + ".dec", "wb") as f:
     f.write(encrypt_data(content))
 ```
 
-After these changes the file can be decrypted by applying the same encryption algorithm again.
+After these changes the file can be decrypted by applying the same encryption algorithm again. See [solve.py](solve.py) for a full solution.
 The amazing gpt generated [space novel](../src/Stardust-reckoning.txt) can then be enjoyed, and halfway through our friend E.T. reveals the flag.
 
 Flag:
 
 ```txt
 UiTHack24{E.T._ph0ne_h0me_plsss}
+```
+
+## Notes
+
+During the ctf, line 39 had a incorrect if statement. This has been fixed in the writeup. Hopefully this did not cause any confusion.
+
+```py
+    # original
+    if n.endswith() == ".enc":
+    # fixed
+    if n.endswith(".enc"):
+```
+
+When replacing the seed value, the seed changes from int to string. However the replace function did not account for this.
+
+```py
+    # original
+    f.write(f.read().replace("8008135", "NiceTry").replace(KEY, KEY.swapcase()))
+    # intended
+    f.write(f.read().replace("8008135", "\"NiceTry\"").replace(KEY, KEY.swapcase()))
 ```
